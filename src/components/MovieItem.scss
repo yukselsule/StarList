@@ -1,0 +1,22 @@
+.movie {
+  list-style: none;
+
+  &__poster {
+    width: 10%;
+    height: auto;
+  }
+
+  &__title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  &__released {
+    color: gray;
+  }
+
+  &__overview {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+}
