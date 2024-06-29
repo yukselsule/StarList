@@ -1,13 +1,16 @@
 import { MoviesProvider } from "./contexts/MoviesContext";
+import { SearchQueryProvider } from "./contexts/SearchQueryContext";
 
 import MovieList from "./components/MovieList";
+import SearchBar from "./components/SearchBar";
 
 export default function App() {
   return (
-    <MoviesProvider>
-      <div>
+    <SearchQueryProvider>
+      <MoviesProvider>
+        <SearchBar />
         <MovieList />
-      </div>
-    </MoviesProvider>
+      </MoviesProvider>
+    </SearchQueryProvider>
   );
 }
