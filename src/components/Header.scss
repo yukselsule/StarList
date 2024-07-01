@@ -1,0 +1,33 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 3rem;
+
+  background-color: $color-background;
+  height: 10vh;
+
+  a.active {
+    text-decoration: none;
+  }
+
+  &__list {
+    display: flex;
+    gap: 3rem;
+    list-style: none;
+
+    &-item a {
+      transition: all 0.4s;
+
+      &:link,
+      &:visited {
+        color: $color-primary;
+        text-decoration: none;
+      }
+      &:hover,
+      &:active {
+        color: $color-primary-dark;
+      }
+    }
+  }
+}

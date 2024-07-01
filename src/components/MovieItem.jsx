@@ -1,5 +1,5 @@
 const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500";
-import imageNotFound from "../assets/img/imageNotFound.jpg";
+import imageNotFound from "../assets/img/imageNotFound.png";
 import "./MovieItem.scss";
 
 function MovieItem({ movie }) {
