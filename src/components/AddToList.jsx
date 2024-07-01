@@ -3,16 +3,29 @@ import DatePicker from "react-datepicker";
 import StarRating from "./StarRating";
 import Button from "./Button";
 
+import { useListNames } from "../contexts/ListNamesContext.jsx";
+
 import "./AddToList.scss";
 import "react-datepicker/dist/react-datepicker.css";
 
-function AddToList({ movie }) {
+function AddToList({ movie, onCloseModal }) {
   const [date, setDate] = useState(new Date());
   const [userRating, setUserRating] = useState("");
   const [userNotes, setUserNotes] = useState("");
   const [selectedList, setSelectedList] = useState("");
+  const [showCreateANewList, setShowCreateANewList] = useState(false);
+  const [newListName, setNewListName] = useState("");
+
+  const { listNames, setListNames } = useListNames();
 
   const { title, poster_path: poster, id } = movie || {};
+
+  function handleCreateANewList() {
+    setListNames([...listNames, newListName]);
+    setNewListName("");
+    setShowCreateANewList(false);
+    setSelectedList(newListName);
+  }
 
   function handleAdd() {
     const newWatchedItem = {
@@ -24,6 +37,7 @@ function AddToList({ movie }) {
       poster,
       id,
     };
+    onCloseModal();
     console.log(newWatchedItem);
   }
 
@@ -43,6 +57,7 @@ function AddToList({ movie }) {
         <label htmlFor="rate">How good was it? </label>
         <StarRating
           maxRating={10}
+          color="#fae94b"
           size={24}
           onSetRating={setUserRating}
           value={userRating}
@@ -64,11 +79,33 @@ function AddToList({ movie }) {
         <select
           value={selectedList}
           onChange={(e) => setSelectedList(e.target.value)}
+          disabled={showCreateANewList}
         >
-          <option> Watch again later </option>
-          <option> Recommend a friend </option>
-          <option> Forget about it </option>
+          <option>Please select a list</option>
+          {listNames.map((listName, index) => (
+            <option key={index} value={listName}>
+              {listName}
+            </option>
+          ))}
         </select>
+      </div>
+
+      <div className="form-row">
+        <Button type="add" onClick={() => setShowCreateANewList(true)}>
+          Create a new list
+        </Button>
+        {showCreateANewList && (
+          <div>
+            <input
+              type="text"
+              value={newListName}
+              onChange={(e) => setNewListName(e.target.value)}
+            ></input>
+            <Button type="add" onClick={handleCreateANewList}>
+              Create a new list
+            </Button>
+          </div>
+        )}
       </div>
 
       <div className="form-row">

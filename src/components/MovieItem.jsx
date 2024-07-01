@@ -5,12 +5,14 @@ import Button from "./Button";
 import AddToList from "./AddToList";
 
 import "./MovieItem.scss";
+import Modal from "./Modal";
 
 const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500";
 
 function MovieItem({ movie }) {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [showAddToList, setShowAddToList] = useState(false);
+
   const {
     title,
     release_date: released,
@@ -21,6 +23,10 @@ function MovieItem({ movie }) {
   function handleAddToList() {
     setSelectedMovie(movie);
     setShowAddToList(!showAddToList);
+  }
+
+  function handleCloseModal() {
+    setShowAddToList(false);
   }
 
   return (
@@ -38,7 +44,14 @@ function MovieItem({ movie }) {
           <Button type="add" onClick={handleAddToList}>
             Add to list
           </Button>
-          {showAddToList && <AddToList movie={selectedMovie} />}
+          {showAddToList && (
+            <Modal onClose={handleCloseModal}>
+              <AddToList
+                onCloseModal={handleCloseModal}
+                movie={selectedMovie}
+              />
+            </Modal>
+          )}
         </div>
       </div>
     </li>
