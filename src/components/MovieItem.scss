@@ -1,22 +1,26 @@
 .movie {
   list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 
   &__poster {
-    width: 10%;
+    width: 75%;
     height: auto;
   }
 
-  &__title {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
+  &__details {
+    &-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
 
-  &__released {
-    color: gray;
-  }
+    &-released {
+      color: gray;
+    }
 
-  &__overview {
-    font-size: 1rem;
-    line-height: 1.5;
+    &-overview {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
   }
 }
