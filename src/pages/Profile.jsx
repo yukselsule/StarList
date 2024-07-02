@@ -1,5 +1,12 @@
+import Lists from "../components/Lists";
+
 function Profile() {
-  return <div>Profile</div>;
+  return (
+    <div>
+      <div> Summary</div>
+      <Lists />
+    </div>
+  );
 }
 
 export default Profile;

@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { MoviesProvider } from "./contexts/MoviesContext";
 import { SearchQueryProvider } from "./contexts/SearchQueryContext";
-import { ListNamesProvider } from "./contexts/ListNamesContext";
+import { ListsProvider } from "./contexts/ListsContext";
 
 import HomePage from "./pages/HomePage";
 import Friends from "./pages/Friends";
@@ -13,7 +13,7 @@ export default function App() {
   return (
     <SearchQueryProvider>
       <MoviesProvider>
-        <ListNamesProvider>
+        <ListsProvider>
           <BrowserRouter>
             <Routes>
               <Route index element={<HomePage />} />
@@ -22,7 +22,7 @@ export default function App() {
               <Route path="profile" element={<Profile />} />
             </Routes>
           </BrowserRouter>
-        </ListNamesProvider>
+        </ListsProvider>
       </MoviesProvider>
     </SearchQueryProvider>
   );

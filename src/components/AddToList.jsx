@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import StarRating from "./StarRating";
 import Button from "./Button";
 
-import { useListNames } from "../contexts/ListNamesContext.jsx";
+import { useLists } from "../contexts/ListsContext.jsx";
 
 import "./AddToList.scss";
 import "react-datepicker/dist/react-datepicker.css";
@@ -16,7 +16,7 @@ function AddToList({ movie, onCloseModal }) {
   const [showCreateANewList, setShowCreateANewList] = useState(false);
   const [newListName, setNewListName] = useState("");
 
-  const { listNames, setListNames } = useListNames();
+  const { listNames, setListNames, lists, setLists } = useLists();
 
   const { title, poster_path: poster, id } = movie || {};
 
@@ -37,8 +37,15 @@ function AddToList({ movie, onCloseModal }) {
       poster,
       id,
     };
+
+    setLists({
+      ...lists,
+      [selectedList]: [...(lists[selectedList] || []), newWatchedItem],
+    });
+
     onCloseModal();
     console.log(newWatchedItem);
+    console.log(listNames);
   }
 
   return (
