@@ -38,14 +38,16 @@ function AddToList({ movie, onCloseModal }) {
       id,
     };
 
-    setLists({
-      ...lists,
-      [selectedList]: [...(lists[selectedList] || []), newWatchedItem],
-    });
+    if (lists[selectedList]?.some((movie) => movie.id === id)) {
+      alert(`You already added "${movie.title}" to "${selectedList}" list`);
+    } else {
+      setLists({
+        ...lists,
+        [selectedList]: [...(lists[selectedList] || []), newWatchedItem],
+      });
+    }
 
     onCloseModal();
-    console.log(newWatchedItem);
-    console.log(listNames);
   }
 
   return (

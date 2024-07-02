@@ -20,7 +20,7 @@ function MovieItem({ movie }) {
     spoken_languages: languages = [],
     runtime,
     genres = [],
-    origin_country: countries = [],
+    production_countries: countries = [],
   } = details;
 
   const {
@@ -50,12 +50,16 @@ function MovieItem({ movie }) {
         />
         <div className="movie__details">
           <h2 className="movie__details-title">{title}</h2>
-          <span className="movie__details-voted"> {voted} </span>
-          <span className="movie__details-runtime">Runtime: {runtime} </span>
+          <span className="movie__details-voted"> {voted.toFixed(1)} </span>
+          <span className="movie__details-runtime">
+            Runtime: {runtime} minutes
+          </span>
           <p className="movie__details-languages">
             Languages:
             {languages.map((language) => {
-              return <span key={language.iso_639_1}>{language.name}</span>;
+              return (
+                <span key={language.iso_639_1}>{language.english_name} </span>
+              );
             })}
           </p>
           <span className="movie__details-released">{released}</span>
@@ -68,7 +72,7 @@ function MovieItem({ movie }) {
           <p className="movie__details-countries">
             Countries:
             {countries.map((country) => {
-              return <span key={country}>{country} </span>;
+              return <span key={country.iso_3166_1}>{country.name} </span>;
             })}
           </p>
           <p className="movie__details-overview">{overview}</p>
