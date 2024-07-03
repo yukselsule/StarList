@@ -1,10 +1,11 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext } from "react";
+import { useLocalStorageState } from "../hooks/useLocalStorageHook";
 
 const ListsContext = createContext();
 
 function ListsProvider({ children }) {
-  const [listNames, setListNames] = useState([]);
-  const [lists, setLists] = useState({});
+  const [listNames, setListNames] = useLocalStorageState([], "listNames");
+  const [lists, setLists] = useLocalStorageState({}, "lists");
 
   return (
     <ListsContext.Provider value={{ listNames, setListNames, lists, setLists }}>
