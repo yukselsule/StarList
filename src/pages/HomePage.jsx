@@ -4,10 +4,12 @@ import SearchBar from "../components/SearchBar";
 
 export default function HomePage() {
   return (
-    <main className="homePage">
+    <div>
       <Header />
-      <SearchBar />
-      <MovieList />
-    </main>
+      <main className="home-page">
+        <SearchBar />
+        <MovieList />
+      </main>
+    </div>
   );
 }

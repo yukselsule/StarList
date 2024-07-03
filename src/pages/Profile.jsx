@@ -1,10 +1,15 @@
+import Header from "../components/Header";
 import Lists from "../components/Lists";
+import Summary from "../components/Summary";
 
 function Profile() {
   return (
     <div>
-      <div> Summary</div>
-      <Lists />
+      <Header />
+      <div className="profile-page">
+        <Summary />
+        <Lists />
+      </div>
     </div>
   );
 }
