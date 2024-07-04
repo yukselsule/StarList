@@ -56,24 +56,32 @@ function MovieItem({ movie }) {
           </span>
           <p className="movie__details-languages">
             Languages:
-            {languages.map((language) => {
-              return (
-                <span key={language.iso_639_1}>{language.english_name} </span>
-              );
-            })}
+            {languages.length > 0
+              ? languages.map((language) => {
+                  return (
+                    <span key={language.iso_639_1}>
+                      {language.english_name}
+                    </span>
+                  );
+                })
+              : "N/A"}
           </p>
           <span className="movie__details-released">{released}</span>
           <p className="movie__details-genres">
             Genres:
-            {genres.map((genre) => {
-              return <span key={genre.id}>{genre.name} </span>;
-            })}
+            {genres.length > 0
+              ? genres.map((genre) => {
+                  return <span key={genre.id}>{genre.name} </span>;
+                })
+              : "N/A"}
           </p>
           <p className="movie__details-countries">
             Countries:
-            {countries.map((country) => {
-              return <span key={country.iso_3166_1}>{country.name} </span>;
-            })}
+            {countries.length > 0
+              ? countries.map((country) => {
+                  return <span key={country.iso_3166_1}>{country.name} </span>;
+                })
+              : "N/A"}
           </p>
           <p className="movie__details-overview">{overview}</p>
           <Button type="add" onClick={handleAddToList}>
