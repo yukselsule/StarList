@@ -10,32 +10,42 @@ import { useSearchQuery } from "./SearchQueryContext";
 const API_KEY = "218dc8f636aa2082cc10293321c67dd5";
 const BASE_URL = "https://api.themoviedb.org/3/";
 
+const debounce = (callback, wait) => {
+  let timeoutId = null;
+  return (...args) => {
+    window.clearTimeout(timeoutId);
+    timeoutId = window.setTimeout(() => {
+      callback(...args);
+    }, wait);
+  };
+};
+
+async function getMovieDetails(id) {
+  const res = await fetch(
+    `${BASE_URL}movie/${id}?language=en-US&api_key=${API_KEY}`,
+    {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+      },
+    }
+  );
+  const data = await res.json();
+  return data;
+}
+
 const MoviesContext = createContext();
 
 function MoviesProvider({ children }) {
   const [movies, setMovies] = useState([]);
   const [movieDetails, setMovieDetails] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
   const { query } = useSearchQuery();
 
-  const getMovieDetails = useCallback(async function getMovieDetails(id) {
-    const res = await fetch(
-      `https://api.themoviedb.org/3/movie/${id}?language=en-US`,
-      {
-        method: "GET",
-        headers: {
-          accept: "application/json",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyMThkYzhmNjM2YWEyMDgyY2MxMDI5MzMyMWM2N2RkNSIsIm5iZiI6MTcxOTkxMTYzMy4xNDM1NzQsInN1YiI6IjY2N2U5YzZiOGExMTkxMTY4MjZkNDI3ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QoIb9-KHmo3tRUnuf5C703-FVybJ1GODeah9lQiuoAs",
-        },
-      }
-    );
-    const data = await res.json();
-    return data;
-  }, []);
-
-  useEffect(
-    function () {
-      async function getMovie() {
+  const getMovies = useCallback(
+    async function () {
+      try {
+        setIsLoading(true);
         const res = await fetch(
           `${BASE_URL}search/movie?query=${query}&api_key=${API_KEY}`
         );
@@ -49,14 +59,30 @@ function MoviesProvider({ children }) {
             [movie.id]: { ...movie, ...details },
           }));
         });
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setIsLoading(false);
       }
-      if (query) getMovie();
     },
-    [query, getMovieDetails]
+    [query]
+  );
+
+  const debouncedGetMovies = useCallback(debounce(getMovies, 1000), [
+    getMovies,
+  ]);
+
+  useEffect(
+    function () {
+      if (query) debouncedGetMovies();
+    },
+    [query, debouncedGetMovies]
   );
 
   return (
-    <MoviesContext.Provider value={{ movies, movieDetails, getMovieDetails }}>
+    <MoviesContext.Provider
+      value={{ movies, movieDetails, getMovieDetails, isLoading }}
+    >
       {children}
     </MoviesContext.Provider>
   );
@@ -65,7 +91,7 @@ function MoviesProvider({ children }) {
 function useMovies() {
   const context = useContext(MoviesContext);
   if (!context) {
-    throw new Error("Movies context was used ouside the movies provider");
+    throw new Error("Movies context was used outside the movies provider");
   }
   return context;
 }
