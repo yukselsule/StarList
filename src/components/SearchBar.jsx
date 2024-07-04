@@ -1,11 +1,29 @@
+import { useState, useCallback } from "react";
 import { useSearchQuery } from "../contexts/SearchQueryContext";
 import Button from "./Button";
 
+const debounce = (callback, wait) => {
+  let timeoutId = null;
+  return (...args) => {
+    window.clearTimeout(timeoutId);
+    timeoutId = window.setTimeout(() => {
+      callback(...args);
+    }, wait);
+  };
+};
+
 function SearchBar() {
-  const { query, setQuery } = useSearchQuery();
+  const [inputValue, setInputValue] = useState("");
+  const { setQuery } = useSearchQuery();
+
+  const debouncedSetQuery = useCallback(
+    debounce((newQuery) => setQuery(newQuery), 1000),
+    [setQuery]
+  );
 
   const handleInputChange = (e) => {
-    setQuery(e.target.value);
+    setInputValue(e.target.value);
+    debouncedSetQuery(e.target.value);
   };
 
   return (
@@ -13,7 +31,7 @@ function SearchBar() {
       <input
         placeholder="Search your movie"
         type="text"
-        value={query}
+        value={inputValue}
         onChange={handleInputChange}
       />
       <Button>Search</Button>
