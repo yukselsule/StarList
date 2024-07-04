@@ -32,9 +32,21 @@ function AddToList({ movie, onCloseModal }) {
     setSelectedList(newListName);
   }
 
-  function handleAdd() {
+  function handleAdd(e) {
+    e.preventDefault();
+
+    if (
+      (!isDateUnknown && !date) ||
+      !selectedList ||
+      !userRating ||
+      !userNotes
+    ) {
+      alert("Please fill required fields");
+      return;
+    }
+
     const newWatchedItem = {
-      date: isDateUnknown ? "date is unknown" : date,
+      date: isDateUnknown ? "unknown" : date,
       userRating,
       userNotes,
       selectedList,
@@ -45,6 +57,7 @@ function AddToList({ movie, onCloseModal }) {
 
     if (lists[selectedList]?.some((movie) => movie.id === id)) {
       alert(`You already added "${movie.title}" to "${selectedList}" list`);
+      return;
     } else {
       setLists({
         ...lists,
@@ -56,7 +69,7 @@ function AddToList({ movie, onCloseModal }) {
   }
 
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
+    <form onSubmit={handleAdd}>
       <div className="form-row">
         <label htmlFor="date">When did you watched this? </label>
         <DatePicker
@@ -65,6 +78,7 @@ function AddToList({ movie, onCloseModal }) {
           selected={date}
           dateFormat="dd/MM/yyyy"
           disabled={isDateUnknown}
+          required={!isDateUnknown}
         />
       </div>
       <div className="form-row">
@@ -87,6 +101,7 @@ function AddToList({ movie, onCloseModal }) {
           size={24}
           onSetRating={setUserRating}
           value={userRating}
+          required
         />
       </div>
 
@@ -97,6 +112,7 @@ function AddToList({ movie, onCloseModal }) {
           placeholder="what to remember"
           onChange={(e) => setUserNotes(e.target.value)}
           value={userNotes}
+          required
         />
       </div>
 
@@ -106,6 +122,7 @@ function AddToList({ movie, onCloseModal }) {
           value={selectedList}
           onChange={(e) => setSelectedList(e.target.value)}
           disabled={showCreateANewList}
+          required
         >
           <option>Please select a list</option>
           {listNames.map((listName, index) => (
@@ -120,11 +137,13 @@ function AddToList({ movie, onCloseModal }) {
         <Button type="add" onClick={() => setShowCreateANewList(true)}>
           Create a new list
         </Button>
+
         {showCreateANewList && (
           <div>
             <input
               type="text"
               value={newListName}
+              required={showCreateANewList}
               onChange={(e) => setNewListName(e.target.value)}
             ></input>
             <Button type="add" onClick={handleCreateANewList}>
@@ -135,9 +154,7 @@ function AddToList({ movie, onCloseModal }) {
       </div>
 
       <div className="form-row">
-        <Button type="add" onClick={() => handleAdd()}>
-          Add
-        </Button>
+        <Button type="add">Add</Button>
       </div>
     </form>
   );
