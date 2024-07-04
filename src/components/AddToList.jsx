@@ -10,6 +10,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 function AddToList({ movie, onCloseModal }) {
   const [date, setDate] = useState(new Date());
+  const [isDateUnknown, setIsDateUnknown] = useState(false);
   const [userRating, setUserRating] = useState("");
   const [userNotes, setUserNotes] = useState("");
   const [selectedList, setSelectedList] = useState("");
@@ -20,6 +21,10 @@ function AddToList({ movie, onCloseModal }) {
 
   const { title, poster_path: poster, id } = movie || {};
 
+  const handleUnkownDate = () => {
+    setIsDateUnknown(!isDateUnknown);
+  };
+
   function handleCreateANewList() {
     setListNames([...listNames, newListName]);
     setNewListName("");
@@ -29,7 +34,7 @@ function AddToList({ movie, onCloseModal }) {
 
   function handleAdd() {
     const newWatchedItem = {
-      date,
+      date: isDateUnknown ? "date is unknown" : date,
       userRating,
       userNotes,
       selectedList,
@@ -51,7 +56,7 @@ function AddToList({ movie, onCloseModal }) {
   }
 
   return (
-    <form onClick={(e) => e.preventDefault()}>
+    <form onSubmit={(e) => e.preventDefault()}>
       <div className="form-row">
         <label htmlFor="date">When did you watched this? </label>
         <DatePicker
@@ -59,7 +64,19 @@ function AddToList({ movie, onCloseModal }) {
           onChange={(date) => setDate(date)}
           selected={date}
           dateFormat="dd/MM/yyyy"
+          disabled={isDateUnknown}
         />
+      </div>
+      <div className="form-row">
+        <input
+          type="checkbox"
+          id="checkbox"
+          checked={isDateUnknown}
+          onChange={handleUnkownDate}
+        />
+        <label htmlFor="checkbox">
+          I don&apos;t remember when i watched it.
+        </label>
       </div>
 
       <div className="form-row">

@@ -23,7 +23,7 @@ function ListItem({ movie, index }) {
       />
       <p>{id}</p>
       <h3>{title}</h3>
-      <p> ({formatDate(date)} )</p>
+      <p> {date === "unknown" ? "unknown" : formatDate(date)}</p>
       <p>{userNotes} </p>
       <p>
         <span> ⭐ </span>
