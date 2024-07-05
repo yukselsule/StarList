@@ -8,8 +8,7 @@ function Lists() {
   return (
     <div>
       {listNames.map((listName, index) => (
-        <ListBox listName={listName} key={index} />
-        // <List key={index} listName={listName} />
+        <ListBox listName={listName} key={index} listId={listName} />
       ))}
     </div>
   );

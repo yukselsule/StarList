@@ -6,7 +6,7 @@ export default function HomePage() {
   return (
     <div>
       <Header />
-      <main className="home-page">
+      <main className="container">
         <SearchBar />
         <MovieList />
       </main>

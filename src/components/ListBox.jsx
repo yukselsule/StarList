@@ -1,6 +1,14 @@
-function ListBox({ listName }) {
+import { useNavigate } from "react-router-dom";
+
+function ListBox({ listName, listId }) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/profile/${listId}`);
+  };
+
   return (
-    <div>
+    <div onClick={handleClick}>
       <h2> {listName} </h2>
     </div>
   );
