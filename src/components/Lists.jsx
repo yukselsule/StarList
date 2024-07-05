@@ -1,5 +1,6 @@
 import { useLists } from "../contexts/ListsContext.jsx";
-import List from "./List";
+import ListBox from "./ListBox.jsx";
+// import List from "./List";
 
 function Lists() {
   const { listNames } = useLists();
@@ -7,7 +8,8 @@ function Lists() {
   return (
     <div>
       {listNames.map((listName, index) => (
-        <List key={index} listName={listName} />
+        <ListBox listName={listName} key={index} />
+        // <List key={index} listName={listName} />
       ))}
     </div>
   );
