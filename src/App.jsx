@@ -7,7 +7,8 @@ import { ListsProvider } from "./contexts/ListsContext";
 import HomePage from "./pages/HomePage";
 import Friends from "./pages/Friends";
 import GoPremium from "./pages/GoPremium";
-import Profile from "./pages/Profile";
+import ProfilePage from "./pages/ProfilePage";
+import DetailedSummary from "./components/DetailedSummary";
 
 export default function App() {
   return (
@@ -16,10 +17,12 @@ export default function App() {
         <ListsProvider>
           <BrowserRouter>
             <Routes>
-              <Route index element={<HomePage />} />
+              <Route path="/" element={<HomePage />} />
               <Route path="friends" element={<Friends />} />
               <Route path="gopremium" element={<GoPremium />} />
-              <Route path="profile" element={<Profile />} />
+              <Route path="/profile" element={<ProfilePage />}>
+                <Route path="summary" element={<DetailedSummary />} />
+              </Route>
             </Routes>
           </BrowserRouter>
         </ListsProvider>
