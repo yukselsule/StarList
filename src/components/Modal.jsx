@@ -1,11 +1,11 @@
 import Button from "./Button";
-import "./Modal.scss";
+import styles from "./Modal.module.scss";
 
 function Modal({ children, onClose }) {
   return (
     <>
-      <div className="overlay" onClick={onClose}></div>
-      <div className="modal">
+      <div className={styles.overlay} onClick={onClose}></div>
+      <div className={styles.modal}>
         {children}
         <Button type="close" onClick={onClose}>
           Close

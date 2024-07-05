@@ -1,20 +1,26 @@
 import { NavLink } from "react-router-dom";
 import Logo from "./Logo";
-import "./Header.scss";
+import styles from "./Header.module.scss";
 
 function Header() {
   return (
-    <header className="header">
+    <header className={styles.header}>
       <Logo />
-      <ul className="header__list">
-        <li className="header__list-item">
-          <NavLink to="/friends"> Friends </NavLink>
+      <ul className={styles.header__list}>
+        <li className={styles["header__list-item"]}>
+          <NavLink to="/friends" activeClassName={styles.active}>
+            Friends
+          </NavLink>
         </li>
-        <li className="header__list-item">
-          <NavLink to="/profile"> Profile </NavLink>
+        <li className={styles["header__list-item"]}>
+          <NavLink to="/profile" activeClassName={styles.active}>
+            Profile
+          </NavLink>
         </li>
-        <li className="header__list-item">
-          <NavLink to="/gopremium"> GoPremium </NavLink>
+        <li className={styles["header__list-item"]}>
+          <NavLink to="/gopremium" activeClassName={styles.active}>
+            GoPremium
+          </NavLink>
         </li>
       </ul>
     </header>

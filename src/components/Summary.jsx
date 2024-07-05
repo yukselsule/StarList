@@ -3,9 +3,11 @@ import { useLists } from "../contexts/ListsContext";
 
 import Button from "./Button";
 import { useMovies } from "../contexts/MoviesContext";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Summary() {
+  const navigate = useNavigate();
+
   const { lists } = useLists();
   const { getMovieDetails } = useMovies();
 
@@ -16,6 +18,10 @@ function Summary() {
     allGenres: [],
     allLanguages: [],
   });
+
+  const handleButtonClick = () => {
+    navigate("/profile/detailed-summary");
+  };
 
   useEffect(() => {
     const fetchMovieDetails = async function () {
@@ -75,8 +81,8 @@ function Summary() {
       <p> {summary.allGenres.length} genres </p>
       <p> {summary.allLanguages.length} languages </p>
 
-      <Button type="details">
-        <NavLink to="/profile/summary">See details</NavLink>
+      <Button type="details" onClick={handleButtonClick}>
+        see details
       </Button>
     </div>
   );

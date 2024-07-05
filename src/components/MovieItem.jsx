@@ -4,7 +4,7 @@ import imageNotFound from "../assets/img/imageNotFound.png";
 import Button from "./Button";
 import AddToList from "./AddToList";
 
-import "./MovieItem.scss";
+import styles from "./MovieItem.module.scss";
 import Modal from "./Modal";
 import { useMovies } from "../contexts/MoviesContext";
 
@@ -42,48 +42,44 @@ function MovieItem({ movie }) {
 
   return (
     <li>
-      <div className="movie">
+      <div className={styles.movie}>
         <img
-          className="movie__poster"
+          className={styles.movie__poster}
           src={poster ? `${IMG_BASE_URL}${poster}` : imageNotFound}
           alt={`Poster of ${title}`}
         />
-        <div className="movie__details">
-          <h2 className="movie__details-title">{title}</h2>
-          <span className="movie__details-voted"> {voted.toFixed(1)} </span>
-          <span className="movie__details-runtime">
+        <div className={styles.movie__details}>
+          <h2 className={styles["movie__details-title"]}>{title}</h2>
+          <span className={styles["movie__details-voted"]}>
+            {voted.toFixed(1)}
+          </span>
+          <span className={styles["movie__details-runtime"]}>
             Runtime: {runtime} minutes
           </span>
-          <p className="movie__details-languages">
+          <p className={styles["movie__details-languages"]}>
             Languages:
             {languages.length > 0
-              ? languages.map((language) => {
-                  return (
-                    <span key={language.iso_639_1}>
-                      {language.english_name}
-                    </span>
-                  );
-                })
+              ? languages.map((language) => (
+                  <span key={language.iso_639_1}>{language.english_name}</span>
+                ))
               : "N/A"}
           </p>
-          <span className="movie__details-released">{released}</span>
-          <p className="movie__details-genres">
+          <span className={styles["movie__details-released"]}>{released}</span>
+          <p className={styles["movie__details-genres"]}>
             Genres:
             {genres.length > 0
-              ? genres.map((genre) => {
-                  return <span key={genre.id}>{genre.name} </span>;
-                })
+              ? genres.map((genre) => <span key={genre.id}>{genre.name} </span>)
               : "N/A"}
           </p>
-          <p className="movie__details-countries">
+          <p className={styles["movie__details-countries"]}>
             Countries:
             {countries.length > 0
-              ? countries.map((country) => {
-                  return <span key={country.iso_3166_1}>{country.name} </span>;
-                })
+              ? countries.map((country) => (
+                  <span key={country.iso_3166_1}>{country.name} </span>
+                ))
               : "N/A"}
           </p>
-          <p className="movie__details-overview">{overview}</p>
+          <p className={styles["movie__details-overview"]}>{overview}</p>
           <Button type="add" onClick={handleAddToList}>
             Add to list
           </Button>

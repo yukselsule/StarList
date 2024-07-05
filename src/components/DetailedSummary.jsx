@@ -26,7 +26,7 @@ function DetailedSummary() {
 
   console.log(movieDetails);
 
-  return <div>detailed summary</div>;
+  return <div>detailed summary components</div>;
 }
 
 export default DetailedSummary;

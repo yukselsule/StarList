@@ -5,7 +5,7 @@ import Button from "./Button";
 
 import { useLists } from "../contexts/ListsContext.jsx";
 
-import "./AddToList.scss";
+import styles from "./AddToList.module.scss";
 import "react-datepicker/dist/react-datepicker.css";
 
 function AddToList({ movie, onCloseModal }) {
@@ -70,7 +70,7 @@ function AddToList({ movie, onCloseModal }) {
 
   return (
     <form onSubmit={handleAdd}>
-      <div className="form-row">
+      <div className={styles["form-row"]}>
         <label htmlFor="date">When did you watched this? </label>
         <DatePicker
           id="date"
@@ -79,9 +79,10 @@ function AddToList({ movie, onCloseModal }) {
           dateFormat="dd/MM/yyyy"
           disabled={isDateUnknown}
           required={!isDateUnknown}
+          className={styles["date-picker"]}
         />
       </div>
-      <div className="form-row">
+      <div className={styles["form-row"]}>
         <input
           type="checkbox"
           id="checkbox"
@@ -89,11 +90,11 @@ function AddToList({ movie, onCloseModal }) {
           onChange={handleUnkownDate}
         />
         <label htmlFor="checkbox">
-          I don&apos;t remember when i watched it.
+          I don&apos;t remember when I watched it.
         </label>
       </div>
 
-      <div className="form-row">
+      <div className={styles["form-row"]}>
         <label htmlFor="rate">How good was it? </label>
         <StarRating
           maxRating={10}
@@ -105,7 +106,7 @@ function AddToList({ movie, onCloseModal }) {
         />
       </div>
 
-      <div className="form-row">
+      <div className={styles["form-row"]}>
         <label htmlFor="notes">Notes about this </label>
         <textarea
           id="notes"
@@ -116,7 +117,7 @@ function AddToList({ movie, onCloseModal }) {
         />
       </div>
 
-      <div className="form-row">
+      <div className={styles["form-row"]}>
         <label htmlFor="selectList">Select a list</label>
         <select
           value={selectedList}
@@ -133,7 +134,7 @@ function AddToList({ movie, onCloseModal }) {
         </select>
       </div>
 
-      <div className="form-row">
+      <div className={styles["form-row"]}>
         <Button type="add" onClick={() => setShowCreateANewList(true)}>
           Create a new list
         </Button>
@@ -145,7 +146,7 @@ function AddToList({ movie, onCloseModal }) {
               value={newListName}
               required={showCreateANewList}
               onChange={(e) => setNewListName(e.target.value)}
-            ></input>
+            />
             <Button type="add" onClick={handleCreateANewList}>
               Create a new list
             </Button>
@@ -153,7 +154,7 @@ function AddToList({ movie, onCloseModal }) {
         )}
       </div>
 
-      <div className="form-row">
+      <div className={styles["form-row"]}>
         <Button type="add">Add</Button>
       </div>
     </form>

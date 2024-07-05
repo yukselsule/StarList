@@ -1,9 +1,9 @@
-import "./Spinner.scss";
+import styles from "./Spinner.module.scss";
 
 function Spinner() {
   return (
-    <div className="spinner-container">
-      <div className="spinner"></div>
+    <div className={styles["spinner-container"]}>
+      <div className={styles.spinner}></div>
     </div>
   );
 }

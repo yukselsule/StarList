@@ -1,5 +1,5 @@
 import { useMovies } from "../contexts/MoviesContext";
-import "./MovieList.scss";
+import styles from "./MovieList.module.scss";
 
 import MovieItem from "./MovieItem";
 import SpinnerFullPage from "./SpinnerFullPage";
@@ -11,7 +11,7 @@ function MovieList() {
 
   if (!isLoading)
     return (
-      <ul className="container movie-list">
+      <ul className={styles["movie-list"]}>
         {movies.map((movie) => (
           <MovieItem movie={movie} key={movie.id} />
         ))}
