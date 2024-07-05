@@ -3,6 +3,7 @@ import { useLists } from "../contexts/ListsContext";
 
 import Button from "./Button";
 import { useMovies } from "../contexts/MoviesContext";
+import { NavLink } from "react-router-dom";
 
 function Summary() {
   const { lists } = useLists();
@@ -73,7 +74,10 @@ function Summary() {
       <p> {summary.allCountries.length} countries </p>
       <p> {summary.allGenres.length} genres </p>
       <p> {summary.allLanguages.length} languages </p>
-      <Button type="details"> see details </Button>
+
+      <Button type="details">
+        <NavLink to="/profile/summary">See details</NavLink>
+      </Button>
     </div>
   );
 }
