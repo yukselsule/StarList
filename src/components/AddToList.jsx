@@ -26,10 +26,19 @@ function AddToList({ movie, onCloseModal }) {
   };
 
   function handleCreateANewList() {
-    setListNames([...listNames, newListName]);
+    if (newListName.trim() === "") {
+      alert("List name cannot be empty or just spaces.");
+      return;
+    }
+    if (listNames.includes(newListName.trim())) {
+      alert("You already have that list");
+      return;
+    }
+
+    setListNames([...listNames, newListName.trim()]);
     setNewListName("");
     setShowCreateANewList(false);
-    setSelectedList(newListName);
+    setSelectedList(newListName.trim());
   }
 
   function handleAdd(e) {
@@ -39,7 +48,7 @@ function AddToList({ movie, onCloseModal }) {
       (!isDateUnknown && !date) ||
       !selectedList ||
       !userRating ||
-      !userNotes
+      !userNotes.trim()
     ) {
       alert("Please fill required fields");
       return;

@@ -6,7 +6,7 @@ import SpinnerFullPage from "./SpinnerFullPage";
 
 function MovieList() {
   const { movies, isLoading } = useMovies();
-  const sortedMovies = [...movies].sort((a, b) => b.vote_count - a.vote_count);
+  const sortedMovies = [...movies].sort((a, b) => b.popularity - a.popularity);
 
   if (isLoading) return <SpinnerFullPage />;
 
