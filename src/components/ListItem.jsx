@@ -11,11 +11,11 @@ const formatDate = (date) =>
 
 function ListItem({ movie, index }) {
   const { poster, date, title, userNotes, userRating } = movie;
+  console.log(movie);
 
   return (
     <li key={index}>
       <img
-        className="list-movie__poster"
         src={poster ? `${IMG_BASE_URL}${poster}` : imageNotFound}
         alt={`Poster of ${title}`}
       />

@@ -4,6 +4,7 @@ import { useLists } from "../contexts/ListsContext";
 import Button from "./Button";
 import { useMovies } from "../contexts/MoviesContext";
 import { useNavigate } from "react-router-dom";
+import SpinnerFullPage from "./SpinnerFullPage";
 
 function Summary() {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ function Summary() {
     allGenres: [],
     allLanguages: [],
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleButtonClick = () => {
     navigate("/profile/detailed-summary");
@@ -25,19 +27,24 @@ function Summary() {
 
   useEffect(() => {
     const fetchMovieDetails = async function () {
-      const uniqueMovieIds = [
-        ...new Set(
-          Object.values(lists)
-            .flat()
-            .map((movie) => movie.id)
-        ),
-      ];
-      const detailsPromises = uniqueMovieIds.map((id) => getMovieDetails(id));
-      const details = await Promise.all(detailsPromises);
-      setMovieDetails(details);
+      try {
+        setIsLoading(true);
+        const uniqueMovieIds = [
+          ...new Set(
+            Object.values(lists)
+              .flat()
+              .map((movie) => movie.id)
+          ),
+        ];
+        const detailsPromises = uniqueMovieIds.map((id) => getMovieDetails(id));
+        const details = await Promise.all(detailsPromises);
+        setMovieDetails(details);
+      } catch (err) {
+        console.log(err);
+      }
     };
     fetchMovieDetails();
-  }, []);
+  }, [lists, getMovieDetails]);
 
   useEffect(() => {
     if (movieDetails.length > 0) {
@@ -69,8 +76,11 @@ function Summary() {
       ];
 
       setSummary({ totalRuntime, allCountries, allGenres, allLanguages });
+      setIsLoading(false);
     }
   }, [movieDetails]);
+
+  if (Object.keys(lists).length > 0 && isLoading) return <SpinnerFullPage />;
 
   return (
     <div>

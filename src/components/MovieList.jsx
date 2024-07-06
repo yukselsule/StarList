@@ -6,17 +6,17 @@ import SpinnerFullPage from "./SpinnerFullPage";
 
 function MovieList() {
   const { movies, isLoading } = useMovies();
+  const sortedMovies = [...movies].sort((a, b) => b.vote_count - a.vote_count);
 
   if (isLoading) return <SpinnerFullPage />;
 
-  if (!isLoading)
-    return (
-      <ul className={styles["movie-list"]}>
-        {movies.map((movie) => (
-          <MovieItem movie={movie} key={movie.id} />
-        ))}
-      </ul>
-    );
+  return (
+    <ul className={styles["movie-list"]}>
+      {sortedMovies.map((movie) => (
+        <MovieItem movie={movie} key={movie.id} />
+      ))}
+    </ul>
+  );
 }
 
 export default MovieList;

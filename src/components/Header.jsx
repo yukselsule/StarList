@@ -8,19 +8,13 @@ function Header() {
       <Logo />
       <ul className={styles.header__list}>
         <li className={styles["header__list-item"]}>
-          <NavLink to="/friends" activeClassName={styles.active}>
-            Friends
-          </NavLink>
+          <NavLink to="/friends">Friends</NavLink>
         </li>
         <li className={styles["header__list-item"]}>
-          <NavLink to="/profile" activeClassName={styles.active}>
-            Profile
-          </NavLink>
+          <NavLink to="/profile">Profile</NavLink>
         </li>
         <li className={styles["header__list-item"]}>
-          <NavLink to="/gopremium" activeClassName={styles.active}>
-            GoPremium
-          </NavLink>
+          <NavLink to="/gopremium">GoPremium</NavLink>
         </li>
       </ul>
     </header>

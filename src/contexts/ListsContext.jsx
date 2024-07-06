@@ -8,7 +8,14 @@ function ListsProvider({ children }) {
   const [lists, setLists] = useLocalStorageState({}, "lists");
 
   return (
-    <ListsContext.Provider value={{ listNames, setListNames, lists, setLists }}>
+    <ListsContext.Provider
+      value={{
+        listNames,
+        setListNames,
+        lists,
+        setLists,
+      }}
+    >
       {children}
     </ListsContext.Provider>
   );

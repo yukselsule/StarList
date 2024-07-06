@@ -34,10 +34,12 @@ function MovieItem({ movie }) {
   function handleAddToList() {
     setSelectedMovie(movie);
     setShowAddToList(!showAddToList);
+    document.body.style.overflow = "hidden";
   }
 
   function handleCloseModal() {
     setShowAddToList(false);
+    document.body.style.overflow = "unset";
   }
 
   return (

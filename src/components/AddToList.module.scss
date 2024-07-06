@@ -2,3 +2,31 @@
   font-family: inherit;
   font-size: 1.2rem;
 }
+
+.form {
+  width: 100%;
+
+  &-row {
+    margin-bottom: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.6rem;
+  }
+
+  label {
+    margin-bottom: 0.4rem;
+    font-weight: bold;
+  }
+
+  input[type="text"],
+  textarea,
+  select {
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  input[type="checkbox"] {
+    margin-right: 0.8rem;
+  }
+}

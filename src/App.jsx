@@ -8,6 +8,7 @@ import { ListsProvider } from "./contexts/ListsContext";
 
 import HomePage from "./pages/HomePage";
 import GoPremium from "./pages/GoPremium";
+import Friends from "./pages/Friends";
 import ProfilePage from "./pages/ProfilePage";
 import DetailedSummaryPage from "./pages/DetailedSummaryPage";
 import Listpage from "./pages/Listpage";
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
     element: <ProfilePage />,
   },
   { path: "go-premium", element: <GoPremium /> },
+  { path: "friends", element: <Friends /> },
   { path: "profile/detailed-summary", element: <DetailedSummaryPage /> },
   { path: "profile/:listId", element: <Listpage /> },
 ]);

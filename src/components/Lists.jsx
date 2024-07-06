@@ -1,6 +1,5 @@
 import { useLists } from "../contexts/ListsContext.jsx";
 import ListBox from "./ListBox.jsx";
-// import List from "./List";
 
 function Lists() {
   const { listNames } = useLists();

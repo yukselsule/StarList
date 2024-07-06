@@ -26,7 +26,11 @@ function DetailedSummary() {
 
   console.log(movieDetails);
 
-  return <div>detailed summary components</div>;
+  return (
+    <div>
+      <p>Your movies: </p>
+    </div>
+  );
 }
 
 export default DetailedSummary;

@@ -69,7 +69,7 @@ function AddToList({ movie, onCloseModal }) {
   }
 
   return (
-    <form onSubmit={handleAdd}>
+    <form className={styles.form} onSubmit={handleAdd}>
       <div className={styles["form-row"]}>
         <label htmlFor="date">When did you watched this? </label>
         <DatePicker
@@ -98,7 +98,7 @@ function AddToList({ movie, onCloseModal }) {
         <label htmlFor="rate">How good was it? </label>
         <StarRating
           maxRating={10}
-          color="#fae94b"
+          color="#ffdd00"
           size={24}
           onSetRating={setUserRating}
           value={userRating}
