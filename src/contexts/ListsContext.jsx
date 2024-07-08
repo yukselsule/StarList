@@ -109,7 +109,7 @@ function ListsProvider({ children }) {
     setIsLoading(false);
   }, [movieDetails]);
 
-  const deleteList = (listName) => {
+  function deleteList(listName) {
     const newLists = { ...lists };
     delete newLists[listName];
     setLists(newLists);
@@ -128,7 +128,14 @@ function ListsProvider({ children }) {
     );
 
     setMovieDetails(remainingMovies);
-  };
+  }
+
+  function deleteMovie(listName, movieId) {
+    if (lists[listName].length === 1)
+      return alert("this action will delete the list");
+    const newLists = lists[listName].filter((movie) => movieId !== movie.id);
+    setLists({ ...lists, [listName]: newLists });
+  }
 
   return (
     <ListsContext.Provider
@@ -142,6 +149,7 @@ function ListsProvider({ children }) {
         movieDetails,
         topPicks,
         deleteList,
+        deleteMovie,
       }}
     >
       {children}

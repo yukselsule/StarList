@@ -1,6 +1,8 @@
 const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500";
 
 import imageNotFound from "../assets/img/imageNotFound.png";
+import { useLists } from "../contexts/ListsContext";
+import Button from "./Button";
 
 const formatDate = (date) =>
   new Intl.DateTimeFormat("en", {
@@ -9,9 +11,13 @@ const formatDate = (date) =>
     year: "numeric",
   }).format(new Date(date));
 
-function ListItem({ movie, index }) {
+function ListItem({ movie, index, listName }) {
   const { poster, date, title, userNotes, userRating } = movie;
-  console.log(movie);
+  const { deleteMovie } = useLists();
+
+  function handleDelete() {
+    deleteMovie(listName, movie.id);
+  }
 
   return (
     <li key={index}>
@@ -26,6 +32,9 @@ function ListItem({ movie, index }) {
         <span> ⭐ </span>
         <span> {userRating} </span>
       </p>
+      <Button key={movie.id} type="delete" onClick={handleDelete}>
+        Delete
+      </Button>
     </li>
   );
 }
