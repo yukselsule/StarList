@@ -10,6 +10,10 @@ function Summary() {
   const { lists, isLoading, movieDetails, summary } = useLists();
 
   const handleButtonClick = () => {
+    if (movieDetails.length === 0) {
+      alert("Create lists to see the details :)");
+      return;
+    }
     navigate("/profile/detailed-summary");
   };
 
