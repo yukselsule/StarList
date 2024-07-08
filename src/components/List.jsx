@@ -20,9 +20,7 @@ function List() {
       <h2>{listId}</h2>
       <ul>
         {movies.map((movie, index) => (
-          <>
-            <ListItem movie={movie} key={index} />
-          </>
+          <ListItem movie={movie} key={index} listName={listId} />
         ))}
         <Button type="delete" onClick={handleDeleteList}>
           Delete list
