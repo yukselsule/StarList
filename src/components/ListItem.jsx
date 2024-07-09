@@ -1,5 +1,6 @@
 const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500";
 
+import { useNavigate } from "react-router-dom";
 import imageNotFound from "../assets/img/imageNotFound.png";
 import { useLists } from "../contexts/ListsContext";
 import Button from "./Button";
@@ -14,9 +15,14 @@ const formatDate = (date) =>
 function ListItem({ movie, index, listName }) {
   const { poster, date, title, userNotes, userRating } = movie;
   const { deleteMovie } = useLists();
+  const navigate = useNavigate();
+
+  function handleNavigate() {
+    navigate(-1);
+  }
 
   function handleDelete() {
-    deleteMovie(listName, movie.id);
+    deleteMovie(listName, movie.id, handleNavigate);
   }
 
   return (

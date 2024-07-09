@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useLocalStorageState } from "../hooks/useLocalStorageHook";
 import { useMovies } from "./MoviesContext";
+import Swal from "sweetalert2";
 
 const ListsContext = createContext();
 
@@ -110,31 +111,42 @@ function ListsProvider({ children }) {
   }, [movieDetails]);
 
   function deleteList(listName) {
+    setListNames(listNames.filter((list) => listName !== list));
+
     const newLists = { ...lists };
     delete newLists[listName];
     setLists(newLists);
-    setListNames(listNames.filter((name) => name !== listName));
-
-    const remainingMovieIds = [
-      ...new Set(
-        Object.values(newLists)
-          .flat()
-          .map((movie) => movie.id)
-      ),
-    ];
-
-    const remainingMovies = movieDetails.filter((movie) =>
-      remainingMovieIds.includes(movie.id)
-    );
-
-    setMovieDetails(remainingMovies);
   }
 
-  function deleteMovie(listName, movieId) {
-    if (lists[listName].length === 1)
-      return alert("this action will delete the list");
-    const newLists = lists[listName].filter((movie) => movieId !== movie.id);
-    setLists({ ...lists, [listName]: newLists });
+  function deleteMovie(listName, movieId, callback) {
+    if (lists[listName].length === 1) {
+      return Swal.fire({
+        title: "This action will delete the list",
+        text: "Are you sure you want to proceed?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, keep it",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your list has been deleted.",
+            icon: "success",
+          });
+          deleteList(listName);
+          typeof callback === "function" && callback();
+          return;
+        }
+      });
+    }
+
+    if (lists[listName].length > 1) {
+      const updatedList = lists[listName].filter(
+        (movie) => movie.id !== movieId
+      );
+      setLists({ ...lists, [listName]: updatedList });
+    }
   }
 
   return (
@@ -148,8 +160,8 @@ function ListsProvider({ children }) {
         isLoading,
         movieDetails,
         topPicks,
-        deleteList,
         deleteMovie,
+        deleteList,
       }}
     >
       {children}
