@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import { useSearchQuery } from "../contexts/SearchQueryContext";
 import Button from "./Button";
+import { useNavigate } from "react-router-dom";
 
 const debounce = (callback, wait) => {
   let timeoutId = null;
@@ -15,10 +16,14 @@ const debounce = (callback, wait) => {
 function SearchBar() {
   const [inputValue, setInputValue] = useState("");
   const { setQuery } = useSearchQuery();
+  const navigate = useNavigate();
 
   const debouncedSetQuery = useCallback(
-    debounce((newQuery) => setQuery(newQuery), 1000),
-    [setQuery]
+    debounce((newQuery) => {
+      setQuery(newQuery);
+      navigate(`/search?query=${newQuery}`);
+    }, 1000),
+    [setQuery, navigate]
   );
 
   const handleInputChange = (e) => {
