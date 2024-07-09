@@ -1,3 +1,4 @@
+import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Lists from "../components/Lists";
 import Summary from "../components/Summary";
@@ -10,6 +11,7 @@ function ProfilePage() {
         <Summary />
         <Lists />
       </div>
+      <Footer />
     </div>
   );
 }

@@ -1,15 +1,20 @@
+import { Outlet } from "react-router-dom";
 import Header from "../components/Header";
-import MovieList from "../components/MovieList";
 import SearchBar from "../components/SearchBar";
+import { useSearchQuery } from "../contexts/SearchQueryContext";
+import Footer from "../components/Footer";
 
-export default function HomePage() {
+function HomePage() {
+  const { query } = useSearchQuery();
   return (
     <div>
       <Header />
       <main className="container">
         <SearchBar />
-        <MovieList />
+        {query ? <Outlet /> : null}
       </main>
+      <Footer />
     </div>
   );
 }
+export default HomePage;

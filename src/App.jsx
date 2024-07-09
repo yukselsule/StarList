@@ -11,18 +11,20 @@ import GoPremium from "./pages/GoPremium";
 import Friends from "./pages/Friends";
 import ProfilePage from "./pages/ProfilePage";
 import DetailedSummaryPage from "./pages/DetailedSummaryPage";
-import Listpage from "./pages/Listpage";
+import ListPage from "./pages/ListPage";
+import ResultsPage from "./pages/ResultsPage";
 
 const router = createBrowserRouter([
-  { path: "/", element: <HomePage /> },
   {
-    path: "profile",
-    element: <ProfilePage />,
+    path: "/",
+    element: <HomePage />,
+    children: [{ path: "search", element: <ResultsPage /> }],
   },
+  { path: "profile", element: <ProfilePage /> },
   { path: "go-premium", element: <GoPremium /> },
   { path: "friends", element: <Friends /> },
   { path: "profile/detailed-summary", element: <DetailedSummaryPage /> },
-  { path: "profile/:listId", element: <Listpage /> },
+  { path: "profile/:listId", element: <ListPage /> },
 ]);
 
 export default function App() {
