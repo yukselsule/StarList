@@ -1,5 +1,5 @@
 {
-  "name": "trivia-quiz-app",
+  "name": "star-list",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -14,7 +14,8 @@
     "react-datepicker": "^7.2.0",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.23.1",
-    "sass": "^1.77.6"
+    "sass": "^1.77.6",
+    "sweetalert2": "^11.12.2"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
