@@ -17,4 +17,11 @@ $color-grey-dark-3: #333;
 
 $color-white: #fbfcf8;
 $color-white-darker: #f8f6f0;
-$color-black: #000;
+$color-black: #18040c;
+
+@mixin centerContent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
