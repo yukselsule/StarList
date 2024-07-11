@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { useSearchQuery } from "../contexts/SearchQueryContext";
-import Button from "./Button";
 import { useNavigate } from "react-router-dom";
+import styles from "./SearchBar.module.scss";
 
 const debounce = (callback, wait) => {
   let timeoutId = null;
@@ -15,7 +15,7 @@ const debounce = (callback, wait) => {
 
 function SearchBar() {
   const [inputValue, setInputValue] = useState("");
-  const { setQuery } = useSearchQuery();
+  const { setQuery, query } = useSearchQuery();
   const navigate = useNavigate();
 
   const debouncedSetQuery = useCallback(
@@ -32,14 +32,14 @@ function SearchBar() {
   };
 
   return (
-    <div>
+    <div className={`${styles["search-box"]} ${query ? styles["top"] : ""}`}>
       <input
         placeholder="Search your movie"
         type="text"
         value={inputValue}
         onChange={handleInputChange}
+        className={styles["search-box_input"]}
       />
-      <Button>Search</Button>
     </div>
   );
 }

@@ -1,19 +1,27 @@
 import { NavLink } from "react-router-dom";
 import Logo from "./Logo";
 import styles from "./Header.module.scss";
+import { useSearchQuery } from "../contexts/SearchQueryContext";
 
 function Header() {
+  const { query } = useSearchQuery();
   return (
-    <header className={styles.header}>
+    <header
+      className={`${styles.header} ${!query ? styles["header-bg"] : ""} `}
+    >
       <Logo />
-      <ul className={styles.header__list}>
-        <li className={styles["header__list-item"]}>
+      <ul
+        className={`${styles.header__list} ${
+          !query ? styles["header-bg__list"] : ""
+        } `}
+      >
+        <li>
           <NavLink to="/friends">Friends</NavLink>
         </li>
-        <li className={styles["header__list-item"]}>
+        <li>
           <NavLink to="/profile">Profile</NavLink>
         </li>
-        <li className={styles["header__list-item"]}>
+        <li>
           <NavLink to="/gopremium">GoPremium</NavLink>
         </li>
       </ul>

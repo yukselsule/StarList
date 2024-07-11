@@ -1,0 +1,24 @@
+.search-box {
+  @include centerContent;
+
+  &_input {
+    border: none;
+    border-radius: 5px;
+    padding: 1.2rem;
+    font-size: 1.6rem;
+    max-width: 50rem;
+    min-width: 40rem;
+    text-align: center;
+    color: inherit;
+    font-family: inherit;
+    font-weight: inherit;
+
+    &:focus {
+      outline: 2px solid $color-primary;
+    }
+  }
+
+  &.top {
+    position: relative;
+  }
+}

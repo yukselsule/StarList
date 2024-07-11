@@ -1,11 +1,13 @@
 .header {
+  background-color: $color-background;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 3rem;
-
-  background-color: $color-background;
   height: 10vh;
+  width: 100%;
+
+  transition: all 0.3s ease;
 
   a.active {
     text-decoration: none;
@@ -16,7 +18,7 @@
     gap: 3rem;
     list-style: none;
 
-    &-item a {
+    li a {
       transition: all 0.4s;
 
       &:link,
@@ -27,6 +29,26 @@
       &:hover,
       &:active {
         color: $color-primary-dark;
+      }
+    }
+  }
+
+  &-bg {
+    background: transparent;
+    position: absolute;
+    top: 0;
+
+    z-index: 3;
+
+    &__list li a {
+      &:link,
+      &:visited {
+        color: $color-primary;
+        text-decoration: none;
+      }
+      &:hover,
+      &:active {
+        color: $color-primary-light;
       }
     }
   }

@@ -21,7 +21,7 @@ const router = createBrowserRouter([
     children: [{ path: "search", element: <ResultsPage /> }],
   },
   { path: "profile", element: <ProfilePage /> },
-  { path: "go-premium", element: <GoPremium /> },
+  { path: "gopremium", element: <GoPremium /> },
   { path: "friends", element: <Friends /> },
   { path: "profile/detailed-summary", element: <DetailedSummaryPage /> },
   { path: "profile/:listId", element: <ListPage /> },
