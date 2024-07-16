@@ -18,7 +18,7 @@ function DetailedSummary() {
                 <img
                   key={i}
                   src={
-                    movie.poster_path
+                    movie?.poster_path
                       ? `${IMG_BASE_URL}${movie.poster_path}`
                       : imageNotFound
                   }

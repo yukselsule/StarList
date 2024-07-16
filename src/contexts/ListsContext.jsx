@@ -16,7 +16,10 @@ function ListsProvider({ children }) {
     allLanguages: [],
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [movieDetails, setMovieDetails] = useState([]);
+  const [movieDetails, setMovieDetails] = useLocalStorageState(
+    [],
+    "movieDetails"
+  );
   const [topPicks, setTopPick] = useState({
     mostPopular: {},
     mostRuntime: {},

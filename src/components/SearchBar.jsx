@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
-import { useSearchQuery } from "../contexts/SearchQueryContext";
 import { useNavigate } from "react-router-dom";
+
+import { useSearchQuery } from "../contexts/SearchQueryContext";
 import styles from "./SearchBar.module.scss";
 
 const debounce = (callback, wait) => {

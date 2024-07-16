@@ -1,7 +1,10 @@
 import { NavLink } from "react-router-dom";
-import Logo from "./Logo";
-import styles from "./Header.module.scss";
+
 import { useSearchQuery } from "../contexts/SearchQueryContext";
+
+import Logo from "./Logo";
+
+import styles from "./Header.module.scss";
 
 function Header() {
   const { query } = useSearchQuery();
