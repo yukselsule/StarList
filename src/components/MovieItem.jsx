@@ -6,22 +6,12 @@ import AddToList from "./AddToList";
 
 import styles from "./MovieItem.module.scss";
 import Modal from "./Modal";
-import { useMovies } from "../contexts/MoviesContext";
 
 const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500";
 
 function MovieItem({ movie }) {
-  const { movieDetails } = useMovies();
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [showAddToList, setShowAddToList] = useState(false);
-
-  const details = movieDetails[movie.id] || {};
-  const {
-    spoken_languages: languages = [],
-    runtime,
-    genres = [],
-    production_countries: countries = [],
-  } = details;
 
   const {
     title,
@@ -29,7 +19,18 @@ function MovieItem({ movie }) {
     poster_path: poster,
     overview,
     vote_average: voted,
+    details,
+    credits,
   } = movie;
+
+  const {
+    spoken_languages: languages = [],
+    runtime,
+    genres = [],
+    production_countries: countries = [],
+  } = details;
+
+  const { cast = [], crew = [] } = credits;
 
   function handleAddToList() {
     setSelectedMovie(movie);
@@ -43,45 +44,71 @@ function MovieItem({ movie }) {
   }
 
   return (
-    <li>
+    <li className={styles["movie-item"]}>
       <div className={styles.movie}>
-        <img
-          className={styles.movie__poster}
-          src={poster ? `${IMG_BASE_URL}${poster}` : imageNotFound}
-          alt={`Poster of ${title}`}
-        />
+        <div className={styles["movie-img"]}>
+          <img
+            className={styles["movie-img__poster"]}
+            src={poster ? `${IMG_BASE_URL}${poster}` : imageNotFound}
+            alt={`Poster of ${title}`}
+          />
+        </div>
+
         <div className={styles.movie__details}>
-          <h2 className={styles["movie__details-title"]}>{title}</h2>
-          <span className={styles["movie__details-voted"]}>
-            {voted.toFixed(1)}
-          </span>
-          <span className={styles["movie__details-runtime"]}>
+          <div>
+            <span className={styles["movie-details__title"]}>{title}</span>
+            <span className={`styles["movie-details__voted"] margin-left-sm`}>
+              ⭐ {voted.toFixed(1)}
+            </span>
+          </div>
+
+          <span className={styles["movie-details__runtime"]}>
             Runtime: {runtime} minutes
           </span>
-          <p className={styles["movie__details-languages"]}>
+          <span className={styles["movie-details__released"]}>{released}</span>
+          <p className={styles["movie-details__languages"]}>
             Languages:
             {languages.length > 0
               ? languages.map((language) => (
-                  <span key={language.iso_639_1}>{language.english_name}</span>
+                  <span
+                    className={styles["movie-details__languages_lng"]}
+                    key={language.iso_639_1}
+                  >
+                    {language.english_name}
+                  </span>
                 ))
               : "N/A"}
           </p>
-          <span className={styles["movie__details-released"]}>{released}</span>
-          <p className={styles["movie__details-genres"]}>
+
+          <p className={styles["movie-details__genres"]}>
             Genres:
             {genres.length > 0
               ? genres.map((genre) => <span key={genre.id}>{genre.name} </span>)
               : "N/A"}
           </p>
-          <p className={styles["movie__details-countries"]}>
+          <p className={styles["movie-details__countries"]}>
             Countries:
             {countries.length > 0
               ? countries.map((country) => (
-                  <span key={country.iso_3166_1}>{country.name} </span>
+                  <span key={country.iso_3166_1}>
+                    {country.name === "United States of America"
+                      ? "USA"
+                      : country.name}{" "}
+                  </span>
                 ))
               : "N/A"}
           </p>
-          <p className={styles["movie__details-overview"]}>{overview}</p>
+          <div>
+            {cast.map((cast) => (
+              <p key={cast.id}> Cast: {cast.name} </p>
+            ))}{" "}
+          </div>
+          <div>
+            {crew.map((crew) => (
+              <p key={crew.credit_id}> Crew: {crew.name} </p>
+            ))}{" "}
+          </div>
+          <p className={styles["movie-details__overview"]}>{overview}</p>
           <Button type="add" onClick={handleAddToList}>
             Add to list
           </Button>
