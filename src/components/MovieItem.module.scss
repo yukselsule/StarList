@@ -1,24 +1,40 @@
-.movie {
-  list-style: none;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.movie-item {
+  display: flex;
+  align-items: stretch;
+}
 
-  &__poster {
-    width: 75%;
-    height: auto;
+.movie {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+
+  border: 2px solid $color-star;
+  border-radius: 5px;
+  padding: 2rem;
+  box-shadow: 0 1rem 3rem rgba($color-primary, 0.2);
+
+  &-img {
+    display: flex;
+    // justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    &__poster {
+      width: 75%;
+      height: auto;
+      border-radius: 5px;
+    }
   }
 
-  &__details {
-    &-title {
-      font-size: 1.5rem;
+  &-details {
+    &__title {
+      font-size: 1.8rem;
       font-weight: bold;
     }
 
-    &-released {
+    &__released {
       color: gray;
     }
 
-    &-overview {
+    &__overview {
       font-size: 1rem;
       line-height: 1.5;
     }

@@ -1,0 +1,9 @@
+.movie {
+  &-img__poster {
+    width: 50%;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

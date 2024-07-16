@@ -1,4 +1,4 @@
-// src/styles/variables.scss
+// Variables
 
 $color-primary: #ec297b;
 $color-primary-light: #ed83b5;
@@ -15,13 +15,38 @@ $color-grey-dark: #25181d;
 $color-grey-dark-2: #999;
 $color-grey-dark-3: #333;
 
-$color-white: #fbfcf8;
+// $color-white: #fbfcf8;
+$color-white: #f6ebee;
 $color-white-darker: #f8f6f0;
 $color-black: #18040c;
+
+// Mixins
 
 @mixin centerContent {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+// Utilities
+
+.margin-top-sm {
+  margin-top: 2rem;
+}
+
+.margin-bottom-sm {
+  margin-bottom: 2rem;
+}
+
+.margin-right-sm {
+  margin-right: 2rem;
+}
+
+.margin-left-sm {
+  margin-left: 2rem;
+}
+
+.margin-right-md {
+  margin-right: 4rem;
 }
