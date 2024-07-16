@@ -13,12 +13,16 @@ import ProfilePage from "./pages/ProfilePage";
 import DetailedSummaryPage from "./pages/DetailedSummaryPage";
 import ListPage from "./pages/ListPage";
 import ResultsPage from "./pages/ResultsPage";
+import MoviePage from "./pages/MoviePage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <HomePage />,
-    children: [{ path: "search", element: <ResultsPage /> }],
+    children: [
+      { path: "search", element: <ResultsPage /> },
+      { path: "search/movie/:id", element: <MoviePage /> },
+    ],
   },
   { path: "profile", element: <ProfilePage /> },
   { path: "gopremium", element: <GoPremium /> },
