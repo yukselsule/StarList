@@ -3,29 +3,27 @@ import { NavLink } from "react-router-dom";
 import { useSearchQuery } from "../contexts/SearchQueryContext";
 
 import Logo from "./Logo";
+import SearchBar from "./SearchBar";
 
 import styles from "./Header.module.scss";
 
 function Header() {
   const { query } = useSearchQuery();
   return (
-    <header
-      className={`${styles.header} ${!query ? styles["header-bg"] : ""} `}
-    >
+    <header className={`${styles.header} ${!query ? styles["header-bg"] : ""}`}>
       <Logo />
+
+      <SearchBar />
+
       <ul
         className={`${styles.header__list} ${
           !query ? styles["header-bg__list"] : ""
-        } `}
+        }`}
       >
         <li>
-          <NavLink to="/friends">Friends</NavLink>
-        </li>
-        <li>
-          <NavLink to="/profile">Profile</NavLink>
-        </li>
-        <li>
-          <NavLink to="/gopremium">GoPremium</NavLink>
+          <NavLink to="/profile">
+            <ion-icon name="person-circle-outline"></ion-icon>
+          </NavLink>
         </li>
       </ul>
     </header>

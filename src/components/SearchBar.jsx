@@ -2,6 +2,7 @@ import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useSearchQuery } from "../contexts/SearchQueryContext";
+
 import styles from "./SearchBar.module.scss";
 
 const debounce = (callback, wait) => {
@@ -16,7 +17,8 @@ const debounce = (callback, wait) => {
 
 function SearchBar() {
   const [inputValue, setInputValue] = useState("");
-  const { setQuery, query } = useSearchQuery();
+  // const { setQuery, query } = useSearchQuery();
+  const { setQuery } = useSearchQuery();
   const navigate = useNavigate();
 
   const debouncedSetQuery = useCallback(
@@ -33,7 +35,10 @@ function SearchBar() {
   };
 
   return (
-    <div className={`${styles["search-box"]} ${query ? styles["top"] : ""}`}>
+    <div
+      // className={`${styles["search-box"]} ${!query ? styles["homepage"] : ""}`}
+      className={`${styles["search-box"]}`}
+    >
       <input
         placeholder="Search your movie"
         type="text"

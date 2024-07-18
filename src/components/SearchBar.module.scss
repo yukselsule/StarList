@@ -1,10 +1,7 @@
 .search-box {
-  @include centerContent;
-  // transition: all 2s ease;
-
-  // position: absolute;
-  // top: 50%;
-  // transform: translateY(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   transition: position 2s ease;
 
   &_input {
@@ -12,25 +9,25 @@
     border-radius: 5px;
     padding: 1.2rem;
     font-size: 1.6rem;
-    max-width: 50rem;
-    min-width: 40rem;
-    text-align: center;
+    max-width: 60rem;
+    min-width: 50rem;
     color: inherit;
     font-family: inherit;
     font-weight: inherit;
+    background-color: $color-white;
 
     &:focus {
       outline: 2px solid $color-primary;
     }
   }
 
-  &.top {
-    position: static;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transform: translate(0);
+  // &.homepage {
+  //   // position: static;
+  //   // display: flex;
+  //   // justify-content: center;
+  //   // align-items: center;
+  //   // transform: translate(0);
 
-    // top: 10%;
-  }
+  //   @include centerContent;
+  // }
 }
