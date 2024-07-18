@@ -1,7 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import Swal from "sweetalert2";
+
 import { useLocalStorageState } from "../hooks/useLocalStorageHook";
 import { useMovies } from "./MoviesContext";
-import Swal from "sweetalert2";
 
 const ListsContext = createContext();
 
