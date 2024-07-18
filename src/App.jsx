@@ -1,19 +1,17 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import "./styles/base.scss";
-
 import { MoviesProvider } from "./contexts/MoviesContext";
 import { SearchQueryProvider } from "./contexts/SearchQueryContext";
 import { ListsProvider } from "./contexts/ListsContext";
 
-import HomePage from "./pages/HomePage";
-import GoPremium from "./pages/GoPremium";
-import Friends from "./pages/Friends";
-import ProfilePage from "./pages/ProfilePage";
 import DetailedSummaryPage from "./pages/DetailedSummaryPage";
+import HomePage from "./pages/HomePage";
 import ListPage from "./pages/ListPage";
-import ResultsPage from "./pages/ResultsPage";
 import MoviePage from "./pages/MoviePage";
+import ProfilePage from "./pages/ProfilePage";
+import ResultsPage from "./pages/ResultsPage";
+
+import "./styles/base.scss";
 
 const router = createBrowserRouter([
   {
@@ -25,8 +23,6 @@ const router = createBrowserRouter([
     ],
   },
   { path: "profile", element: <ProfilePage /> },
-  { path: "gopremium", element: <GoPremium /> },
-  { path: "friends", element: <Friends /> },
   { path: "profile/detailed-summary", element: <DetailedSummaryPage /> },
   { path: "profile/:listId", element: <ListPage /> },
 ]);
