@@ -1,8 +1,9 @@
 import { useMovies } from "../contexts/MoviesContext";
-import styles from "./MovieList.module.scss";
 
+import MovieCard from "./MovieCard";
 import SpinnerFullPage from "./SpinnerFullPage";
-import Movie from "./Movie";
+
+import styles from "./MovieList.module.scss";
 
 function MovieList() {
   const { movies, isLoading } = useMovies();
@@ -13,7 +14,7 @@ function MovieList() {
   return (
     <ul className={styles["movie-list"]}>
       {sortedMovies.map((movie) => (
-        <Movie movie={movie} key={movie.id} />
+        <MovieCard movie={movie} key={movie.id} />
       ))}
     </ul>
   );
