@@ -19,7 +19,7 @@
     list-style: none;
     justify-content: flex-end;
 
-    li a {
+    li {
       transition: all 0.4s;
 
       &:link,
@@ -29,6 +29,17 @@
       }
       &:hover,
       &:active {
+        color: $color-primary-light;
+      }
+    }
+
+    &-icon {
+      width: 3rem;
+      height: 3rem;
+      stroke: $color-primary;
+      transition: all 0.3s ease;
+
+      &:hover {
         color: $color-primary-light;
       }
     }
@@ -52,10 +63,17 @@
       }
     }
   }
+}
 
-  // .searchContainer {
-  //   flex: 1;
-  //   display: flex;
-  //   justify-content: center;
-  // }
+:global {
+  ion-icon[name="person-circle-outline"] {
+    width: 3rem;
+    height: 3rem;
+    color: $color-primary;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: $color-primary-light;
+    }
+  }
 }

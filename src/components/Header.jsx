@@ -12,9 +12,7 @@ function Header() {
   return (
     <header className={`${styles.header} ${!query ? styles["header-bg"] : ""}`}>
       <Logo />
-
       <SearchBar />
-
       <ul
         className={`${styles.header__list} ${
           !query ? styles["header-bg__list"] : ""
@@ -22,7 +20,10 @@ function Header() {
       >
         <li>
           <NavLink to="/profile">
-            <ion-icon name="person-circle-outline"></ion-icon>
+            <ion-icon
+              className={styles["header__list-icon"]}
+              name="person-circle-outline"
+            ></ion-icon>
           </NavLink>
         </li>
       </ul>

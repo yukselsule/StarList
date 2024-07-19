@@ -11,4 +11,13 @@
   &-add {
     background-color: $color-primary;
   }
+
+  &-close {
+    background-color: inherit;
+
+    position: absolute;
+    top: 3%;
+    right: 3%;
+    transform: translate(-3%, -3%);
+  }
 }

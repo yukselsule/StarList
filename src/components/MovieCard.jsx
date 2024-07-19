@@ -51,13 +51,15 @@ function MovieCard({ movie }) {
             }`}
           ></div>
           <button
-            type="add"
             onClick={handleAddToList}
             className={styles["movie-card__button"]}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            +
+            <ion-icon
+              className={styles["movie-card__button-icon"]}
+              name="add-outline"
+            ></ion-icon>
           </button>
         </div>
 
