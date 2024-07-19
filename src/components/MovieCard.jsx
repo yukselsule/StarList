@@ -37,30 +37,33 @@ function MovieCard({ movie }) {
     <div className={styles.movie}>
       <div className={styles["movie-card"]}>
         <div className={styles["movie-card__poster-container"]}>
-          <img
-            className={styles["movie-card__poster"]}
-            src={poster ? `${IMG_BASE_URL}${poster}` : imageNotFound}
-            alt={`Poster of ${title}`}
-            onClick={handleImageClick}
-          />
+          <div className={styles["movie-card__poster-container"]}>
+            <img
+              className={styles["movie-card__poster"]}
+              src={poster ? `${IMG_BASE_URL}${poster}` : imageNotFound}
+              alt={`Poster of ${title}`}
+              onClick={handleImageClick}
+            />
+          </div>
+          <div
+            className={`${
+              isHovered ? styles["movie-card__poster--hovered"] : ""
+            }`}
+          ></div>
+          <button
+            type="add"
+            onClick={handleAddToList}
+            className={styles["movie-card__button"]}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            +
+          </button>
         </div>
-        <div
-          className={`${
-            isHovered ? styles["movie-card__poster--hovered"] : ""
-          }`}
-        ></div>
-        <button
-          type="add"
-          onClick={handleAddToList}
-          className={styles["movie-card__button"]}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          +
-        </button>
-      </div>
-      <div className={styles["movie__title"]}>
-        <h3 className={styles["movie__title--title"]}> {title} </h3>
+
+        <div className={styles["movie-card__title-container"]}>
+          <h3> {title} </h3>
+        </div>
       </div>
 
       {showAddToList && (
