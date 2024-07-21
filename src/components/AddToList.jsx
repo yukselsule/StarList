@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import DatePicker from "react-datepicker";
-import StarRating from "./StarRating";
-import Button from "./Button";
+import Swal from "sweetalert2";
 
 import { useLists } from "../contexts/ListsContext.jsx";
+
+import Button from "./Button";
+import StarRating from "./StarRating";
 
 import styles from "./AddToList.module.scss";
 import "react-datepicker/dist/react-datepicker.css";
@@ -21,17 +23,31 @@ function AddToList({ movie, onCloseModal }) {
 
   const { title, poster_path: poster, id } = movie || {};
 
-  const handleUnkownDate = () => {
+  const newListNameRef = useRef(null);
+
+  function handleUnkownDate() {
     setIsDateUnknown(!isDateUnknown);
-  };
+  }
 
   function handleCreateANewList() {
     if (newListName.trim() === "") {
-      alert("List name cannot be empty or just spaces.");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "List name cannot be empty or just spaces",
+        iconColor: "red",
+        confirmButtonColor: "black",
+      });
       return;
     }
     if (listNames.includes(newListName.trim())) {
-      alert("You already have that list");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "You already have that list",
+        iconColor: "red",
+        confirmButtonColor: "black",
+      });
       return;
     }
 
@@ -77,10 +93,15 @@ function AddToList({ movie, onCloseModal }) {
     onCloseModal();
   }
 
+  useEffect(() => {
+    if (showCreateANewList && newListNameRef.current) {
+      newListNameRef.current.focus();
+    }
+  }, [showCreateANewList]);
+
   return (
     <form className={styles.form} onSubmit={handleAdd}>
-      <div className={styles["form-row"]}>
-        <label htmlFor="date">When did you watched this? </label>
+      <div className={styles["form-row__date"]}>
         <DatePicker
           id="date"
           onChange={(date) => setDate(date)}
@@ -88,23 +109,32 @@ function AddToList({ movie, onCloseModal }) {
           dateFormat="dd/MM/yyyy"
           disabled={isDateUnknown}
           required={!isDateUnknown}
-          className={styles["date-picker"]}
+          popperPlacement="bottom"
+          popperModifiers={{
+            offset: {
+              enabled: true,
+              offset: "5px, 10px",
+            },
+            preventOverflow: {
+              enabled: true,
+              escapeWithReference: false,
+              boundariesElement: "viewport",
+            },
+          }}
         />
-      </div>
-      <div className={styles["form-row"]}>
-        <input
-          type="checkbox"
-          id="checkbox"
-          checked={isDateUnknown}
-          onChange={handleUnkownDate}
-        />
-        <label htmlFor="checkbox">
-          I don&apos;t remember when I watched it.
-        </label>
+
+        <div className={styles["form-row__checkbox"]}>
+          <input
+            type="checkbox"
+            id="checkbox"
+            checked={isDateUnknown}
+            onChange={handleUnkownDate}
+          />
+          <span htmlFor="checkbox">I don&apos;t remember.</span>
+        </div>
       </div>
 
       <div className={styles["form-row"]}>
-        <label htmlFor="rate">How good was it? </label>
         <StarRating
           maxRating={10}
           color="#ffdd00"
@@ -116,18 +146,16 @@ function AddToList({ movie, onCloseModal }) {
       </div>
 
       <div className={styles["form-row"]}>
-        <label htmlFor="notes">Notes about this </label>
         <textarea
           id="notes"
-          placeholder="what to remember"
+          placeholder={`What to remember about ${title}`}
           onChange={(e) => setUserNotes(e.target.value)}
           value={userNotes}
           required
         />
       </div>
 
-      <div className={styles["form-row"]}>
-        <label htmlFor="selectList">Select a list</label>
+      <div className={styles["form-row__list"]}>
         <select
           value={selectedList}
           onChange={(e) => setSelectedList(e.target.value)}
@@ -141,29 +169,32 @@ function AddToList({ movie, onCloseModal }) {
             </option>
           ))}
         </select>
-      </div>
 
-      <div className={styles["form-row"]}>
-        <Button type="add" onClick={() => setShowCreateANewList(true)}>
-          Create a new list
-        </Button>
-
-        {showCreateANewList && (
-          <div>
-            <input
-              type="text"
-              value={newListName}
-              required={showCreateANewList}
-              onChange={(e) => setNewListName(e.target.value)}
-            />
-            <Button type="add" onClick={handleCreateANewList}>
-              Create a new list
+        <div className={styles["form-row__list-create"]}>
+          {!showCreateANewList && (
+            <Button type="add" onClick={() => setShowCreateANewList(true)}>
+              <span>+Create a new list</span>
             </Button>
-          </div>
-        )}
+          )}
+
+          {showCreateANewList && (
+            <div>
+              <input
+                type="text"
+                value={newListName}
+                required={showCreateANewList}
+                onChange={(e) => setNewListName(e.target.value)}
+                ref={newListNameRef}
+              />
+              <Button type="add" onClick={handleCreateANewList}>
+                Create
+              </Button>
+            </div>
+          )}
+        </div>
       </div>
 
-      <div className={styles["form-row"]}>
+      <div className={styles["form-row__list__add-button"]}>
         <Button type="add">Add</Button>
       </div>
     </form>
