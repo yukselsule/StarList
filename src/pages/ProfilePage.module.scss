@@ -1,0 +1,14 @@
+.profile-page {
+  padding: 2rem 6rem;
+  height: 90vh;
+  position: relative;
+
+  &__empty {
+    @include centerContent;
+  }
+
+  &__full {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+  }
+}
