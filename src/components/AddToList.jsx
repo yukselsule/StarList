@@ -66,7 +66,11 @@ function AddToList({ movie, onCloseModal }) {
       !userRating ||
       !userNotes.trim()
     ) {
-      alert("Please fill required fields");
+      Swal.fire({
+        text: "Please fill required fields",
+        iconColor: "red",
+        confirmButtonColor: "black",
+      });
       return;
     }
 
@@ -81,7 +85,12 @@ function AddToList({ movie, onCloseModal }) {
     };
 
     if (lists[selectedList]?.some((movie) => movie.id === id)) {
-      alert(`You already added "${movie.title}" to "${selectedList}" list`);
+      Swal.fire({
+        icon: "error",
+        text: `You already added "${movie.title}" to "${selectedList}" list`,
+        iconColor: "red",
+        confirmButtonColor: "black",
+      });
       return;
     } else {
       setLists({
