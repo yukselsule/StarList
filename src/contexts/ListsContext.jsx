@@ -24,6 +24,7 @@ function ListsProvider({ children }) {
   const [topPicks, setTopPick] = useState({
     mostPopular: {},
     mostRuntime: {},
+    leastRuntime: {},
     mostBudget: {},
     oldest: {},
     newest: {},
@@ -88,6 +89,12 @@ function ListsProvider({ children }) {
       movieDetails[0]
     );
 
+    const leastRuntime = movieDetails.reduce(
+      (movie, curMovie) =>
+        movie.runtime < curMovie.runtime ? movie : curMovie,
+      movieDetails[0]
+    );
+
     const mostBudget = movieDetails.reduce(
       (movie, curMovie) => (movie.budget > curMovie.budget ? movie : curMovie),
       movieDetails[0]
@@ -110,7 +117,14 @@ function ListsProvider({ children }) {
     );
 
     setSummary({ totalRuntime, allCountries, allGenres, allLanguages });
-    setTopPick({ mostPopular, mostRuntime, mostBudget, oldest, newest });
+    setTopPick({
+      mostPopular,
+      mostRuntime,
+      leastRuntime,
+      mostBudget,
+      oldest,
+      newest,
+    });
     setIsLoading(false);
   }, [movieDetails]);
 
