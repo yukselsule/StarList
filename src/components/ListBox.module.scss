@@ -1,0 +1,24 @@
+.list-box {
+  border: 2px solid $color-primary-dark;
+  border-radius: 4px;
+  height: 10rem;
+  width: 14rem;
+  padding: 1.2rem 2rem;
+  cursor: pointer;
+  justify-self: center;
+  box-shadow: 0 1.5rem 2rem 0.5rem rgba($color-black, 0.1);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  &__name {
+    font-size: 1.6rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

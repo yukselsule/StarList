@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
+import styles from "./ListBox.module.scss";
+
 function ListBox({ listName, listId }) {
   const navigate = useNavigate();
 
@@ -8,9 +10,9 @@ function ListBox({ listName, listId }) {
   }
 
   return (
-    <div onClick={handleClick}>
-      <h2> {listName} </h2>
-    </div>
+    <li className={styles["list-box"]} onClick={handleClick}>
+      <h2 className={styles["list-box__name"]}> {listName} </h2>
+    </li>
   );
 }
 
