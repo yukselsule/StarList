@@ -1,6 +1,6 @@
 # Star-List
 
-Star-List is a web application designed for movie enthusiasts to search for movies, view detailed information about them, create and manage lists of watched or to-watch movies, and access these lists from a personal profile.
+Star-List is a web application designed for movie enthusiasts to search for movies, view detailed information about them, create and manage lists of watched movies, and access these lists from a personal profile.
 
 ## Features
 
