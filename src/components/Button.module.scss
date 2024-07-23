@@ -10,7 +10,9 @@
 
   &-add {
     background-color: $color-primary;
-    height: 3.2rem;
+    padding: 1rem;
+    font-weight: 600;
+    font-size: 1.2rem;
   }
 
   &-close {
@@ -37,6 +39,11 @@
     text-transform: lowercase;
     text-decoration: underline;
     font-size: 1.4rem;
+  }
+
+  &-show-all {
+    font-weight: 600;
+    background-color: rgba($color-grey-dark, 0.4);
   }
 
   &-trash {

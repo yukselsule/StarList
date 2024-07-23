@@ -1,4 +1,5 @@
 import bgvideo from "../assets/img/bgvideo.mp4";
+
 import styles from "./BackgroundVideo.module.scss";
 
 function BackgroundVideo() {

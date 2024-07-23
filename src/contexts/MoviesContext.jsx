@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+
 import { useSearchQuery } from "./SearchQueryContext";
 
 const API_KEY = "218dc8f636aa2082cc10293321c67dd5";
@@ -44,44 +45,6 @@ function MoviesProvider({ children }) {
     return movies.find((movie) => movie.id === parseInt(id));
   }
 
-  //   function () {
-  //     async function getMovie() {
-  //       setIsLoading(true);
-  //       try {
-  //         const res = await fetch(
-  //           `${BASE_URL}search/movie?query=${query}&api_key=${API_KEY}`
-  //         );
-  //         const data = await res.json();
-  //         setMovies(data.results);
-
-  //         data.results.forEach(async (movie) => {
-  //           const details = await getMovieDetails(movie.id);
-  //           const credits = await getMovieCredits(movie.id);
-  //           setMovieDetails((prevDetails) => {
-  //             return {
-  //               ...prevDetails,
-  //               [movie.id]: { ...movie, ...details },
-  //             };
-  //           });
-  //           setMovieCredits((prevCredits) => {
-  //             return {
-  //               ...prevCredits,
-  //               [movie.id]: { ...movie, ...credits },
-  //             };
-  //           });
-  //         });
-  //       } catch (err) {
-  //         console.log(err);
-  //       } finally {
-  //         setIsLoading(false);
-  //       }
-  //     }
-  //     if (query) getMovie();
-  //     console.log(movieCredits);
-  //   },
-  //   [query]
-  // );
-
   useEffect(
     function () {
       async function getMovie() {
@@ -116,13 +79,10 @@ function MoviesProvider({ children }) {
     [query]
   );
 
-  console.log(movies);
-
   return (
     <MoviesContext.Provider
       value={{
         movies,
-
         getMovieDetails,
         isLoading,
         getMovieById,
