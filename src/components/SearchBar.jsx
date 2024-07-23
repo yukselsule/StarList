@@ -17,8 +17,7 @@ const debounce = (callback, wait) => {
 
 function SearchBar() {
   const [inputValue, setInputValue] = useState("");
-  // const { setQuery, query } = useSearchQuery();
-  const { setQuery } = useSearchQuery();
+  const { setQuery, query } = useSearchQuery();
   const navigate = useNavigate();
 
   const debouncedSetQuery = useCallback(
@@ -36,8 +35,7 @@ function SearchBar() {
 
   return (
     <div
-      // className={`${styles["search-box"]} ${!query ? styles["homepage"] : ""}`}
-      className={`${styles["search-box"]}`}
+      className={`${styles["search-box"]} ${!query ? styles["homepage"] : ""}`}
     >
       <input
         placeholder="Search your movie"
