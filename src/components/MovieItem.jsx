@@ -52,99 +52,55 @@ function MovieItem({ movie }) {
   }
 
   return (
-    <li className={styles["movie-item"]}>
-      <div className={styles.movie}>
-        <div className={styles["movie-img"]}>
-          <img
-            className={styles["movie-img__poster"]}
-            src={poster ? `${IMG_BASE_URL}${poster}` : imageNotFound}
-            alt={`Poster of ${title}`}
-          />
+    <div className={styles.movie}>
+      <div className={styles["movie__poster-container"]}>
+        <img
+          src={poster ? `${IMG_BASE_URL}${poster}` : imageNotFound}
+          alt={`Poster of ${title}`}
+        />
+      </div>
+
+      <div className={styles["movie-details"]}>
+        <div className={styles["movie-details-heading"]}>
+          <span className={styles["movie-details__title"]}>{title}</span>
+          {released !== "" && (
+            <span className={styles["movie-details__released"]}>
+              ({released.split("").slice(0, 4)})
+            </span>
+          )}
+          <span className={styles["movie-details__voted"]}>
+            ⭐ {voted.toFixed(1)}
+          </span>
         </div>
 
-        <div className={styles.movie__details}>
-          <div>
-            <span className={styles["movie-details__title"]}>
-              {title} (
-              {released !== "" && (
-                <span className={styles["movie-details__released"]}>
-                  {released.split("").slice(0, 4)}
-                </span>
-              )}
-              )
-            </span>
-            <span className={`styles["movie-details__voted"] margin-left-sm`}>
-              ⭐ {voted.toFixed(1)}
-            </span>
-          </div>
+        <span className={styles["movie-details__runtime"]}>
+          {runtime} <span>minutes</span>
+        </span>
 
-          <span className={styles["movie-details__runtime"]}>
-            {runtime} minutes
-          </span>
+        {tagline !== "" && (
+          <p className={styles["movie-details__tagline"]}>
+            &quot; {tagline} &quot;
+          </p>
+        )}
 
-          {tagline !== "" && <h3> &quot;{tagline}&quot; </h3>}
+        <p className={styles["movie-details__overview"]}>{overview}</p>
 
-          <p className={styles["movie-details__overview"]}>{overview}</p>
-
-          <div>
-            <h3>
-              Directed by:
-              {crew
-                .filter((crew) => crew.job === "Director")
-                .map((director) => {
-                  return (
-                    <span key={director.credit_id}> {director.name} </span>
-                  );
-                })}
-            </h3>
-            <h3>
-              Written by:
-              {crew
-                .filter(
-                  (crew) => crew.job === "Writer" || crew.job === "Screenplay"
-                )
-                .map((writer) => {
-                  return <span key={writer.credit_id}> {writer.name} </span>;
-                })}
-            </h3>
-          </div>
-
-          <div>
-            Starring:
-            <ul>
-              {castToShow.map((cast) => (
-                <li key={cast.id}> {cast.name} </li>
-              ))}
-              {cast.length > 10 && (
-                <Button onClick={handleShowAllCast}>
-                  {showAllCast ? "show less" : "show all"}
-                </Button>
-              )}
-            </ul>
-          </div>
-
-          <p className={styles["movie-details__genres"]}>
+        <ul className={styles["movie-details__list"]}>
+          <li>
             Genres:{" "}
             {genres.length > 0
               ? genres.map((genre) => <span key={genre.id}>{genre.name} </span>)
               : "N/A"}
-          </p>
-
-          <p className={styles["movie-details__languages"]}>
+          </li>
+          <li>
             Languages:{" "}
             {languages.length > 0
               ? languages.map((language) => (
-                  <span
-                    className={styles["movie-details__languages_lng"]}
-                    key={language.iso_639_1}
-                  >
-                    {language.english_name}{" "}
-                  </span>
+                  <span key={language.iso_639_1}>{language.english_name} </span>
                 ))
               : "N/A"}
-          </p>
-
-          <p className={styles["movie-details__countries"]}>
+          </li>
+          <li>
             Countries:{" "}
             {countries.length > 0
               ? countries.map((country) => (
@@ -155,22 +111,50 @@ function MovieItem({ movie }) {
                   </span>
                 ))
               : "N/A"}
-          </p>
-
-          <Button type="add" onClick={handleAddToList}>
-            Add to list
-          </Button>
-          {showAddToList && (
-            <Modal onClose={handleCloseModal}>
-              <AddToList
-                onCloseModal={handleCloseModal}
-                movie={selectedMovie}
-              />
-            </Modal>
-          )}
-        </div>
+          </li>
+          <li>
+            Directed by:
+            {crew
+              .filter((crew) => crew.job === "Director")
+              .map((director) => {
+                return <span key={director.credit_id}> {director.name} </span>;
+              })}
+          </li>
+          <li>
+            Written by:
+            {crew
+              .filter(
+                (crew) => crew.job === "Writer" || crew.job === "Screenplay"
+              )
+              .map((writer) => {
+                return <span key={writer.credit_id}> {writer.name} </span>;
+              })}
+          </li>
+          <li className={styles["movie-details__list__cast"]}>
+            Starring:
+            <ul>
+              {castToShow.map((cast) => (
+                <li key={cast.id}> {cast.name} </li>
+              ))}
+              {cast.length > 10 && (
+                <Button type="show-all" onClick={handleShowAllCast}>
+                  {showAllCast ? "show less" : "show all"}
+                </Button>
+              )}
+            </ul>
+          </li>
+        </ul>
       </div>
-    </li>
+
+      <Button type="add" onClick={handleAddToList}>
+        Add to list
+      </Button>
+      {showAddToList && (
+        <Modal onClose={handleCloseModal}>
+          <AddToList onCloseModal={handleCloseModal} movie={selectedMovie} />
+        </Modal>
+      )}
+    </div>
   );
 }
 

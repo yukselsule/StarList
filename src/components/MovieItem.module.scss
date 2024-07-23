@@ -1,42 +1,107 @@
-.movie-item {
-  display: flex;
-  align-items: stretch;
-}
-
 .movie {
   display: grid;
-  grid-template-columns: 2fr 3fr;
+  grid-template-columns: 2fr 5fr 1fr;
+  gap: 6rem;
+  align-items: start;
 
-  border: 2px solid $color-star;
-  border-radius: 5px;
-  padding: 2rem;
-  box-shadow: 0 1rem 3rem rgba($color-primary, 0.2);
+  padding: 2rem 4rem;
 
-  &-img {
+  &__poster-container {
     display: flex;
-    // justify-content: center;
     align-items: center;
     border-radius: 5px;
-    &__poster {
-      width: 75%;
+
+    & img {
+      width: 100%;
       height: auto;
       border-radius: 5px;
     }
   }
 
   &-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    &-heading {
+      display: flex;
+      align-items: center;
+    }
+
     &__title {
-      font-size: 1.8rem;
-      font-weight: bold;
+      font-size: 2.8rem;
+      font-weight: 600;
     }
 
     &__released {
-      color: gray;
+      color: $color-grey-dark;
+      font-size: 1.6rem;
+      margin: 0 2rem 0 0.8rem;
+    }
+
+    &__voted {
+      font-size: 1.8rem;
+    }
+
+    &__runtime {
+      font-size: 1.6rem;
+      margin: -1.4rem 0 2rem 2rem;
+
+      & span {
+        font-size: 1.4rem;
+      }
+    }
+
+    &__tagline {
+      font-size: 1.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      // color: $color-primary-dark;
     }
 
     &__overview {
-      font-size: 1rem;
+      font-size: 1.6rem;
       line-height: 1.5;
+      margin-top: -1rem;
+    }
+
+    &__list {
+      padding: 0 0 0 2rem;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
+
+      font-size: 1.8rem;
+
+      & li span {
+        padding: 0.6rem 0.8rem;
+        margin-left: 1rem;
+        background-color: rgba($color-grey, 0.3);
+        border-radius: 4px;
+
+        font-size: 1.4rem;
+      }
+
+      &__cast {
+        display: flex;
+        gap: 1rem;
+        & ul {
+          list-style: none;
+          display: flex;
+          gap: 1rem;
+          flex-wrap: wrap;
+
+          & li {
+            padding: 0.6rem 0.8rem;
+            // margin-left: 1rem;
+            background-color: rgba($color-grey, 0.3);
+            border-radius: 4px;
+
+            font-size: 1.4rem;
+          }
+        }
+      }
     }
   }
 }
