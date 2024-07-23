@@ -1,32 +1,87 @@
+// // Variables
+
+// $color-primary: #ec297b;
+// $color-primary-light: #ed83b5;
+// $color-primary-dark: #470c25;
+
+// $color-secondary: #fff48b;
+// $color-secondary-dark: #fae94b;
+
+// $color-star: #ffdd00;
+
+// $color-background: #f2e3e6;
+
+// $color-grey-dark: #25181d;
+// $color-grey-dark-2: #999;
+// $color-grey-dark-3: #333;
+
+// // $color-white: #fbfcf8;
+// $color-white: #f6ebee;
+// $color-white-darker: #f8f6f0;
+// $color-black: #18040c;
+
 // Variables
 
-$color-primary: #ec297b;
-$color-primary-light: #ed83b5;
-$color-primary-dark: #470c25;
+// $color-primary: #ffc1c1;
+// $color-primary-light: #8351a8;
+// $color-primary-dark: #29162a;
 
-$color-secondary: #fff48b;
-$color-secondary-dark: #fae94b;
+// $color-secondary: #4d7b93;
+
+// // $color-background: #e5b8f4;
+// // $color-background: #fff9f9;
+
+// $color-white: #f6ebee;
+
+// #9B86BD #373A40 #686D76  #E2BBE9 #5A639C #7776B3
+// Variables
 
 $color-star: #ffdd00;
+$color-primary: #8ec6c5;
+$color-primary-dark: #0891b2;
+$color-primary-light: #b0d7d6;
 
-$color-background: #f2e3e6;
+$color-secondary: #ffc1c1;
+$color-secondary-dark: #b38787;
+$color-secondary-light: #ffd4d4;
 
-$color-grey-dark: #25181d;
-$color-grey-dark-2: #999;
-$color-grey-dark-3: #333;
+$color-background: #ffc1c16c;
 
-// $color-white: #fbfcf8;
+$color-grey-dark: #31363f;
+
 $color-white: #f6ebee;
-$color-white-darker: #f8f6f0;
-$color-black: #18040c;
+
+$color-black: #0f0f0f;
 
 // Mixins
-
 @mixin centerContent {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone {
+    @media only screen and (max-width: 37.5em) {
+      @content;
+    } //600px
+  }
+  @if $breakpoint == tab-port {
+    @media only screen and (max-width: 56.25em) {
+      @content;
+    } //900px
+  }
+  @if $breakpoint == tab-land {
+    @media only screen and (max-width: 75em) {
+      @content;
+    } //1200px
+  }
+  @if $breakpoint == big-desktop {
+    @media only screen and (min-width: 112.5em) {
+      @content;
+    } //1800px
+  }
 }
 
 // Utilities

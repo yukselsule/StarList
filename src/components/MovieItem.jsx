@@ -66,9 +66,11 @@ function MovieItem({ movie }) {
           <div>
             <span className={styles["movie-details__title"]}>
               {title} (
-              <span className={styles["movie-details__released"]}>
-                {released.split("").slice(0, 4)}
-              </span>
+              {released !== "" && (
+                <span className={styles["movie-details__released"]}>
+                  {released.split("").slice(0, 4)}
+                </span>
+              )}
               )
             </span>
             <span className={`styles["movie-details__voted"] margin-left-sm`}>

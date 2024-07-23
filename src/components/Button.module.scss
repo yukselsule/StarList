@@ -10,6 +10,7 @@
 
   &-add {
     background-color: $color-primary;
+    height: 3.2rem;
   }
 
   &-close {
@@ -19,5 +20,28 @@
     top: 3%;
     right: 3%;
     transform: translate(-3%, -3%);
+  }
+
+  &-delete {
+    padding: 1rem;
+    font-weight: 600;
+    background-color: $color-primary-dark;
+    flex-shrink: 0;
+  }
+
+  &-details {
+    display: inline-block;
+    justify-self: flex-end;
+    padding: 0;
+    background-color: inherit;
+    text-transform: lowercase;
+    text-decoration: underline;
+    font-size: 1.4rem;
+  }
+
+  &-trash {
+    padding: 0;
+    background-color: inherit;
+    align-self: center;
   }
 }
