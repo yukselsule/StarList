@@ -100,21 +100,25 @@ function ListsProvider({ children }) {
       movieDetails[0]
     );
 
-    const oldest = movieDetails.reduce(
-      (movie, curMovie) =>
-        new Date(movie.release_date) < new Date(curMovie.release_date)
-          ? movie
-          : curMovie,
-      movieDetails[0]
-    );
+    const oldest = movieDetails
+      .filter((movie) => movie.release_date !== "")
+      .reduce(
+        (movie, curMovie) =>
+          new Date(movie.release_date) < new Date(curMovie.release_date)
+            ? movie
+            : curMovie,
+        movieDetails[0]
+      );
 
-    const newest = movieDetails.reduce(
-      (movie, curMovie) =>
-        new Date(movie.release_date) > new Date(curMovie.release_date)
-          ? movie
-          : curMovie,
-      movieDetails[0]
-    );
+    const newest = movieDetails
+      .filter((movie) => movie.release_date !== "")
+      .reduce(
+        (movie, curMovie) =>
+          new Date(movie.release_date) > new Date(curMovie.release_date)
+            ? movie
+            : curMovie,
+        movieDetails[0]
+      );
 
     setSummary({ totalRuntime, allCountries, allGenres, allLanguages });
     setTopPick({
@@ -128,42 +132,66 @@ function ListsProvider({ children }) {
     setIsLoading(false);
   }, [movieDetails]);
 
-  function deleteList(listName) {
-    setListNames(listNames.filter((list) => listName !== list));
+  function deleteList(listName, callback) {
+    return Swal.fire({
+      title: "This action will delete the list",
+      text: "Are you sure you want to proceed?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "No, keep it",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setListNames(listNames.filter((list) => listName !== list));
 
-    const newLists = { ...lists };
-    delete newLists[listName];
-    setLists(newLists);
+        const newLists = { ...lists };
+        delete newLists[listName];
+        setLists(newLists);
+
+        callback();
+
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your list has been deleted.",
+          icon: "success",
+          timer: 1500,
+        });
+
+        return;
+      }
+    });
   }
 
   function deleteMovie(listName, movieId, callback) {
     if (lists[listName].length === 1) {
-      return Swal.fire({
-        title: "This action will delete the list",
+      deleteList(listName, callback);
+      return;
+    }
+
+    if (lists[listName].length > 1) {
+      Swal.fire({
+        title: "This action will delete the movie from your list",
         text: "Are you sure you want to proceed?",
         icon: "warning",
         showCancelButton: true,
         confirmButtonText: "Yes, delete it!",
         cancelButtonText: "No, keep it",
+        confirmButtonColor: "red",
+        cancelButtonColor: "green",
       }).then((result) => {
         if (result.isConfirmed) {
           Swal.fire({
             title: "Deleted!",
-            text: "Your list has been deleted.",
+            text: "Your movie has been deleted.",
             icon: "success",
+            timer: 1500,
           });
-          deleteList(listName);
-          typeof callback === "function" && callback();
-          return;
+          const updatedList = lists[listName].filter(
+            (movie) => movie.id !== movieId
+          );
+          setLists({ ...lists, [listName]: updatedList });
         }
       });
-    }
-
-    if (lists[listName].length > 1) {
-      const updatedList = lists[listName].filter(
-        (movie) => movie.id !== movieId
-      );
-      setLists({ ...lists, [listName]: updatedList });
     }
   }
 
