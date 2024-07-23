@@ -1,6 +1,5 @@
-import { NavLink } from "react-router-dom";
-
-import { useSearchQuery } from "../contexts/SearchQueryContext";
+import { useEffect, useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 
 import Logo from "./Logo";
 import SearchBar from "./SearchBar";
@@ -8,14 +7,30 @@ import SearchBar from "./SearchBar";
 import styles from "./Header.module.scss";
 
 function Header() {
-  const { query } = useSearchQuery();
+  const location = useLocation();
+  const [isHomePage, setIsHomePage] = useState(true);
+  const [isResultsPage, setIsResultsPage] = useState(false);
+
+  useEffect(() => {
+    const isHomePage = location.pathname === "/";
+    setIsHomePage(isHomePage);
+  }, [isHomePage, location.pathname]);
+
+  useEffect(() => {
+    const isResultsPage = location.pathname === "/search";
+    setIsResultsPage(isResultsPage);
+  }, [isResultsPage, location.pathname]);
+
   return (
-    <header className={`${styles.header} ${!query ? styles["header-bg"] : ""}`}>
+    <header
+      className={`${styles.header} ${isHomePage ? styles["header-bg"] : ""}`}
+    >
       <Logo />
-      <SearchBar />
+
+      {isHomePage || isResultsPage ? <SearchBar /> : <div></div>}
       <ul
         className={`${styles.header__list} ${
-          !query ? styles["header-bg__list"] : ""
+          isHomePage ? styles["header-bg__list"] : ""
         }`}
       >
         <li>

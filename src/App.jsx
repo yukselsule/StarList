@@ -4,6 +4,7 @@ import { MoviesProvider } from "./contexts/MoviesContext";
 import { SearchQueryProvider } from "./contexts/SearchQueryContext";
 import { ListsProvider } from "./contexts/ListsContext";
 
+import AppLayout from "./pages/AppLayout";
 import DetailedSummaryPage from "./pages/DetailedSummaryPage";
 import HomePage from "./pages/HomePage";
 import ListPage from "./pages/ListPage";
@@ -15,16 +16,19 @@ import "./styles/base.scss";
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <HomePage />,
+    element: <AppLayout />,
     children: [
+      {
+        path: "/",
+        element: <HomePage />,
+      },
       { path: "search", element: <ResultsPage /> },
       { path: "search/movie/:id", element: <MoviePage /> },
+      { path: "profile", element: <ProfilePage /> },
+      { path: "profile/detailed-summary", element: <DetailedSummaryPage /> },
+      { path: "profile/:listId", element: <ListPage /> },
     ],
   },
-  { path: "profile", element: <ProfilePage /> },
-  { path: "profile/detailed-summary", element: <DetailedSummaryPage /> },
-  { path: "profile/:listId", element: <ListPage /> },
 ]);
 
 export default function App() {

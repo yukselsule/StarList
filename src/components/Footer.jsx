@@ -3,7 +3,10 @@ import styles from "./Footer.module.scss";
 function Footer() {
   return (
     <footer className={styles.footer}>
-      <p>&copy; Copyright {new Date().getFullYear()} StarList</p>
+      <p>
+        &copy; {new Date().getFullYear()} StarList. Film data from{" "}
+        <a href="https://www.themoviedb.org/">TMDB</a>
+      </p>
     </footer>
   );
 }

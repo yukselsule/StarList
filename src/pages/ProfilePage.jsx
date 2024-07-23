@@ -1,7 +1,5 @@
 import { useLists } from "../contexts/ListsContext";
 
-import Footer from "../components/Footer";
-import Header from "../components/Header";
 import Lists from "../components/Lists";
 import Summary from "../components/Summary";
 
@@ -11,7 +9,6 @@ function ProfilePage() {
   const { movieDetails } = useLists();
   return (
     <div>
-      <Header />
       <main className={styles["profile-page"]}>
         {movieDetails.length === 0 && (
           <h2 className={styles["profile-page__empty"]}>
@@ -27,8 +24,6 @@ function ProfilePage() {
           </div>
         )}
       </main>
-
-      <Footer />
     </div>
   );
 }
