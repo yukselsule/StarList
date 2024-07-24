@@ -1,8 +1,9 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
+import { ErrorProvider } from "./contexts/ErrorContext";
 import { MoviesProvider } from "./contexts/MoviesContext";
-import { SearchQueryProvider } from "./contexts/SearchQueryContext";
 import { ListsProvider } from "./contexts/ListsContext";
+import { SearchQueryProvider } from "./contexts/SearchQueryContext";
 
 import AppLayout from "./pages/AppLayout";
 import DetailedSummaryPage from "./pages/DetailedSummaryPage";
@@ -33,12 +34,14 @@ const router = createBrowserRouter([
 
 export default function App() {
   return (
-    <SearchQueryProvider>
-      <MoviesProvider>
-        <ListsProvider>
-          <RouterProvider router={router} />
-        </ListsProvider>
-      </MoviesProvider>
-    </SearchQueryProvider>
+    <ErrorProvider>
+      <SearchQueryProvider>
+        <MoviesProvider>
+          <ListsProvider>
+            <RouterProvider router={router} />
+          </ListsProvider>
+        </MoviesProvider>
+      </SearchQueryProvider>
+    </ErrorProvider>
   );
 }
