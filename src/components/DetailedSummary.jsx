@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 import { useLists } from "../contexts/ListsContext";
 
 import imageNotFound from "../assets/img/imageNotFound.png";
@@ -7,7 +9,12 @@ import styles from "./DetailedSummary.module.scss";
 const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500";
 
 function DetailedSummary() {
+  const navigate = useNavigate();
   const { summary, topPicks } = useLists();
+
+  function handleImageClick(movie) {
+    navigate(`/search/movie/${movie.id}`);
+  }
 
   return (
     <div className={styles["detailed-summary"]}>
@@ -52,14 +59,18 @@ function DetailedSummary() {
         <ul>
           <li>
             <h3>Most Popular Movie</h3>
-            <img
-              className={styles["detailed-summary__top-picks__poster"]}
-              src={
-                topPicks.mostPopular.poster_path
-                  ? `${IMG_BASE_URL}${topPicks.mostPopular.poster_path}`
-                  : imageNotFound
-              }
-            />
+            <div className={styles["detailed-summary__top-picks__poster"]}>
+              <img
+                onClick={() => handleImageClick(topPicks.mostPopular)}
+                src={
+                  topPicks.mostPopular.poster_path
+                    ? `${IMG_BASE_URL}${topPicks.mostPopular.poster_path}`
+                    : imageNotFound
+                }
+                alt={topPicks.mostPopular.title}
+              />
+            </div>
+
             <p>
               {topPicks.mostPopular.popularity} <span>votes</span>
             </p>
@@ -67,14 +78,18 @@ function DetailedSummary() {
 
           <li>
             <h3>Longest Movie</h3>
-            <img
-              className={styles["detailed-summary__top-picks__poster"]}
-              src={
-                topPicks.mostRuntime.poster_path
-                  ? `${IMG_BASE_URL}${topPicks.mostRuntime.poster_path}`
-                  : imageNotFound
-              }
-            />
+            <div className={styles["detailed-summary__top-picks__poster"]}>
+              <img
+                onClick={() => handleImageClick(topPicks.mostPopular)}
+                src={
+                  topPicks.mostRuntime.poster_path
+                    ? `${IMG_BASE_URL}${topPicks.mostRuntime.poster_path}`
+                    : imageNotFound
+                }
+                alt={topPicks.mostRuntime.title}
+              />
+            </div>
+
             <p>
               {topPicks.mostRuntime.runtime} <span>minutes</span>
             </p>
@@ -82,14 +97,18 @@ function DetailedSummary() {
 
           <li>
             <h3>Shortest Movie</h3>
-            <img
-              className={styles["detailed-summary__top-picks__poster"]}
-              src={
-                topPicks.leastRuntime.poster_path
-                  ? `${IMG_BASE_URL}${topPicks.leastRuntime.poster_path}`
-                  : imageNotFound
-              }
-            />
+            <div className={styles["detailed-summary__top-picks__poster"]}>
+              <img
+                onClick={() => handleImageClick(topPicks.mostPopular)}
+                src={
+                  topPicks.leastRuntime.poster_path
+                    ? `${IMG_BASE_URL}${topPicks.leastRuntime.poster_path}`
+                    : imageNotFound
+                }
+                alt={topPicks.leastRuntime.title}
+              />
+            </div>
+
             <p>
               {topPicks.leastRuntime.runtime} <span>minutes</span>
             </p>
@@ -97,40 +116,52 @@ function DetailedSummary() {
 
           <li>
             <h3>Most Budget</h3>
-            <img
-              className={styles["detailed-summary__top-picks__poster"]}
-              src={
-                topPicks.mostBudget.poster_path
-                  ? `${IMG_BASE_URL}${topPicks.mostBudget.poster_path}`
-                  : imageNotFound
-              }
-            />
+            <div className={styles["detailed-summary__top-picks__poster"]}>
+              <img
+                onClick={() => handleImageClick(topPicks.mostPopular)}
+                src={
+                  topPicks.mostBudget.poster_path
+                    ? `${IMG_BASE_URL}${topPicks.mostBudget.poster_path}`
+                    : imageNotFound
+                }
+                alt={topPicks.mostBudget.title}
+              />
+            </div>
+
             <p> ${topPicks.mostBudget.budget} </p>
           </li>
 
           <li>
             <h3>Oldest Movie</h3>
-            <img
-              className={styles["detailed-summary__top-picks__poster"]}
-              src={
-                topPicks.oldest.poster_path
-                  ? `${IMG_BASE_URL}${topPicks.oldest.poster_path}`
-                  : imageNotFound
-              }
-            />
+            <div className={styles["detailed-summary__top-picks__poster"]}>
+              <img
+                onClick={() => handleImageClick(topPicks.mostPopular)}
+                src={
+                  topPicks.oldest.poster_path
+                    ? `${IMG_BASE_URL}${topPicks.oldest.poster_path}`
+                    : imageNotFound
+                }
+                alt={topPicks.oldest.title}
+              />
+            </div>
+
             <p> {topPicks.oldest.release_date} </p>
           </li>
 
           <li>
             <h3>Newest Movie</h3>
-            <img
-              className={styles["detailed-summary__top-picks__poster"]}
-              src={
-                topPicks.newest.poster_path
-                  ? `${IMG_BASE_URL}${topPicks.newest.poster_path}`
-                  : imageNotFound
-              }
-            />
+            <div className={styles["detailed-summary__top-picks__poster"]}>
+              <img
+                onClick={() => handleImageClick(topPicks.mostPopular)}
+                src={
+                  topPicks.newest.poster_path
+                    ? `${IMG_BASE_URL}${topPicks.newest.poster_path}`
+                    : imageNotFound
+                }
+                alt={topPicks.newest.title}
+              />
+            </div>
+
             <p> {topPicks.newest.release_date} </p>
           </li>
         </ul>
