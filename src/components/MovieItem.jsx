@@ -164,31 +164,48 @@ function MovieItem({ id }) {
                 : "N/A"}
             </li>
             <li>
-              Directed by:
-              {crew
-                .filter((crew) => crew.job === "Director")
-                .map((director) => {
-                  return (
-                    <span key={director.credit_id}> {director.name} </span>
-                  );
-                })}
+              Directed by:{" "}
+              {crew.filter((crewMember) => {
+                return crewMember.job === "Director";
+              }).length === 0
+                ? "N/A"
+                : crew
+                    .filter((crewMember) => {
+                      return crewMember.job === "Director";
+                    })
+                    .map((director) => {
+                      return (
+                        <span key={director.credit_id}> {director.name} </span>
+                      );
+                    })}
             </li>
             <li>
-              Written by:
-              {crew
-                .filter(
-                  (crew) => crew.job === "Writer" || crew.job === "Screenplay"
-                )
-                .map((writer) => {
-                  return <span key={writer.credit_id}> {writer.name} </span>;
-                })}
+              Written by:{" "}
+              {crew.filter(
+                (crewMember) =>
+                  crewMember.job === "Writer" || crewMember.job === "Screenplay"
+              ).length === 0
+                ? "N/A"
+                : crew
+                    .filter(
+                      (crewMember) =>
+                        crewMember.job === "Writer" ||
+                        crewMember.job === "Screenplay"
+                    )
+                    .map((writer) => {
+                      return (
+                        <span key={writer.credit_id}> {writer.name} </span>
+                      );
+                    })}
             </li>
             <li className={styles["movie-details__list__cast"]}>
               Starring:
               <ul>
-                {castToShow.map((cast) => (
-                  <li key={cast.id}> {cast.name} </li>
-                ))}
+                {castToShow.length === 0
+                  ? "N/A"
+                  : castToShow.map((cast) => (
+                      <li key={cast.id}> {cast.name} </li>
+                    ))}
                 {cast.length > 10 && (
                   <Button type="show-all" onClick={handleShowAllCast}>
                     {showAllCast ? "show less" : "show all"}
