@@ -3,9 +3,9 @@ import List from "../components/List";
 function Listpage() {
   return (
     <div>
-      <main className="container">
+      <div className="container">
         <List />
-      </main>
+      </div>
     </div>
   );
 }

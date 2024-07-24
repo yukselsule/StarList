@@ -3,9 +3,9 @@ import DetailedSummary from "../components/DetailedSummary";
 function DetailedSummaryPage() {
   return (
     <div>
-      <main className="container">
+      <div className="container">
         <DetailedSummary />
-      </main>
+      </div>
     </div>
   );
 }
