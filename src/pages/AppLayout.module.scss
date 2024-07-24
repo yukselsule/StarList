@@ -4,13 +4,8 @@
   flex-direction: column;
   justify-content: space-between;
   min-height: 100vh;
+}
 
-  & main {
-    flex: 1;
-    background-image: linear-gradient(
-      to right bottom,
-      rgba($color-white, 0.9),
-      rgba($color-background, 0.6)
-    );
-  }
+.homepage-main {
+  background-image: none;
 }

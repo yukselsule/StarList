@@ -18,7 +18,7 @@ function AppLayout() {
     <div className={styles["app-layout"]}>
       <Header />
 
-      <main>
+      <main className={styles["homepage-main"]}>
         <Outlet />
       </main>
 

@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 import { useSearchQuery } from "../contexts/SearchQueryContext";
 
@@ -8,9 +8,12 @@ import styles from "./HomePage.module.scss";
 
 function HomePage() {
   const { query } = useSearchQuery();
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
+
   return (
-    <div className={!query ? styles.homepage : ""}>
-      {!query && <BackgroundVideo />}
+    <div className={styles.homepage}>
+      {isHomePage && <BackgroundVideo />}
       {query && <Outlet />}
     </div>
   );
