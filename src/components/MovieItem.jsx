@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import { useMovies } from "../contexts/MoviesContext";
+
 import AddToList from "./AddToList";
 import Button from "./Button";
 import Modal from "./Modal";
@@ -7,7 +9,6 @@ import Modal from "./Modal";
 import imageNotFound from "../assets/img/imageNotFound.png";
 
 import styles from "./MovieItem.module.scss";
-import { useMovies } from "../contexts/MoviesContext";
 
 const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500";
 
@@ -17,21 +18,6 @@ function MovieItem({ id }) {
   const [showAllCast, setShowAllCast] = useState(false);
   const [movie, setMovie] = useState({});
   const { getMovieDetails, getMovieCredits } = useMovies();
-
-  // useEffect(() => {
-  //   const fetchMovie = async function () {
-  //     try {
-  //       await Promise.all([getMovieCredits(id), getMovieDetails(id)]).then(
-  //         (values) => {
-  //           setMovie({ ...values[0], ...values[1] });
-  //         }
-  //       );
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-  //   fetchMovie();
-  // }, [id, getMovieDetails, getMovieCredits]);
 
   useEffect(() => {
     const fetchMovie = async function () {

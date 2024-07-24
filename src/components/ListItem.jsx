@@ -18,7 +18,7 @@ const formatDate = (date) =>
   }).format(new Date(date));
 
 function ListItem({ movie, listName }) {
-  const { poster, date, title, userNotes, userRating } = movie;
+  const { poster, date, title, userNotes, userRating, id } = movie;
   const { deleteMovie } = useLists();
   const navigate = useNavigate();
 
@@ -30,13 +30,20 @@ function ListItem({ movie, listName }) {
     deleteMovie(listName, movie.id, handleNavigate);
   }
 
+  function handleImageClick() {
+    navigate(`/search/movie/${id}`);
+  }
+
   return (
     <li className={styles["list-item"]}>
-      <img
-        className={styles["list-item__poster"]}
-        src={poster ? `${IMG_BASE_URL}${poster}` : imageNotFound}
-        alt={`Poster of ${title}`}
-      />
+      <a className={styles["list-item__poster"]}>
+        <img
+          onClick={handleImageClick}
+          src={poster ? `${IMG_BASE_URL}${poster}` : imageNotFound}
+          alt={`Poster of ${title}`}
+        />
+      </a>
+
       <div className={styles["list-item__details"]}>
         <div className={styles["list-item__details-heading"]}>
           <h3>{title}</h3>
