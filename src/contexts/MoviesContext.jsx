@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
+import { useError } from "./ErrorContext";
 import { useSearchQuery } from "./SearchQueryContext";
 
 const API_KEY = "218dc8f636aa2082cc10293321c67dd5";
@@ -15,7 +16,13 @@ async function getMovieDetails(id) {
       },
     }
   );
+
   const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.status_message || "Error fetching movie details");
+  }
+
   return data;
 }
 
@@ -30,7 +37,11 @@ async function getMovieCredits(id) {
       },
     }
   );
+
   const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.status_message || "Error fetching movie credits");
+  }
   return data;
 }
 
@@ -40,16 +51,28 @@ function MoviesProvider({ children }) {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const { query } = useSearchQuery();
+  const { handleError, clearError } = useError();
 
   useEffect(
     function () {
       async function getMovie() {
         setIsLoading(true);
+        clearError();
         try {
           const res = await fetch(
             `${BASE_URL}search/movie?query=${query}&api_key=${API_KEY}`
           );
+
           const data = await res.json();
+          console.log(data);
+
+          if (!res.ok) {
+            throw new Error(data.status_message || "Error fetching movies");
+          }
+
+          if (data.results.length === 0) {
+            throw new Error(data.status_message || "No movies for your query");
+          }
 
           const moviesDetailsCredits = await Promise.all(
             data.results.map(async (movie) => {
@@ -65,14 +88,14 @@ function MoviesProvider({ children }) {
 
           setMovies(moviesDetailsCredits);
         } catch (err) {
-          console.log(err);
+          handleError(err.message);
         } finally {
           setIsLoading(false);
         }
       }
       if (query) getMovie();
     },
-    [query]
+    [query, handleError, clearError]
   );
 
   return (
@@ -92,7 +115,7 @@ function MoviesProvider({ children }) {
 function useMovies() {
   const context = useContext(MoviesContext);
   if (!context) {
-    throw new Error("Movies context was used ouside the movies provider");
+    throw new Error("Movies context was used outside the movies provider");
   }
   return context;
 }

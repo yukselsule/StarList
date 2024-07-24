@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
 import { useLocalStorageState } from "../hooks/useLocalStorageHook";
+import { useError } from "./ErrorContext";
 import { useMovies } from "./MoviesContext";
 
 const ListsContext = createContext();
@@ -10,6 +11,7 @@ function ListsProvider({ children }) {
   const [listNames, setListNames] = useLocalStorageState([], "listNames");
   const [lists, setLists] = useLocalStorageState({}, "lists");
   const { getMovieDetails } = useMovies();
+  const { clearError, handleError } = useError();
   const [summary, setSummary] = useState({
     totalRuntime: 0,
     allCountries: [],
@@ -21,7 +23,7 @@ function ListsProvider({ children }) {
     [],
     "movieDetails"
   );
-  const [topPicks, setTopPick] = useState({
+  const [topPicks, setTopPicks] = useState({
     mostPopular: {},
     mostRuntime: {},
     leastRuntime: {},
@@ -34,6 +36,7 @@ function ListsProvider({ children }) {
     const fetchMovieDetails = async function () {
       try {
         setIsLoading(true);
+        clearError();
         const uniqueMovieIds = [
           ...new Set(
             Object.values(lists)
@@ -45,11 +48,14 @@ function ListsProvider({ children }) {
         const details = await Promise.all(detailsPromises);
         setMovieDetails(details);
       } catch (err) {
-        console.log(err);
+        handleError(err.message);
       }
     };
-    fetchMovieDetails();
-  }, [lists, getMovieDetails]);
+
+    if (Object.keys(lists).length > 0) {
+      fetchMovieDetails();
+    }
+  }, [lists, getMovieDetails, handleError, clearError, setMovieDetails]);
 
   useEffect(() => {
     const totalRuntime = movieDetails.reduce(
@@ -121,7 +127,7 @@ function ListsProvider({ children }) {
       );
 
     setSummary({ totalRuntime, allCountries, allGenres, allLanguages });
-    setTopPick({
+    setTopPicks({
       mostPopular,
       mostRuntime,
       leastRuntime,

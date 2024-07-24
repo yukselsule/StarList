@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 
+import { useError } from "../contexts/ErrorContext";
 import { useMovies } from "../contexts/MoviesContext";
 
 import AddToList from "./AddToList";
 import Button from "./Button";
+import Error from "./Error";
 import Modal from "./Modal";
 import SpinnerFullPage from "./SpinnerFullPage";
 
@@ -17,41 +19,61 @@ function MovieItem({ id }) {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [showAddToList, setShowAddToList] = useState(false);
   const [showAllCast, setShowAllCast] = useState(false);
-  const [movie, setMovie] = useState({});
+  const [movie, setMovie] = useState({
+    title: "",
+    release_date: "",
+    poster_path: "",
+    overview: "",
+    vote_average: "",
+    spoken_languages: [],
+    runtime: "",
+    genres: [],
+    production_countries: [],
+    tagline: "",
+    cast: [],
+    crew: [],
+  });
   const [isLoading, setIsLoading] = useState(false);
   const { getMovieDetails, getMovieCredits } = useMovies();
+  const { error, handleError, clearError } = useError();
 
   useEffect(() => {
-    const fetchMovie = async function () {
+    const fetchMovie = async () => {
       setIsLoading(true);
+      clearError();
       try {
         const [credits, details] = await Promise.all([
           getMovieCredits(id),
           getMovieDetails(id),
         ]);
+
+        if (!details || !details.id) {
+          throw new Error("No movie found with the given ID.");
+        }
+
         setMovie({ ...credits, ...details });
       } catch (err) {
-        console.log(err);
+        handleError(err.message);
       } finally {
         setIsLoading(false);
       }
     };
     fetchMovie();
-  }, [id, getMovieDetails, getMovieCredits]);
+  }, [id, getMovieDetails, getMovieCredits, handleError, clearError]);
 
   const {
     title,
-    release_date: released = "",
-    poster_path: poster = "",
-    overview = "",
-    vote_average: voted = "",
-    spoken_languages: languages = [],
-    runtime = "",
-    genres = [],
-    production_countries: countries = [],
-    tagline = "",
-    cast = [],
-    crew = [],
+    release_date: released,
+    poster_path: poster,
+    overview,
+    vote_average: voted,
+    spoken_languages: languages,
+    runtime,
+    genres,
+    production_countries: countries,
+    tagline,
+    cast,
+    crew,
   } = movie;
 
   const castToShow = showAllCast ? cast : cast.slice(0, 10);
@@ -71,9 +93,12 @@ function MovieItem({ id }) {
     setShowAllCast(!showAllCast);
   }
 
+  if (isLoading) return <SpinnerFullPage />;
+
+  if (error) return <Error error={error} />;
+
   return (
     <div>
-      {isLoading && <SpinnerFullPage />}
       <div className={styles.movie}>
         <div className={styles["movie__poster-container"]}>
           <img
@@ -85,9 +110,9 @@ function MovieItem({ id }) {
         <div className={styles["movie-details"]}>
           <div className={styles["movie-details-heading"]}>
             <span className={styles["movie-details__title"]}>{title}</span>
-            {released !== "" && (
+            {released && (
               <span className={styles["movie-details__released"]}>
-                ({released.split("").slice(0, 4)})
+                ({released.split("-")[0]})
               </span>
             )}
             <span className={styles["movie-details__voted"]}>
@@ -99,7 +124,7 @@ function MovieItem({ id }) {
             {runtime} <span>minutes</span>
           </span>
 
-          {tagline !== "" && (
+          {tagline && (
             <p className={styles["movie-details__tagline"]}>
               &quot; {tagline} &quot;
             </p>
