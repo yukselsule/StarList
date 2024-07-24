@@ -28,6 +28,11 @@ body {
   font-size: 2rem;
   color: $color-black;
   font-weight: 500;
+}
+
+main {
+  min-height: 80vh;
+  flex: 1;
   background-image: linear-gradient(
     to right bottom,
     rgba($color-white, 0.9),
@@ -36,6 +41,5 @@ body {
 }
 
 .container {
-  // position: relative;
   padding: 2rem 4rem;
 }

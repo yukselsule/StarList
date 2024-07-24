@@ -9,6 +9,7 @@ import styles from "./AppLayout.module.scss";
 function AppLayout() {
   const location = useLocation();
   const [isHomePage, setIsHomePage] = useState(true);
+
   useEffect(() => {
     const isHomePage = location.pathname === "/";
     setIsHomePage(isHomePage);
@@ -18,7 +19,7 @@ function AppLayout() {
     <div className={styles["app-layout"]}>
       <Header />
 
-      <main className={styles["homepage-main"]}>
+      <main className={isHomePage ? styles["homepage-main"] : ""}>
         <Outlet />
       </main>
 

@@ -10,12 +10,13 @@
 
   &__poster {
     justify-self: center;
-    transition: all 3 ease;
 
     & img {
       width: 50%;
       border-radius: 4px;
       cursor: pointer;
+
+      transition: all 0.3s ease;
     }
 
     :hover {
