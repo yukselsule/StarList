@@ -80,7 +80,7 @@ function DetailedSummary() {
             <h3>Longest Movie</h3>
             <div className={styles["detailed-summary__top-picks__poster"]}>
               <img
-                onClick={() => handleImageClick(topPicks.mostPopular)}
+                onClick={() => handleImageClick(topPicks.mostRuntime)}
                 src={
                   topPicks.mostRuntime.poster_path
                     ? `${IMG_BASE_URL}${topPicks.mostRuntime.poster_path}`
@@ -115,10 +115,10 @@ function DetailedSummary() {
           </li>
 
           <li>
-            <h3>Most Budget</h3>
+            <h3>Highest Budget</h3>
             <div className={styles["detailed-summary__top-picks__poster"]}>
               <img
-                onClick={() => handleImageClick(topPicks.mostPopular)}
+                onClick={() => handleImageClick(topPicks.mostBudget)}
                 src={
                   topPicks.mostBudget.poster_path
                     ? `${IMG_BASE_URL}${topPicks.mostBudget.poster_path}`
@@ -135,7 +135,7 @@ function DetailedSummary() {
             <h3>Oldest Movie</h3>
             <div className={styles["detailed-summary__top-picks__poster"]}>
               <img
-                onClick={() => handleImageClick(topPicks.mostPopular)}
+                onClick={() => handleImageClick(topPicks.oldest)}
                 src={
                   topPicks.oldest.poster_path
                     ? `${IMG_BASE_URL}${topPicks.oldest.poster_path}`
@@ -149,10 +149,10 @@ function DetailedSummary() {
           </li>
 
           <li>
-            <h3>Newest Movie</h3>
+            <h3>Most Recent Movie</h3>
             <div className={styles["detailed-summary__top-picks__poster"]}>
               <img
-                onClick={() => handleImageClick(topPicks.mostPopular)}
+                onClick={() => handleImageClick(topPicks.newest)}
                 src={
                   topPicks.newest.poster_path
                     ? `${IMG_BASE_URL}${topPicks.newest.poster_path}`

@@ -5,7 +5,9 @@ function Footer() {
     <footer className={styles.footer}>
       <p>
         &copy; {new Date().getFullYear()} StarList. Film data from{" "}
-        <a href="https://www.themoviedb.org/">TMDB</a>
+        <a target="_blank" href="https://www.themoviedb.org/">
+          TMDB
+        </a>
       </p>
     </footer>
   );
