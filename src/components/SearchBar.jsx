@@ -1,5 +1,5 @@
-import { useState, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useCallback, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { useSearchQuery } from "../contexts/SearchQueryContext";
 
@@ -19,6 +19,7 @@ function SearchBar() {
   const [inputValue, setInputValue] = useState("");
   const { setQuery, query } = useSearchQuery();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const debouncedSetQuery = useCallback(
     debounce((newQuery) => {
@@ -32,6 +33,12 @@ function SearchBar() {
     setInputValue(e.target.value);
     debouncedSetQuery(e.target.value);
   };
+
+  useEffect(() => {
+    if (location.pathname === "/") {
+      setInputValue("");
+    }
+  }, [location.pathname]);
 
   return (
     <div
