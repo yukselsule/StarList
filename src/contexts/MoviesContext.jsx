@@ -41,10 +41,6 @@ function MoviesProvider({ children }) {
   const [isLoading, setIsLoading] = useState(false);
   const { query } = useSearchQuery();
 
-  function getMovieById(id) {
-    return movies.find((movie) => movie.id === parseInt(id));
-  }
-
   useEffect(
     function () {
       async function getMovie() {
@@ -84,8 +80,8 @@ function MoviesProvider({ children }) {
       value={{
         movies,
         getMovieDetails,
+        getMovieCredits,
         isLoading,
-        getMovieById,
       }}
     >
       {children}

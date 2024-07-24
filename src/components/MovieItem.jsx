@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import AddToList from "./AddToList";
 import Button from "./Button";
@@ -7,33 +7,62 @@ import Modal from "./Modal";
 import imageNotFound from "../assets/img/imageNotFound.png";
 
 import styles from "./MovieItem.module.scss";
+import { useMovies } from "../contexts/MoviesContext";
 
 const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500";
 
-function MovieItem({ movie }) {
+function MovieItem({ id }) {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [showAddToList, setShowAddToList] = useState(false);
   const [showAllCast, setShowAllCast] = useState(false);
+  const [movie, setMovie] = useState({});
+  const { getMovieDetails, getMovieCredits } = useMovies();
+
+  // useEffect(() => {
+  //   const fetchMovie = async function () {
+  //     try {
+  //       await Promise.all([getMovieCredits(id), getMovieDetails(id)]).then(
+  //         (values) => {
+  //           setMovie({ ...values[0], ...values[1] });
+  //         }
+  //       );
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   fetchMovie();
+  // }, [id, getMovieDetails, getMovieCredits]);
+
+  useEffect(() => {
+    const fetchMovie = async function () {
+      try {
+        const [credits, details] = await Promise.all([
+          getMovieCredits(id),
+          getMovieDetails(id),
+        ]);
+        setMovie({ ...credits, ...details });
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchMovie();
+  }, [id, getMovieDetails, getMovieCredits]);
 
   const {
     title,
-    release_date: released,
-    poster_path: poster,
-    overview,
-    vote_average: voted,
-    details,
-    credits,
-  } = movie;
-
-  const {
+    release_date: released = "",
+    poster_path: poster = "",
+    overview = "",
+    vote_average: voted = "",
     spoken_languages: languages = [],
-    runtime,
+    runtime = "",
     genres = [],
     production_countries: countries = [],
-    tagline,
-  } = details;
+    tagline = "",
+    cast = [],
+    crew = [],
+  } = movie;
 
-  const { cast = [], crew = [] } = credits;
   const castToShow = showAllCast ? cast : cast.slice(0, 10);
 
   function handleAddToList() {
@@ -69,7 +98,7 @@ function MovieItem({ movie }) {
             </span>
           )}
           <span className={styles["movie-details__voted"]}>
-            ⭐ {voted.toFixed(1)}
+            ⭐ {Number(voted).toFixed(1)}
           </span>
         </div>
 
