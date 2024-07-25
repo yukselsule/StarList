@@ -7,12 +7,18 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: all 0.3s ease-in;
 
   &-add {
     background-color: $color-primary;
     padding: 1rem;
     font-weight: 600;
     font-size: 1.2rem;
+
+    &:hover {
+      background-color: $color-primary-dark;
+      color: $color-white;
+    }
   }
 
   &-close {
@@ -22,13 +28,22 @@
     top: 3%;
     right: 3%;
     transform: translate(-3%, -3%);
+
+    &:hover {
+      transform: scale(1.2);
+    }
   }
 
   &-delete {
     padding: 1rem;
     font-weight: 600;
-    background-color: $color-primary-dark;
+    background-color: $color-primary;
     flex-shrink: 0;
+
+    &:hover {
+      background-color: $color-primary-dark;
+      color: $color-white;
+    }
   }
 
   &-details {
@@ -39,22 +54,41 @@
     text-transform: lowercase;
     text-decoration: underline;
     font-size: 1.4rem;
+    font-weight: 500;
+
+    &:hover {
+      color: $color-secondary-dark;
+    }
   }
 
   &-new-list {
     text-transform: lowercase;
     background-color: rgba($color-primary, 0.7);
     font-size: 1.4rem;
+
+    &:hover {
+      background-color: $color-primary-dark;
+      color: $color-white;
+    }
   }
 
   &-show-all {
     font-weight: 600;
-    background-color: rgba($color-grey-dark, 0.4);
+    background-color: rgba($color-secondary, 0.4);
+
+    &:hover {
+      background-color: rgba($color-secondary, 0.9);
+      color: $color-white;
+    }
   }
 
   &-trash {
     padding: 0;
     background-color: inherit;
     align-self: center;
+
+    &:hover {
+      transform: scale(1.2);
+    }
   }
 }

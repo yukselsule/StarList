@@ -15,7 +15,7 @@
     }
   }
   .react-datepicker__month-container {
-    background-color: $color-background;
+    background-color: $color-secondary;
     border: none;
     font-size: 1.2rem;
   }
@@ -75,7 +75,9 @@
       }
 
       & span {
-        font-size: 1rem;
+        font-size: 1.2rem;
+        color: $color-white;
+        font-weight: 400;
       }
     }
 
@@ -119,11 +121,11 @@
   select {
     font-family: inherit;
     padding: 0.8rem;
-    border: 1px solid #ccc;
+    border: 1px solid $color-white;
     border-radius: 4px;
+    font-weight: 600;
 
     &:focus {
-      // border: none;
       outline: none;
     }
   }
@@ -135,6 +137,7 @@
   & p {
     width: 80%;
     text-align: center;
+    color: $color-white;
     @include centerContent;
   }
 }

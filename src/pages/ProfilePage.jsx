@@ -8,7 +8,7 @@ import styles from "./ProfilePage.module.scss";
 function ProfilePage() {
   const { movieDetails } = useLists();
   return (
-    <div className={styles["profile-page"]}>
+    <div className={`styles["profile-page"] container`}>
       {movieDetails.length === 0 && (
         <h2 className={styles["profile-page__empty"]}>
           {" "}

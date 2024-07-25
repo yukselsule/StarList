@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import AddToList from "./AddToList";
 import Modal from "./Modal";
 
-import imageNotFound from "../assets/img/imageNotFound.png";
+import imageNotFound from "../assets/img/imageNotFound.webp";
 
 import styles from "./MovieCard.module.scss";
 

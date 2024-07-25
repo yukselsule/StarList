@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useLists } from "../contexts/ListsContext";
 
-import imageNotFound from "../assets/img/imageNotFound.png";
+import imageNotFound from "../assets/img/imageNotFound.webp";
 
 import styles from "./DetailedSummary.module.scss";
 

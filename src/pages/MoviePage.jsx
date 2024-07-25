@@ -6,7 +6,7 @@ function MoviePage() {
   const { id } = useParams();
 
   return (
-    <div>
+    <div className="container">
       <MovieItem id={id} />
     </div>
   );

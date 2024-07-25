@@ -4,7 +4,7 @@ import { useLists } from "../contexts/ListsContext";
 
 import Button from "./Button";
 
-import imageNotFound from "../assets/img/imageNotFound.png";
+import imageNotFound from "../assets/img/imageNotFound.webp";
 
 import styles from "./ListItem.module.scss";
 

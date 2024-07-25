@@ -9,7 +9,7 @@ import Error from "./Error";
 import Modal from "./Modal";
 import SpinnerFullPage from "./SpinnerFullPage";
 
-import imageNotFound from "../assets/img/imageNotFound.png";
+import imageNotFound from "../assets/img/imageNotFound.webp";
 
 import styles from "./MovieItem.module.scss";
 
