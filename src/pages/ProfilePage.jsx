@@ -6,22 +6,24 @@ import Summary from "../components/Summary";
 import styles from "./ProfilePage.module.scss";
 
 function ProfilePage() {
-  const { movieDetails } = useLists();
-  return (
-    <div className={`styles["profile-page"] container`}>
-      {movieDetails.length === 0 && (
+  const { lists } = useLists();
+
+  if (Object.values(lists).length === 0)
+    return (
+      <div>
         <h2 className={styles["profile-page__empty"]}>
           {" "}
           Go watch some movies to make lists!{" "}
         </h2>
-      )}
+      </div>
+    );
 
-      {movieDetails.length > 0 && (
-        <div className={styles["profile-page__full"]}>
-          <Summary />
-          <Lists />
-        </div>
-      )}
+  return (
+    <div className={`styles["profile-page"] container`}>
+      <div className={styles["profile-page__full"]}>
+        <Summary />
+        <Lists />
+      </div>
     </div>
   );
 }

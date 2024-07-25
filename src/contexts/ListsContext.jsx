@@ -152,7 +152,6 @@ function ListsProvider({ children }) {
     }).then((result) => {
       if (result.isConfirmed) {
         setListNames(listNames.filter((list) => listName !== list));
-
         const newLists = { ...lists };
         delete newLists[listName];
         setLists(newLists);
@@ -168,6 +167,7 @@ function ListsProvider({ children }) {
           showConfirmButton: false,
         });
 
+        if (listNames.length === 1) setMovieDetails([]);
         return;
       }
     });

@@ -60,6 +60,7 @@ function AddToList({ movie, onCloseModal }) {
       });
       return;
     }
+
     if (listNames.includes(newListName.trim())) {
       Swal.fire({
         icon: "error",
@@ -91,6 +92,7 @@ function AddToList({ movie, onCloseModal }) {
         iconColor: "#991b1b",
         confirmButtonColor: "#010101",
       });
+
       return;
     }
 
@@ -108,8 +110,8 @@ function AddToList({ movie, onCloseModal }) {
       Swal.fire({
         icon: "error",
         text: `You already added "${movie.title}" to "${selectedList}" list`,
-        iconColor: "red",
-        confirmButtonColor: "black",
+        iconColor: "#991b1b",
+        confirmButtonColor: "#010101",
       });
       return;
     } else {
@@ -121,9 +123,10 @@ function AddToList({ movie, onCloseModal }) {
 
     Swal.fire({
       title: `${title} added to ${selectedList}`,
-      // text: `${title} added to ${selectedList}`,
       icon: "success",
+      iconColor: "#a16207",
       timer: 1500,
+      showConfirmButton: false,
     });
 
     onCloseModal();
