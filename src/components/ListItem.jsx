@@ -36,7 +36,7 @@ function ListItem({ movie, listName }) {
 
   return (
     <li className={styles["list-item"]}>
-      <a className={styles["list-item__poster"]}>
+      <a name="movie item link" className={styles["list-item__poster"]}>
         <img
           onClick={handleImageClick}
           src={poster ? `${IMG_BASE_URL}${poster}` : imageNotFound}

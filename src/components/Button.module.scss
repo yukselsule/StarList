@@ -41,6 +41,12 @@
     font-size: 1.4rem;
   }
 
+  &-new-list {
+    text-transform: lowercase;
+    background-color: rgba($color-primary, 0.7);
+    font-size: 1.4rem;
+  }
+
   &-show-all {
     font-weight: 600;
     background-color: rgba($color-grey-dark, 0.4);
