@@ -1,57 +1,25 @@
-// // Variables
-
-// $color-primary: #ec297b;
-// $color-primary-light: #ed83b5;
-// $color-primary-dark: #470c25;
-
-// $color-secondary: #fff48b;
-// $color-secondary-dark: #fae94b;
-
-// $color-star: #ffdd00;
-
-// $color-background: #f2e3e6;
-
-// $color-grey-dark: #25181d;
-// $color-grey-dark-2: #999;
-// $color-grey-dark-3: #333;
-
-// // $color-white: #fbfcf8;
-// $color-white: #f6ebee;
-// $color-white-darker: #f8f6f0;
-// $color-black: #18040c;
-
 // Variables
 
-// $color-primary: #ffc1c1;
-// $color-primary-light: #8351a8;
-// $color-primary-dark: #29162a;
+//  iconColor: "#991b1b",
+// confirmButtonColor: "#010101",
+// confirmButtonColor: "#991b1b",
+// cancelButtonColor: "#a16207",
 
-// $color-secondary: #4d7b93;
+$color-primary: #facc15;
+$color-primary-dark: #a16207;
+$color-primary-light: #fde047;
 
-// // $color-background: #e5b8f4;
-// // $color-background: #fff9f9;
+$color-secondary: #404040;
+$color-secondary-dark: #262626;
+$color-secondary-light: #525252;
 
-// $color-white: #f6ebee;
+$color-background: #52525298;
 
-// #9B86BD #373A40 #686D76  #E2BBE9 #5A639C #7776B3
-// Variables
+$color-white: #fdf5f4;
 
-$color-star: #ffdd00;
-$color-primary: #8ec6c5;
-$color-primary-dark: #0891b2;
-$color-primary-light: #b0d7d6;
+$color-black: #010101;
 
-$color-secondary: #ffc1c1;
-$color-secondary-dark: #b38787;
-$color-secondary-light: #ffd4d4;
-
-$color-background: #ffc1c16c;
-
-$color-grey-dark: #31363f;
-
-$color-white: #f6ebee;
-
-$color-black: #0f0f0f;
+$color-star: #facc15;
 
 // Mixins
 @mixin centerContent {

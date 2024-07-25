@@ -31,15 +31,15 @@ body {
 }
 
 main {
-  min-height: 80vh;
+  min-height: 70vh;
   flex: 1;
   background-image: linear-gradient(
     to right bottom,
     rgba($color-white, 0.9),
-    rgba($color-background, 0.6)
+    rgba($color-background, 0.4)
   );
 }
 
 .container {
-  padding: 2rem 4rem;
+  padding: 6rem 12rem;
 }
