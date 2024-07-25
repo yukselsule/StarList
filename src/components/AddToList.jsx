@@ -21,12 +21,32 @@ function AddToList({ movie, onCloseModal }) {
 
   const { listNames, setListNames, lists, setLists } = useLists();
 
-  const { title, poster_path: poster, id } = movie || {};
+  const {
+    title,
+    poster_path: poster,
+    id,
+    release_date: released,
+  } = movie || {};
 
   const newListNameRef = useRef(null);
 
   function handleUnkownDate() {
     setIsDateUnknown(!isDateUnknown);
+  }
+
+  function handleSetDate() {
+    if (!isDateUnknown && new Date(date) < new Date(released)) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "It is before release date",
+        iconColor: "red",
+        confirmButtonColor: "black",
+      });
+      return;
+    }
+
+    setDate(new Date(date));
   }
 
   function handleCreateANewList() {
@@ -99,6 +119,13 @@ function AddToList({ movie, onCloseModal }) {
       });
     }
 
+    Swal.fire({
+      title: `${title} added to ${selectedList}`,
+      // text: `${title} added to ${selectedList}`,
+      icon: "success",
+      timer: 1500,
+    });
+
     onCloseModal();
   }
 
@@ -108,13 +135,23 @@ function AddToList({ movie, onCloseModal }) {
     }
   }, [showCreateANewList]);
 
+  if (new Date(released) > new Date())
+    return (
+      <div className={styles["not-released"]}>
+        <p>
+          {title} will be released on {released}.
+        </p>
+      </div>
+    );
+
   return (
     <form className={styles.form} onSubmit={handleAdd}>
       <div className={styles["form-row__date"]}>
         <DatePicker
           id="date"
-          onChange={(date) => setDate(date)}
+          onChange={(date) => handleSetDate(date)}
           selected={date}
+          maxDate={new Date()}
           dateFormat="dd/MM/yyyy"
           disabled={isDateUnknown}
           required={!isDateUnknown}
@@ -181,8 +218,8 @@ function AddToList({ movie, onCloseModal }) {
 
         <div className={styles["form-row__list-create"]}>
           {!showCreateANewList && (
-            <Button type="add" onClick={() => setShowCreateANewList(true)}>
-              <span>+Create a new list</span>
+            <Button type="new-list" onClick={() => setShowCreateANewList(true)}>
+              <span>New list</span>
             </Button>
           )}
 
@@ -195,7 +232,7 @@ function AddToList({ movie, onCloseModal }) {
                 onChange={(e) => setNewListName(e.target.value)}
                 ref={newListNameRef}
               />
-              <Button type="add" onClick={handleCreateANewList}>
+              <Button type="new-list" onClick={handleCreateANewList}>
                 Create
               </Button>
             </div>

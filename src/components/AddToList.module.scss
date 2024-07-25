@@ -128,3 +128,13 @@
     }
   }
 }
+
+.not-released {
+  height: 30vh;
+
+  & p {
+    width: 80%;
+    text-align: center;
+    @include centerContent;
+  }
+}
