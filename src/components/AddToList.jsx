@@ -34,19 +34,19 @@ function AddToList({ movie, onCloseModal }) {
     setIsDateUnknown(!isDateUnknown);
   }
 
-  function handleSetDate() {
-    if (!isDateUnknown && new Date(date) < new Date(released)) {
+  function handleSetDate(selectedDate) {
+    if (!isDateUnknown && new Date(selectedDate) < new Date(released)) {
       Swal.fire({
         icon: "error",
         title: "Oops...",
         text: "It is before release date",
-        iconColor: "red",
-        confirmButtonColor: "black",
+        iconColor: "#991b1b",
+        confirmButtonColor: "#010101",
       });
       return;
     }
 
-    setDate(new Date(date));
+    setDate(new Date(selectedDate));
   }
 
   function handleCreateANewList() {
@@ -55,8 +55,8 @@ function AddToList({ movie, onCloseModal }) {
         icon: "error",
         title: "Oops...",
         text: "List name cannot be empty or just spaces",
-        iconColor: "red",
-        confirmButtonColor: "black",
+        iconColor: "#991b1b",
+        confirmButtonColor: "#010101",
       });
       return;
     }
@@ -65,8 +65,8 @@ function AddToList({ movie, onCloseModal }) {
         icon: "error",
         title: "Oops...",
         text: "You already have that list",
-        iconColor: "red",
-        confirmButtonColor: "black",
+        iconColor: "#991b1b",
+        confirmButtonColor: "#010101",
       });
       return;
     }
@@ -88,8 +88,8 @@ function AddToList({ movie, onCloseModal }) {
     ) {
       Swal.fire({
         text: "Please fill required fields",
-        iconColor: "red",
-        confirmButtonColor: "black",
+        iconColor: "#991b1b",
+        confirmButtonColor: "#010101",
       });
       return;
     }
@@ -149,7 +149,7 @@ function AddToList({ movie, onCloseModal }) {
       <div className={styles["form-row__date"]}>
         <DatePicker
           id="date"
-          onChange={(date) => handleSetDate(date)}
+          onChange={handleSetDate}
           selected={date}
           maxDate={new Date()}
           dateFormat="dd/MM/yyyy"

@@ -143,9 +143,12 @@ function ListsProvider({ children }) {
       title: "This action will delete the list",
       text: "Are you sure you want to proceed?",
       icon: "warning",
+      iconColor: "#991b1b",
       showCancelButton: true,
       confirmButtonText: "Yes, delete it!",
+      confirmButtonColor: "#991b1b",
       cancelButtonText: "No, keep it",
+      cancelButtonColor: "#a16207",
     }).then((result) => {
       if (result.isConfirmed) {
         setListNames(listNames.filter((list) => listName !== list));
@@ -160,7 +163,9 @@ function ListsProvider({ children }) {
           title: "Deleted!",
           text: "Your list has been deleted.",
           icon: "success",
+          iconColor: "#a16207",
           timer: 1500,
+          showConfirmButton: false,
         });
 
         return;
@@ -181,16 +186,18 @@ function ListsProvider({ children }) {
         icon: "warning",
         showCancelButton: true,
         confirmButtonText: "Yes, delete it!",
+        confirmButtonColor: "#991b1b",
         cancelButtonText: "No, keep it",
-        confirmButtonColor: "red",
-        cancelButtonColor: "green",
+        cancelButtonColor: "#a16207",
       }).then((result) => {
         if (result.isConfirmed) {
           Swal.fire({
             title: "Deleted!",
             text: "Your movie has been deleted.",
             icon: "success",
+            iconColor: "#a16207",
             timer: 1500,
+            showConfirmButton: false,
           });
           const updatedList = lists[listName].filter(
             (movie) => movie.id !== movieId
