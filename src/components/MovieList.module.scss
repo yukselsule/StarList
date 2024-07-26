@@ -4,4 +4,8 @@
   grid-template-columns: repeat(5, 1fr);
   column-gap: 4rem;
   row-gap: 2rem;
+
+  @include respond(75em) {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }

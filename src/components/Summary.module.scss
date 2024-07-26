@@ -1,9 +1,14 @@
 .summary {
   border-right: 2px solid $color-primary;
+
   &__heading {
     font-size: 2rem;
     font-weight: 600;
     margin-bottom: 2rem;
+
+    @include respond(48em) {
+      font-size: 1.8rem;
+    }
   }
 
   &__list {
@@ -15,9 +20,17 @@
     font-size: 2.6rem;
     color: $color-primary-dark;
 
+    @include respond(48em) {
+      font-size: 2.4rem;
+    }
+
     & li span {
       font-size: 1.6rem;
       color: $color-black;
+
+      @include respond(48em) {
+        font-size: 1.4rem;
+      }
     }
   }
 

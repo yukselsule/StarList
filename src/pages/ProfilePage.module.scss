@@ -8,5 +8,9 @@
   &__full {
     display: grid;
     grid-template-columns: 1fr 3fr;
+
+    @include respond(56.25em) {
+      grid-template-columns: 1fr 2fr;
+    }
   }
 }
