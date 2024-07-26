@@ -8,11 +8,14 @@ function Lists() {
   const { listNames } = useLists();
 
   return (
-    <ul className={styles["lists"]}>
-      {listNames.map((listName, index) => (
-        <ListBox listName={listName} key={index} listId={listName} />
-      ))}
-    </ul>
+    <div className={styles["lists"]}>
+      <h3>Your lists</h3>
+      <ul>
+        {listNames.map((listName, index) => (
+          <ListBox listName={listName} key={index} listId={listName} />
+        ))}
+      </ul>
+    </div>
   );
 }
 

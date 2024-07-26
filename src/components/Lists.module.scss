@@ -1,8 +1,26 @@
 .lists {
-  padding: 4rem;
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  min-height: 80vh;
+  padding: 0 4rem;
+  display: flex;
+  flex-direction: column;
+
+  & h3 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+
+    @include respond(48em) {
+      font-size: 1.8rem;
+    }
+  }
+  & ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+
+    @include respond(31.25em) {
+      grid-template-columns: 1fr 1fr;
+      row-gap: 1rem;
+    }
+  }
 }
