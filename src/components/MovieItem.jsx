@@ -100,11 +100,26 @@ function MovieItem({ id }) {
   return (
     <div>
       <div className={styles.movie}>
-        <div className={styles["movie__poster-container"]}>
-          <img
-            src={poster ? `${IMG_BASE_URL}${poster}` : imageNotFound}
-            alt={`Poster of ${title}`}
-          />
+        <div className={styles["movie-wrapper"]}>
+          <div className={styles["movie__poster-container"]}>
+            <img
+              src={poster ? `${IMG_BASE_URL}${poster}` : imageNotFound}
+              alt={`Poster of ${title}`}
+            />
+          </div>
+          <div className={styles["movie__button-container"]}>
+            <Button type="add" onClick={handleAddToList}>
+              Add to list
+            </Button>
+            {showAddToList && (
+              <Modal onClose={handleCloseModal}>
+                <AddToList
+                  onCloseModal={handleCloseModal}
+                  movie={selectedMovie}
+                />
+              </Modal>
+            )}
+          </div>
         </div>
 
         <div className={styles["movie-details"]}>
@@ -135,70 +150,75 @@ function MovieItem({ id }) {
           <ul className={styles["movie-details__list"]}>
             <li>
               Genres:{" "}
-              {genres.length > 0
-                ? genres.map((genre) => (
-                    <span key={genre.id}>{genre.name} </span>
-                  ))
-                : "N/A"}
+              <ul>
+                {genres.length > 0
+                  ? genres.map((genre) => <li key={genre.id}>{genre.name} </li>)
+                  : "N/A"}
+              </ul>
             </li>
             <li>
               Languages:{" "}
-              {languages.length > 0
-                ? languages.map((language) => (
-                    <span key={language.iso_639_1}>
-                      {language.english_name}{" "}
-                    </span>
-                  ))
-                : "N/A"}
+              <ul>
+                {languages.length > 0
+                  ? languages.map((language) => (
+                      <li key={language.iso_639_1}>{language.english_name} </li>
+                    ))
+                  : "N/A"}
+              </ul>
             </li>
             <li>
               Countries:{" "}
-              {countries.length > 0
-                ? countries.map((country) => (
-                    <span key={country.iso_3166_1}>
-                      {country.name === "United States of America"
-                        ? "USA"
-                        : country.name}{" "}
-                    </span>
-                  ))
-                : "N/A"}
+              <ul>
+                {countries.length > 0
+                  ? countries.map((country) => (
+                      <li key={country.iso_3166_1}>
+                        {country.name === "United States of America"
+                          ? "USA"
+                          : country.name}{" "}
+                      </li>
+                    ))
+                  : "N/A"}
+              </ul>
             </li>
             <li>
               Directed by:{" "}
-              {crew.filter((crewMember) => {
-                return crewMember.job === "Director";
-              }).length === 0
-                ? "N/A"
-                : crew
-                    .filter((crewMember) => {
-                      return crewMember.job === "Director";
-                    })
-                    .map((director) => {
-                      return (
-                        <span key={director.credit_id}> {director.name} </span>
-                      );
-                    })}
+              <ul>
+                {crew.filter((crewMember) => {
+                  return crewMember.job === "Director";
+                }).length === 0
+                  ? "N/A"
+                  : crew
+                      .filter((crewMember) => {
+                        return crewMember.job === "Director";
+                      })
+                      .map((director) => {
+                        return (
+                          <li key={director.credit_id}> {director.name} </li>
+                        );
+                      })}
+              </ul>
             </li>
             <li>
               Written by:{" "}
-              {crew.filter(
-                (crewMember) =>
-                  crewMember.job === "Writer" || crewMember.job === "Screenplay"
-              ).length === 0
-                ? "N/A"
-                : crew
-                    .filter(
-                      (crewMember) =>
-                        crewMember.job === "Writer" ||
-                        crewMember.job === "Screenplay"
-                    )
-                    .map((writer) => {
-                      return (
-                        <span key={writer.credit_id}> {writer.name} </span>
-                      );
-                    })}
+              <ul>
+                {crew.filter(
+                  (crewMember) =>
+                    crewMember.job === "Writer" ||
+                    crewMember.job === "Screenplay"
+                ).length === 0
+                  ? "N/A"
+                  : crew
+                      .filter(
+                        (crewMember) =>
+                          crewMember.job === "Writer" ||
+                          crewMember.job === "Screenplay"
+                      )
+                      .map((writer) => {
+                        return <li key={writer.credit_id}> {writer.name} </li>;
+                      })}
+              </ul>
             </li>
-            <li className={styles["movie-details__list__cast"]}>
+            <li>
               Starring:
               <ul>
                 {castToShow.length === 0
@@ -214,20 +234,6 @@ function MovieItem({ id }) {
               </ul>
             </li>
           </ul>
-        </div>
-
-        <div className={styles["button-container"]}>
-          <Button type="add" onClick={handleAddToList}>
-            Add to list
-          </Button>
-          {showAddToList && (
-            <Modal onClose={handleCloseModal}>
-              <AddToList
-                onCloseModal={handleCloseModal}
-                movie={selectedMovie}
-              />
-            </Modal>
-          )}{" "}
         </div>
       </div>
     </div>

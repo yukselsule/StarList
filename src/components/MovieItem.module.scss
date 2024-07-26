@@ -10,9 +10,16 @@
   }
 
   @include respond(48em) {
-    gap: 2rem;
     position: relative;
     grid-template-columns: 1fr 2fr;
+  }
+
+  &-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
   }
 
   &__poster-container {
@@ -24,6 +31,14 @@
       width: 100%;
       height: auto;
       border-radius: 5px;
+    }
+  }
+
+  &__button-container {
+    @include respond(49em) {
+      position: absolute;
+      top: 15%;
+      right: 10%;
     }
   }
 
@@ -95,16 +110,7 @@
         font-size: 1.6rem;
       }
 
-      & li span {
-        padding: 0.6rem 0.8rem;
-        margin-left: 1rem;
-        background-color: rgba($color-primary-dark, 0.2);
-        border-radius: 4px;
-
-        font-size: 1.4rem;
-      }
-
-      &__cast {
+      & li {
         display: flex;
         gap: 1rem;
         & ul {
@@ -123,13 +129,5 @@
         }
       }
     }
-  }
-}
-
-.button-container {
-  @include respond(48em) {
-    position: absolute;
-    top: 70%;
-    left: 10%;
   }
 }
