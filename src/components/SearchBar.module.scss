@@ -3,8 +3,14 @@
   justify-content: center;
   align-items: center;
   transition: position 2s ease;
+  position: relative;
 
-  &_input {
+  @include respond(37.5em) {
+    width: 100%;
+    grid-column: 1 / -1;
+  }
+
+  &__input {
     border: none;
     border-radius: 5px;
     padding: 1.2rem;
@@ -16,8 +22,35 @@
     font-weight: inherit;
     background-color: $color-white;
 
+    @include respond(56.25em) {
+      max-width: 50rem;
+    }
+
+    @include respond(48em) {
+      min-width: 40rem;
+    }
+
+    @include respond(37.5em) {
+      max-width: none;
+      width: 100%;
+      padding: 0 2rem;
+    }
+
     &:focus {
       outline: 2px solid $color-primary;
+
+      @include respond(37.5em) {
+        outline: none;
+      }
     }
+  }
+
+  &__close {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: $color-black;
   }
 }

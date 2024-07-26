@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { useSearchQuery } from "../contexts/SearchQueryContext";
@@ -15,11 +15,13 @@ const debounce = (callback, wait) => {
   };
 };
 
-function SearchBar() {
+function SearchBar({ isSearchOpen, onSearchOpen }) {
   const [inputValue, setInputValue] = useState("");
-  const { setQuery, query } = useSearchQuery();
+  const { setQuery } = useSearchQuery();
   const navigate = useNavigate();
   const location = useLocation();
+
+  const searchBarRef = useRef();
 
   const debouncedSetQuery = useCallback(
     debounce((newQuery) => {
@@ -34,6 +36,16 @@ function SearchBar() {
     debouncedSetQuery(e.target.value);
   };
 
+  function handleSearchClose() {
+    onSearchOpen(false);
+  }
+
+  useEffect(() => {
+    if (isSearchOpen && searchBarRef.current) {
+      searchBarRef.current.focus();
+    }
+  }, [isSearchOpen]);
+
   useEffect(() => {
     if (location.pathname === "/") {
       setInputValue("");
@@ -41,16 +53,20 @@ function SearchBar() {
   }, [location.pathname]);
 
   return (
-    <div
-      className={`${styles["search-box"]} ${!query ? styles["homepage"] : ""}`}
-    >
+    <div className={`${styles["search-box"]}`}>
       <input
         placeholder="Search your movie"
         type="text"
         value={inputValue}
         onChange={handleInputChange}
-        className={styles["search-box_input"]}
+        className={styles["search-box__input"]}
+        ref={searchBarRef}
       />
+      <span className={styles["search-box__close"]}>
+        {isSearchOpen && (
+          <ion-icon onClick={handleSearchClose} name="close-outline"></ion-icon>
+        )}
+      </span>
     </div>
   );
 }
