@@ -1,6 +1,6 @@
 // Variables
 
-//  iconColor: "#991b1b",
+// iconColor: "#991b1b",
 // confirmButtonColor: "#010101",
 // confirmButtonColor: "#991b1b",
 // cancelButtonColor: "#a16207",
@@ -44,6 +44,11 @@ $color-star: #facc15;
     @media only screen and (max-width: 48em) {
       @content;
     } //768px
+  }
+  @if $breakpoint == 49em {
+    @media only screen and (min-width: 49em) {
+      @content;
+    }
   }
   @if $breakpoint == 56.25em {
     @media only screen and (max-width: 56.25em) {
