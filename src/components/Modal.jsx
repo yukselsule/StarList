@@ -10,10 +10,9 @@ function Modal({ children, onClose }) {
         <div className={styles.modal}>
           {children}
           <Button type="close" onClick={onClose}>
-            <ion-icon
-              className={styles["modal__icon"]}
-              name="close-outline"
-            ></ion-icon>
+            <span className={styles["modal__close"]}>
+              <ion-icon name="close-outline"></ion-icon>
+            </span>
           </Button>
         </div>
       </div>

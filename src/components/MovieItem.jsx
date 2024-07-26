@@ -216,14 +216,19 @@ function MovieItem({ id }) {
           </ul>
         </div>
 
-        <Button type="add" onClick={handleAddToList}>
-          Add to list
-        </Button>
-        {showAddToList && (
-          <Modal onClose={handleCloseModal}>
-            <AddToList onCloseModal={handleCloseModal} movie={selectedMovie} />
-          </Modal>
-        )}
+        <div className={styles["button-container"]}>
+          <Button type="add" onClick={handleAddToList}>
+            Add to list
+          </Button>
+          {showAddToList && (
+            <Modal onClose={handleCloseModal}>
+              <AddToList
+                onCloseModal={handleCloseModal}
+                movie={selectedMovie}
+              />
+            </Modal>
+          )}{" "}
+        </div>
       </div>
     </div>
   );

@@ -6,6 +6,13 @@
 
   @include respond(56.25em) {
     grid-template-columns: 2fr 4fr 1fr;
+    gap: 4rem;
+  }
+
+  @include respond(48em) {
+    gap: 2rem;
+    position: relative;
+    grid-template-columns: 1fr 2fr;
   }
 
   &__poster-container {
@@ -116,5 +123,13 @@
         }
       }
     }
+  }
+}
+
+.button-container {
+  @include respond(48em) {
+    position: absolute;
+    top: 70%;
+    left: 10%;
   }
 }
