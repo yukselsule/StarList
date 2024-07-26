@@ -1,6 +1,17 @@
 .summary {
   border-right: 2px solid $color-primary;
 
+  @include respond(48em) {
+    width: 70%;
+  }
+
+  @include respond(48em) {
+    border-right: none;
+    border-bottom: 2px solid $color-primary;
+    min-width: 50%;
+    padding-bottom: 4rem;
+  }
+
   &__heading {
     font-size: 2rem;
     font-weight: 600;

@@ -14,6 +14,13 @@
     grid-template-columns: 1fr 2fr;
   }
 
+  @include respond(31.25em) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
   &-wrapper {
     display: flex;
     flex-direction: column;
@@ -25,12 +32,17 @@
   &__poster-container {
     display: flex;
     align-items: center;
+    justify-content: center;
     border-radius: 5px;
 
     & img {
       width: 100%;
       height: auto;
       border-radius: 5px;
+
+      @include respond(31.25em) {
+        width: 50%;
+      }
     }
   }
 
@@ -46,6 +58,10 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
+
+    @include respond(37.5em) {
+      gap: 1rem;
+    }
 
     &-heading {
       display: flex;
@@ -74,7 +90,9 @@
     &__runtime {
       font-size: 1.6rem;
       margin: -1.4rem 0 2rem 2rem;
-
+      @include respond(37.5em) {
+        margin: -1rem 0 1rem 1rem;
+      }
       & span {
         font-size: 1.4rem;
       }
@@ -94,6 +112,9 @@
 
       @include respond(56.25em) {
         font-size: 1.4rem;
+      }
+      @include respond(31.25em) {
+        margin-bottom: 1rem;
       }
     }
 

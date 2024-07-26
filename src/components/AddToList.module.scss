@@ -15,7 +15,7 @@
     }
   }
   .react-datepicker__month-container {
-    background-color: $color-secondary;
+    background-color: $color-primary;
     border: none;
     font-size: 1.2rem;
   }
@@ -25,11 +25,7 @@
   }
 
   .react-datepicker__day ~ .react-datepicker__day--selected {
-    background-color: $color-primary;
-  }
-
-  .react-datepicker__day--today {
-    background-color: $color-primary;
+    background-color: $color-primary-dark;
   }
 
   .react-datepicker-popper {
@@ -92,6 +88,10 @@
       gap: 1rem;
       & select {
         width: 40%;
+
+        @include respond(37.5em) {
+          width: 60%;
+        }
       }
 
       &-create {

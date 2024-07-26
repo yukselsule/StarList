@@ -55,9 +55,13 @@ function Summary() {
             {summary.allCountries.length > 1 ? "countries" : "country"}
           </span>
         </li>
-        <Button type="details" onClick={handleButtonClick}>
-          see details
-        </Button>
+        <li>
+          <div className={styles["summary__button"]}>
+            <Button type="details" onClick={handleButtonClick}>
+              see details
+            </Button>
+          </div>
+        </li>
       </ul>
     </div>
   );

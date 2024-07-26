@@ -14,6 +14,18 @@
     width: 60%;
   }
 
+  @include respond(48em) {
+    width: 75%;
+  }
+
+  @include respond(37.5em) {
+    width: 80%;
+  }
+
+  @include respond(31.25em) {
+    width: 90%;
+  }
+
   &-container {
     position: relative;
   }

@@ -12,5 +12,13 @@
     @include respond(56.25em) {
       grid-template-columns: 1fr 2fr;
     }
+
+    @include respond(48em) {
+      display: flex;
+      flex-direction: column;
+      gap: 4rem;
+      justify-content: center;
+      align-items: center;
+    }
   }
 }
