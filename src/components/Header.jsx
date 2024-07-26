@@ -10,6 +10,7 @@ function Header() {
   const location = useLocation();
   const [isHomePage, setIsHomePage] = useState(true);
   const [isResultsPage, setIsResultsPage] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   useEffect(() => {
     const isHomePage = location.pathname === "/";
@@ -21,28 +22,69 @@ function Header() {
     setIsResultsPage(isResultsPage);
   }, [isResultsPage, location.pathname]);
 
-  return (
-    <header
-      className={`${styles.header} ${isHomePage ? styles["header-bg"] : ""}`}
-    >
-      <Logo />
+  function handleSearchIconClick() {
+    setIsSearchOpen(true);
+  }
 
-      {isHomePage || isResultsPage ? <SearchBar /> : <div></div>}
-      <ul
-        className={`${styles.header__list} ${
-          isHomePage ? styles["header-bg__list"] : ""
-        }`}
+  return (
+    <>
+      <header
+        className={`${styles.header} ${isHomePage ? styles["header-bg"] : ""}`}
       >
-        <li>
-          <NavLink to="/profile">
+        <Logo />
+
+        {isHomePage || isResultsPage ? <SearchBar /> : <div></div>}
+        <ul
+          className={`${styles.header__list} ${
+            isHomePage ? styles["header-bg__list"] : ""
+          }`}
+        >
+          <li>
+            <NavLink to="/profile">
+              <ion-icon
+                className={styles["header__list-icon"]}
+                name="person-circle-outline"
+              ></ion-icon>
+            </NavLink>
+          </li>
+        </ul>
+      </header>
+      <header
+        className={`${styles["header-mobile"]} ${
+          !isSearchOpen ? styles["header-mobile-bg"] : ""
+        } `}
+      >
+        {!isSearchOpen && (
+          <>
+            <Logo />
             <ion-icon
-              className={styles["header__list-icon"]}
-              name="person-circle-outline"
+              onClick={handleSearchIconClick}
+              name="search-outline"
             ></ion-icon>
-          </NavLink>
-        </li>
-      </ul>
-    </header>
+            <ul
+              className={`${styles.header__list} ${
+                isHomePage ? styles["header-bg__list"] : ""
+              }`}
+            >
+              <li>
+                <NavLink to="/profile">
+                  <ion-icon
+                    className={styles["header__list-icon"]}
+                    name="person-circle-outline"
+                  ></ion-icon>
+                </NavLink>
+              </li>
+            </ul>
+          </>
+        )}
+        {isSearchOpen && (
+          <SearchBar
+            isSearchOpen={isSearchOpen}
+            onSearchOpen={setIsSearchOpen}
+          />
+        )}
+      </header>
+    </>
   );
 }
 

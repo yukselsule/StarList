@@ -1,105 +1,44 @@
-// .header {
-//   background-color: $color-black;
-//   display: grid;
-//   grid-template-columns: 1fr 3fr 1fr;
-//   gap: auto;
-//   align-items: center;
-//   padding: 0 3rem;
-//   height: 10vh;
-//   width: 100%;
-//   transition: all 0.3s ease-in-out;
-
-//   a.active {
-//     text-decoration: none;
-//   }
-
-//   &__list {
-//     display: flex;
-//     gap: 3rem;
-//     list-style: none;
-//     justify-content: flex-end;
-
-//     li {
-//       transition: all 0.4s;
-
-//       &:link,
-//       &:visited {
-//         color: $color-primary;
-//         text-decoration: none;
-//       }
-//       &:hover,
-//       &:active {
-//         color: $color-primary-light;
-//       }
-//     }
-
-//     &-icon {
-//       width: 3rem;
-//       height: 3rem;
-//       stroke: $color-primary;
-//       transition: all 0.3s ease;
-
-//       &:hover {
-//         color: $color-primary-light;
-//       }
-//     }
-//   }
-
-//   &-bg {
-//     background: transparent;
-//     position: absolute;
-//     top: 0;
-//     z-index: 3;
-//     display: grid;
-//     grid-template-columns: 1fr 3fr 1fr;
-//     gap: auto;
-//     align-items: center;
-//     padding: 0 3rem;
-//     height: 10vh;
-//     width: 100%;
-//     transition: all 0.3s ease-in-out;
-
-//     &__list li {
-//       transition: none;
-
-//       & a {
-//         &:link,
-//         &:visited {
-//           color: $color-primary;
-//           text-decoration: none;
-//         }
-//         &:hover,
-//         &:active {
-//           color: $color-primary-light;
-//         }
-//       }
-//     }
-//   }
-// }
-
-// :global {
-//   ion-icon[name="person-circle-outline"] {
-//     width: 3rem;
-//     height: 3rem;
-//     color: $color-primary;
-//     transition: color 0.3s ease;
-
-//     &:hover {
-//       color: $color-primary-light;
-//     }
-//   }
-// }
-
 .header {
   background-color: $color-black;
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
   gap: auto;
   align-items: center;
-  padding: 0 3rem;
-  height: 10vh;
+  padding: 1rem 3rem;
+  min-height: 10vh;
   width: 100%;
   transition: all 0.3s ease-in-out;
+
+  @include respond(37.5em) {
+    display: none;
+  }
+
+  &-mobile {
+    display: none;
+
+    @include respond(37.5em) {
+      display: grid;
+      background-color: $color-white;
+      align-items: center;
+      gap: auto;
+      width: 100%;
+      min-height: 10vh;
+
+      grid-template-columns: 4fr 1fr 1fr;
+    }
+
+    &-bg {
+      background-color: $color-black;
+      padding: 1rem 3rem;
+    }
+  }
+
+  // @include respond(48em) {
+  //   grid-template-columns: 1fr 3fr 1fr;
+  // }
+  @include respond(37.5em) {
+    grid-template-columns: 2fr 4fr 1fr;
+  }
 
   a.active {
     text-decoration: none;
@@ -110,6 +49,7 @@
     gap: 3rem;
     list-style: none;
     justify-content: flex-end;
+    align-items: center;
 
     li {
       transition: all 0.4s;
@@ -159,6 +99,20 @@
 
 :global {
   ion-icon[name="person-circle-outline"] {
+    width: 3rem;
+    height: 3rem;
+    color: $color-primary;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: $color-primary-light;
+    }
+  }
+}
+
+:global {
+  ion-icon[name="search-outline"] {
+    justify-self: end;
     width: 3rem;
     height: 3rem;
     color: $color-primary;
