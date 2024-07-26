@@ -1,3 +1,7 @@
 .logo {
   height: 5rem;
+
+  @include respond(48em) {
+    height: 4rem;
+  }
 }

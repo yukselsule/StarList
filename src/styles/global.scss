@@ -30,22 +30,37 @@ $color-star: #facc15;
 }
 
 @mixin respond($breakpoint) {
-  @if $breakpoint == phone {
+  @if $breakpoint == 31.25em {
+    @media only screen and (max-width: 31.25em) {
+      @content;
+    } //500px
+  }
+  @if $breakpoint == 37.5em {
     @media only screen and (max-width: 37.5em) {
       @content;
     } //600px
   }
-  @if $breakpoint == tab-port {
+  @if $breakpoint == 48em {
+    @media only screen and (max-width: 48em) {
+      @content;
+    } //768px
+  }
+  @if $breakpoint == 56.25em {
     @media only screen and (max-width: 56.25em) {
       @content;
     } //900px
   }
-  @if $breakpoint == tab-land {
+  @if $breakpoint == 62.5em {
+    @media only screen and (max-width: 62.5em) {
+      @content;
+    } //1000px
+  }
+  @if $breakpoint == 75em {
     @media only screen and (max-width: 75em) {
       @content;
     } //1200px
   }
-  @if $breakpoint == big-desktop {
+  @if $breakpoint == 112.5em {
     @media only screen and (min-width: 112.5em) {
       @content;
     } //1800px

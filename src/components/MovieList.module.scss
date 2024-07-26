@@ -8,4 +8,12 @@
   @include respond(75em) {
     grid-template-columns: repeat(4, 1fr);
   }
+
+  @include respond(37.5em) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include respond(31.25em) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

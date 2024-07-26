@@ -9,15 +9,15 @@
 html {
   font-size: 62.5%;
 
-  @include respond(tab-land) {
+  @include respond(75em) {
     font-size: 56.25%;
   }
 
-  @include respond(tab-port) {
+  @include respond(56.25) {
     font-size: 50%;
   }
 
-  @include respond(big-desktop) {
+  @include respond(112.5) {
     font-size: 75%;
   }
 }
@@ -42,4 +42,11 @@ main {
 
 .container {
   padding: 6rem 12rem;
+  @include respond(62.5em) {
+    padding: 4rem 8rem;
+  }
+
+  @include respond(48em) {
+    padding: 4rem 6rem;
+  }
 }
