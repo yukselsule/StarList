@@ -15,12 +15,18 @@ function Header() {
   useEffect(() => {
     const isHomePage = location.pathname === "/";
     setIsHomePage(isHomePage);
-  }, [isHomePage, location.pathname]);
+  }, [location.pathname]);
 
   useEffect(() => {
     const isResultsPage = location.pathname === "/search";
     setIsResultsPage(isResultsPage);
-  }, [isResultsPage, location.pathname]);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    if (!isHomePage && !isResultsPage) {
+      setIsSearchOpen(false);
+    }
+  }, [isHomePage, isResultsPage]);
 
   function handleSearchIconClick() {
     setIsSearchOpen(true);
@@ -57,10 +63,15 @@ function Header() {
         {!isSearchOpen && (
           <>
             <Logo />
-            <ion-icon
-              onClick={handleSearchIconClick}
-              name="search-outline"
-            ></ion-icon>
+            {isHomePage || isResultsPage ? (
+              <ion-icon
+                onClick={handleSearchIconClick}
+                name="search-outline"
+              ></ion-icon>
+            ) : (
+              <div></div>
+            )}
+
             <ul
               className={`${styles.header__list} ${
                 isHomePage ? styles["header-bg__list"] : ""
@@ -77,7 +88,7 @@ function Header() {
             </ul>
           </>
         )}
-        {isSearchOpen && (
+        {isSearchOpen && (isHomePage || isResultsPage) && (
           <SearchBar
             isSearchOpen={isSearchOpen}
             onSearchOpen={setIsSearchOpen}
