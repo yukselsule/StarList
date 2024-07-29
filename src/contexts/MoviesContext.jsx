@@ -64,7 +64,6 @@ function MoviesProvider({ children }) {
           );
 
           const data = await res.json();
-          console.log(data);
 
           if (!res.ok) {
             throw new Error(data.status_message || "Error fetching movies");
