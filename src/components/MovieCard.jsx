@@ -37,7 +37,7 @@ function MovieCard({ movie }) {
     <div className={styles.movie}>
       <div className={styles["movie-card"]}>
         <div className={styles["movie-card__poster-container"]}>
-          <div className={styles["movie-card__poster-container"]}>
+          <div>
             <img
               className={styles["movie-card__poster"]}
               src={poster ? `${IMG_BASE_URL}${poster}` : imageNotFound}
@@ -56,10 +56,7 @@ function MovieCard({ movie }) {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            <ion-icon
-              className={styles["movie-card__button-icon"]}
-              name="add-outline"
-            ></ion-icon>
+            <ion-icon name="add-outline"></ion-icon>
           </button>
         </div>
 
