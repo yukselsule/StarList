@@ -1,7 +1,44 @@
 .lists {
-  padding: 0 4rem;
+  padding: 0 0 0 4rem;
+  width: 100%;
   display: flex;
   flex-direction: column;
+
+  @include respond(48em) {
+    padding: 0 0 0 2rem;
+  }
+
+  @include respond(37.5em) {
+    border-top: 2px solid $color-primary;
+    padding: 4rem 0 0 0;
+  }
+
+  &-container {
+    justify-self: center;
+    margin-left: 2rem;
+
+    & ul {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+
+      @include respond(48em) {
+        grid-template-columns: 1fr 1fr;
+        row-gap: 1rem;
+      }
+
+      @include respond(37.5em) {
+        grid-template-columns: repeat(3, 1fr);
+        row-gap: 1rem;
+      }
+
+      @include respond(31.25em) {
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 1rem;
+      }
+    }
+  }
 
   & h3 {
     font-size: 2rem;
@@ -10,17 +47,6 @@
 
     @include respond(48em) {
       font-size: 1.8rem;
-    }
-  }
-  & ul {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-
-    @include respond(31.25em) {
-      grid-template-columns: 1fr 1fr;
-      row-gap: 1rem;
     }
   }
 }

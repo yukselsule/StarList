@@ -10,11 +10,13 @@ function Lists() {
   return (
     <div className={styles["lists"]}>
       <h3>Your lists</h3>
-      <ul>
-        {listNames.map((listName, index) => (
-          <ListBox listName={listName} key={index} listId={listName} />
-        ))}
-      </ul>
+      <div className={styles["lists-container"]}>
+        <ul>
+          {listNames.map((listName, index) => (
+            <ListBox listName={listName} key={index} listId={listName} />
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
