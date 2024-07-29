@@ -18,6 +18,11 @@
     transform: scale(1.02);
   }
 
+  @include respond(31.25em) {
+    height: 8rem;
+    width: 11rem;
+  }
+
   &__name {
     font-size: 1.6rem;
     display: -webkit-box;

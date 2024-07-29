@@ -1,7 +1,18 @@
 .list {
   padding: 2rem;
   margin: 0 auto;
-  width: 70rem;
+
+  @include respond(75em) {
+    width: 80%;
+  }
+
+  @include respond(56.25em) {
+    width: 90%;
+  }
+
+  @include respond(48em) {
+    width: 100%;
+  }
 
   &-heading {
     display: flex;
@@ -12,6 +23,10 @@
 
   & h2 {
     font-size: 2.8rem;
+
+    @include respond(31.25em) {
+      font-size: 2.4rem;
+    }
   }
 
   & ul {
@@ -20,5 +35,9 @@
     flex-direction: column;
     gap: 2rem;
     margin-bottom: 4rem;
+
+    @include respond(48em) {
+      margin-bottom: 2rem;
+    }
   }
 }

@@ -14,6 +14,10 @@
     }
 
     @include respond(48em) {
+      grid-template-columns: 2fr 3fr;
+    }
+
+    @include respond(37.5em) {
       display: flex;
       flex-direction: column;
       gap: 4rem;

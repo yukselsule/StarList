@@ -30,6 +30,11 @@ $color-star: #facc15;
 }
 
 @mixin respond($breakpoint) {
+  @if $breakpoint == 25em {
+    @media only screen and (max-width: 25em) {
+      @content;
+    } //400px
+  }
   @if $breakpoint == 31.25em {
     @media only screen and (max-width: 31.25em) {
       @content;

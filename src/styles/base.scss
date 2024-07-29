@@ -53,4 +53,8 @@ main {
   @include respond(37.5em) {
     padding: 2rem 4rem;
   }
+
+  @include respond(31.25em) {
+    padding: 1rem 2rem;
+  }
 }
