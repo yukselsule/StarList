@@ -1,8 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { ErrorProvider } from "./contexts/ErrorContext";
-import { MoviesProvider } from "./contexts/MoviesContext";
 import { ListsProvider } from "./contexts/ListsContext";
+import { MoviesProvider } from "./contexts/MoviesContext";
 import { SearchQueryProvider } from "./contexts/SearchQueryContext";
 
 import AppLayout from "./pages/AppLayout";

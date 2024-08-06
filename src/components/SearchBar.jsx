@@ -17,11 +17,13 @@ const debounce = (callback, wait) => {
 
 function SearchBar({ isSearchOpen, onSearchOpen }) {
   const [inputValue, setInputValue] = useState("");
-  const { setQuery } = useSearchQuery();
+  const { query, setQuery } = useSearchQuery();
   const navigate = useNavigate();
   const location = useLocation();
 
   const searchBarRef = useRef();
+
+  useEffect(() => setInputValue(query), [query]);
 
   const debouncedSetQuery = useCallback(
     debounce((newQuery) => {
