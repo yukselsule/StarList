@@ -78,7 +78,7 @@ function Header() {
               }`}
             >
               <li>
-                <NavLink to="/profile">
+                <NavLink name="profile" to="/profile">
                   <ion-icon
                     className={styles["header__list-icon"]}
                     name="person-circle-outline"
