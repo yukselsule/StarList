@@ -21,12 +21,12 @@ function MovieCard({ movie }) {
   function handleAddToList() {
     setSelectedMovie(movie);
     setShowAddToList(!showAddToList);
-    document.body.style.overflow = "hidden";
+    // document.body.style.overflow = "hidden";
   }
 
   function handleCloseModal() {
     setShowAddToList(false);
-    document.body.style.overflow = "unset";
+    // document.body.style.overflow = "unset";
   }
 
   function handleImageClick() {

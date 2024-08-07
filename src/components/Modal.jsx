@@ -8,6 +8,7 @@ const modalVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: [0, 0.5, 1],
+    zIndex: [50, 500, 5000],
     transition: {
       duration: 0.1,
       ease: "easeIn",
