@@ -1,12 +1,33 @@
+import { motion } from "framer-motion";
+
 import Button from "./Button";
 
 import styles from "./Modal.module.scss";
+
+const modalVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: [0, 0.5, 1],
+    transition: {
+      duration: 0.1,
+      ease: "easeIn",
+      times: [0, 0.5, 1],
+    },
+  },
+  exit: { opacity: 0, transition: { duration: 0.3 } },
+};
 
 function Modal({ children, onClose }) {
   return (
     <>
       <div className={styles.overlay} onClick={onClose}></div>
-      <div className={styles["modal-container"]}>
+      <motion.div
+        className={styles["modal-container"]}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+        variants={modalVariants}
+      >
         <div className={styles.modal}>
           {children}
           <Button type="close" onClick={onClose}>
@@ -15,7 +36,7 @@ function Modal({ children, onClose }) {
             </span>
           </Button>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 }
