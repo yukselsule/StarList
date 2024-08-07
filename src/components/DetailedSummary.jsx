@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 import { useLists } from "../contexts/ListsContext";
 
@@ -7,6 +8,25 @@ import imageNotFound from "../assets/img/imageNotFound.webp";
 import styles from "./DetailedSummary.module.scss";
 
 const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, translateY: 20 },
+  visible: {
+    opacity: 1,
+    translateY: 0,
+    transition: { duration: 0.5, ease: "easeInOut" },
+  },
+};
 
 function DetailedSummary() {
   const navigate = useNavigate();
@@ -17,8 +37,13 @@ function DetailedSummary() {
   }
 
   return (
-    <div className={styles["detailed-summary"]}>
-      <div>
+    <motion.div
+      className={styles["detailed-summary"]}
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+    >
+      <motion.div variants={itemVariants}>
         <h2>Your watched movies in these</h2>
         <ul className={styles["detailed-summary__list"]}>
           <li className={styles["detailed-summary__list-item"]}>
@@ -52,9 +77,12 @@ function DetailedSummary() {
             </ul>
           </li>
         </ul>
-      </div>
+      </motion.div>
 
-      <div className={styles["detailed-summary__top-picks"]}>
+      <motion.div
+        className={styles["detailed-summary__top-picks"]}
+        variants={itemVariants}
+      >
         <h2>Top Picks from Your Movie Lists</h2>
         <ul>
           <li>
@@ -165,8 +193,8 @@ function DetailedSummary() {
             <p> {topPicks.newest.release_date} </p>
           </li>
         </ul>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 
