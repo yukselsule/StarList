@@ -9,36 +9,36 @@ import SpinnerFullPage from "./SpinnerFullPage";
 
 import styles from "./MovieList.module.scss";
 
+const containerVariants = {
+  visible: {
+    transition: {
+      staggerChildren: 0.05,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, translateY: 15 },
+  visible: {
+    opacity: 1,
+    translateY: 0,
+  },
+};
+
 function MovieList() {
   const { error } = useError();
   const { movies, isLoading } = useMovies();
   const sortedMovies = [...movies].sort((a, b) => b.popularity - a.popularity);
-
-  const container = {
-    visible: {
-      transition: {
-        staggerChildren: 0.15,
-      },
-    },
-  };
-
-  const item = {
-    hidden: { opacity: 0, translateY: 15 },
-    visible: {
-      opacity: 1,
-      translateY: 0,
-    },
-  };
 
   if (isLoading) return <SpinnerFullPage />;
 
   if (error) return <Error error={error} />;
 
   return (
-    <motion.div initial="hidden" animate="visible" variants={container}>
+    <motion.div initial="hidden" animate="visible" variants={containerVariants}>
       <ul className={styles["movie-list"]}>
         {sortedMovies.map((movie) => (
-          <motion.div key={movie.id} variants={item}>
+          <motion.div key={movie.id} variants={itemVariants}>
             <MovieCard movie={movie} />
           </motion.div>
         ))}
