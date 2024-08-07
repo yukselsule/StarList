@@ -7,27 +7,27 @@ import Summary from "../components/Summary";
 
 import styles from "./ProfilePage.module.scss";
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, translateY: 20 },
+  visible: {
+    opacity: 1,
+    translateY: 0,
+    transition: { duration: 0.5, ease: "easeInOut" },
+  },
+};
+
 function ProfilePage() {
   const { lists } = useLists();
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, translateY: 20 },
-    visible: {
-      opacity: 1,
-      translateY: 0,
-      transition: { duration: 0.5, ease: "easeInOut" },
-    },
-  };
 
   if (Object.values(lists).length === 0)
     return (
