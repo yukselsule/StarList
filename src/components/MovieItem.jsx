@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 import { useError } from "../contexts/ErrorContext";
 import { useMovies } from "../contexts/MoviesContext";
@@ -14,6 +15,38 @@ import imageNotFound from "../assets/img/imageNotFound.webp";
 import styles from "./MovieItem.module.scss";
 
 const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, translateY: 20 },
+  visible: {
+    opacity: 1,
+    translateY: 0,
+    transition: { duration: 0.5, ease: "easeInOut" },
+  },
+};
+
+const buttonContainerVariants = {
+  hidden: { opacity: 0, translateY: 20 },
+  visible: {
+    opacity: [0, 0, 1],
+    translateY: [20, 20, 0],
+    transition: {
+      duration: 1,
+      ease: "easeIn",
+      times: [0, 0.5, 1],
+    },
+  },
+};
 
 function MovieItem({ id }) {
   const [selectedMovie, setSelectedMovie] = useState(null);
@@ -81,12 +114,12 @@ function MovieItem({ id }) {
   function handleAddToList() {
     setSelectedMovie(movie);
     setShowAddToList(!showAddToList);
-    document.body.style.overflow = "hidden";
+    // document.body.style.overflow = "hidden";
   }
 
   function handleCloseModal() {
     setShowAddToList(false);
-    document.body.style.overflow = "unset";
+    // document.body.style.overflow = "unset";
   }
 
   function handleShowAllCast() {
@@ -98,145 +131,150 @@ function MovieItem({ id }) {
   if (error) return <Error error={error} />;
 
   return (
-    <div>
-      <div className={styles.movie}>
-        <div className={styles["movie-wrapper"]}>
-          <div className={styles["movie__poster-container"]}>
-            <img
-              src={poster ? `${IMG_BASE_URL}${poster}` : imageNotFound}
-              alt={`Poster of ${title}`}
-            />
-          </div>
-          <div className={styles["movie__button-container"]}>
-            <Button type="add" onClick={handleAddToList}>
-              Add to list
-            </Button>
-            {showAddToList && (
-              <Modal onClose={handleCloseModal}>
-                <AddToList
-                  onCloseModal={handleCloseModal}
-                  movie={selectedMovie}
-                />
-              </Modal>
-            )}
-          </div>
+    <motion.div
+      className={styles.movie}
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+    >
+      <motion.div className={styles["movie-wrapper"]} variants={itemVariants}>
+        <div className={styles["movie__poster-container"]}>
+          <img
+            src={poster ? `${IMG_BASE_URL}${poster}` : imageNotFound}
+            alt={`Poster of ${title}`}
+          />
         </div>
-
-        <div className={styles["movie-details"]}>
-          <div className={styles["movie-details-heading"]}>
-            <span className={styles["movie-details__title"]}>{title}</span>
-            {released && (
-              <span className={styles["movie-details__released"]}>
-                ({released.split("-")[0]})
-              </span>
-            )}
-            <span className={styles["movie-details__voted"]}>
-              ⭐ {Number(voted).toFixed(1)}
-            </span>
-          </div>
-
-          <span className={styles["movie-details__runtime"]}>
-            {runtime} <span>minutes</span>
-          </span>
-
-          {tagline && (
-            <p className={styles["movie-details__tagline"]}>
-              &quot; {tagline} &quot;
-            </p>
+        <motion.div
+          className={styles["movie__button-container"]}
+          variants={buttonContainerVariants}
+        >
+          <Button type="add" onClick={handleAddToList}>
+            Add to list
+          </Button>
+          {showAddToList && (
+            <Modal onClose={handleCloseModal}>
+              <AddToList
+                onCloseModal={handleCloseModal}
+                movie={selectedMovie}
+              />
+            </Modal>
           )}
+        </motion.div>
+      </motion.div>
 
-          <p className={styles["movie-details__overview"]}>{overview}</p>
-
-          <ul className={styles["movie-details__list"]}>
-            <li>
-              Genres:{" "}
-              <ul>
-                {genres.length > 0
-                  ? genres.map((genre) => <li key={genre.id}>{genre.name} </li>)
-                  : "N/A"}
-              </ul>
-            </li>
-            <li>
-              Languages:{" "}
-              <ul>
-                {languages.length > 0
-                  ? languages.map((language) => (
-                      <li key={language.iso_639_1}>{language.english_name} </li>
-                    ))
-                  : "N/A"}
-              </ul>
-            </li>
-            <li>
-              Countries:{" "}
-              <ul>
-                {countries.length > 0
-                  ? countries.map((country) => (
-                      <li key={country.iso_3166_1}>
-                        {country.name === "United States of America"
-                          ? "USA"
-                          : country.name}{" "}
-                      </li>
-                    ))
-                  : "N/A"}
-              </ul>
-            </li>
-            <li>
-              Directed by:{" "}
-              <ul>
-                {crew.filter((crewMember) => {
-                  return crewMember.job === "Director";
-                }).length === 0
-                  ? "N/A"
-                  : crew
-                      .filter((crewMember) => {
-                        return crewMember.job === "Director";
-                      })
-                      .map((director) => {
-                        return (
-                          <li key={director.credit_id}> {director.name} </li>
-                        );
-                      })}
-              </ul>
-            </li>
-            <li>
-              Written by:{" "}
-              <ul>
-                {crew.filter(
-                  (crewMember) =>
-                    crewMember.job === "Writer" ||
-                    crewMember.job === "Screenplay"
-                ).length === 0
-                  ? "N/A"
-                  : crew
-                      .filter(
-                        (crewMember) =>
-                          crewMember.job === "Writer" ||
-                          crewMember.job === "Screenplay"
-                      )
-                      .map((writer) => {
-                        return <li key={writer.credit_id}> {writer.name} </li>;
-                      })}
-              </ul>
-            </li>
-            <li>
-              Starring:
-              <ul>
-                {castToShow.length === 0
-                  ? "N/A"
-                  : castToShow.map((cast) => (
-                      <li key={cast.id}> {cast.name} </li>
-                    ))}
-                {cast.length > 10 && (
-                  <Button type="show-all" onClick={handleShowAllCast}>
-                    {showAllCast ? "show less" : "show all"}
-                  </Button>
-                )}
-              </ul>
-            </li>
-          </ul>
+      <motion.div className={styles["movie-details"]} variants={itemVariants}>
+        <div className={styles["movie-details-heading"]}>
+          <span className={styles["movie-details__title"]}>{title}</span>
+          {released && (
+            <span className={styles["movie-details__released"]}>
+              ({released.split("-")[0]})
+            </span>
+          )}
+          <span className={styles["movie-details__voted"]}>
+            ⭐ {Number(voted).toFixed(1)}
+          </span>
         </div>
-      </div>
-    </div>
+
+        <span className={styles["movie-details__runtime"]}>
+          {runtime} <span>minutes</span>
+        </span>
+
+        {tagline && (
+          <p className={styles["movie-details__tagline"]}>
+            &quot; {tagline} &quot;
+          </p>
+        )}
+
+        <p className={styles["movie-details__overview"]}>{overview}</p>
+
+        <ul className={styles["movie-details__list"]}>
+          <li>
+            Genres:{" "}
+            <ul>
+              {genres.length > 0
+                ? genres.map((genre) => <li key={genre.id}>{genre.name} </li>)
+                : "N/A"}
+            </ul>
+          </li>
+          <li>
+            Languages:{" "}
+            <ul>
+              {languages.length > 0
+                ? languages.map((language) => (
+                    <li key={language.iso_639_1}>{language.english_name} </li>
+                  ))
+                : "N/A"}
+            </ul>
+          </li>
+          <li>
+            Countries:{" "}
+            <ul>
+              {countries.length > 0
+                ? countries.map((country) => (
+                    <li key={country.iso_3166_1}>
+                      {country.name === "United States of America"
+                        ? "USA"
+                        : country.name}{" "}
+                    </li>
+                  ))
+                : "N/A"}
+            </ul>
+          </li>
+          <li>
+            Directed by:{" "}
+            <ul>
+              {crew.filter((crewMember) => {
+                return crewMember.job === "Director";
+              }).length === 0
+                ? "N/A"
+                : crew
+                    .filter((crewMember) => {
+                      return crewMember.job === "Director";
+                    })
+                    .map((director) => {
+                      return (
+                        <li key={director.credit_id}> {director.name} </li>
+                      );
+                    })}
+            </ul>
+          </li>
+          <li>
+            Written by:{" "}
+            <ul>
+              {crew.filter(
+                (crewMember) =>
+                  crewMember.job === "Writer" || crewMember.job === "Screenplay"
+              ).length === 0
+                ? "N/A"
+                : crew
+                    .filter(
+                      (crewMember) =>
+                        crewMember.job === "Writer" ||
+                        crewMember.job === "Screenplay"
+                    )
+                    .map((writer) => {
+                      return <li key={writer.credit_id}> {writer.name} </li>;
+                    })}
+            </ul>
+          </li>
+          <li>
+            Starring:
+            <ul>
+              {castToShow.length === 0
+                ? "N/A"
+                : castToShow.map((cast) => (
+                    <li key={cast.id}> {cast.name} </li>
+                  ))}
+              {cast.length > 10 && (
+                <Button type="show-all" onClick={handleShowAllCast}>
+                  {showAllCast ? "show less" : "show all"}
+                </Button>
+              )}
+            </ul>
+          </li>
+        </ul>
+      </motion.div>
+    </motion.div>
   );
 }
 
