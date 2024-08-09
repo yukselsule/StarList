@@ -23,7 +23,7 @@ function ResultsPage() {
   return (
     <div className={`container ${styles["results-page"]}  `}>
       <MovieList />
-      <Pagination totalPages={totalPages} />
+      {totalPages > 1 && <Pagination totalPages={totalPages} />}
     </div>
   );
 }

@@ -72,6 +72,9 @@ function MoviesProvider({ children }) {
           }
 
           if (data.results.length === 0) {
+            setTotalPages(1);
+            setPage(1);
+            setMovies([]);
             throw new Error(data.status_message || "No movies for your query");
           }
 
@@ -88,7 +91,6 @@ function MoviesProvider({ children }) {
           );
 
           setMovies(moviesDetailsCredits);
-
           setTotalPages(data.total_pages);
         } catch (err) {
           handleError(err.message);
