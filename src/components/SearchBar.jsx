@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
+import { useMovies } from "../contexts/MoviesContext";
 import { useSearchQuery } from "../contexts/SearchQueryContext";
 
 import styles from "./SearchBar.module.scss";
@@ -18,6 +19,7 @@ const debounce = (callback, wait) => {
 function SearchBar({ isSearchOpen, onSearchOpen }) {
   const [inputValue, setInputValue] = useState("");
   const { query, setQuery } = useSearchQuery();
+  const { setPage } = useMovies();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -28,6 +30,7 @@ function SearchBar({ isSearchOpen, onSearchOpen }) {
   const debouncedSetQuery = useCallback(
     debounce((newQuery) => {
       setQuery(newQuery);
+      setPage(1);
       navigate(`/search?query=${newQuery}`);
     }, 1000),
     [setQuery, navigate]

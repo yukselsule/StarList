@@ -50,17 +50,19 @@ const MoviesContext = createContext();
 function MoviesProvider({ children }) {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const { query } = useSearchQuery();
   const { handleError, clearError } = useError();
 
   useEffect(
     function () {
-      async function getMovie() {
+      async function getMovies() {
         setIsLoading(true);
         clearError();
         try {
           const res = await fetch(
-            `${BASE_URL}search/movie?query=${query}&api_key=${API_KEY}`
+            `${BASE_URL}search/movie?query=${query}&page=${page}&api_key=${API_KEY}`
           );
 
           const data = await res.json();
@@ -86,15 +88,17 @@ function MoviesProvider({ children }) {
           );
 
           setMovies(moviesDetailsCredits);
+
+          setTotalPages(data.total_pages);
         } catch (err) {
           handleError(err.message);
         } finally {
           setIsLoading(false);
         }
       }
-      if (query) getMovie();
+      if (query) getMovies();
     },
-    [query, handleError, clearError]
+    [query, page, handleError, clearError]
   );
 
   return (
@@ -104,6 +108,9 @@ function MoviesProvider({ children }) {
         getMovieDetails,
         getMovieCredits,
         isLoading,
+        page,
+        setPage,
+        totalPages,
       }}
     >
       {children}
