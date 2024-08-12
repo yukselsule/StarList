@@ -58,6 +58,7 @@ function MoviesProvider({ children }) {
   useEffect(
     function () {
       async function getMovies() {
+        setMovies([]);
         setIsLoading(true);
         clearError();
         try {
