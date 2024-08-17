@@ -3,14 +3,18 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  min-height: 60vh;
+  border-left: 2px solid $color-primary;
 
   @include respond(48em) {
     padding: 0 0 0 2rem;
   }
 
   @include respond(37.5em) {
+    border-left: none;
+    min-height: 0;
     border-top: 2px solid $color-primary;
-    padding: 4rem 0 0 0;
+    padding: 4rem 0;
   }
 
   &-container {
