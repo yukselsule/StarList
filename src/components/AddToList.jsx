@@ -52,7 +52,9 @@ function AddToList({ movie, onCloseModal }) {
     setDate(new Date(selectedDate));
   }
 
-  function handleCreateANewList() {
+  function handleCreateANewList(e) {
+    e.preventDefault();
+
     if (newListName.trim() === "") {
       Swal.fire({
         icon: "error",
