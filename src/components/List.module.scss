@@ -1,6 +1,7 @@
 .list {
   padding: 2rem;
   margin: 0 auto;
+  position: relative;
 
   @include respond(75em) {
     width: 80%;
@@ -40,4 +41,10 @@
       margin-bottom: 2rem;
     }
   }
+}
+
+.button-box {
+  position: absolute;
+  top: 10rem;
+  left: 5rem;
 }

@@ -48,35 +48,43 @@ function List() {
   }
 
   return (
-    <div className={styles["list"]}>
-      <div className={styles["list-heading"]}>
-        <h2>{listId}</h2>
-        <Button type="delete" onClick={handleDeleteList}>
-          Delete list
+    <>
+      <div className={styles["button-box"]}>
+        <Button type="back" onClick={handleNavigate}>
+          <ion-icon name="arrow-back-outline"></ion-icon> <span>Back</span>
         </Button>
       </div>
 
-      <motion.ul
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-        className={styles["lists-container"]}
-      >
-        <AnimatePresence>
-          {movies.map((movie) => (
-            <motion.li
-              key={movie.id}
-              variants={itemVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-            >
-              <ListItem movie={movie} listName={listId} />
-            </motion.li>
-          ))}
-        </AnimatePresence>
-      </motion.ul>
-    </div>
+      <div className={styles["list"]}>
+        <div className={styles["list-heading"]}>
+          <h2>{listId}</h2>
+          <Button type="delete" onClick={handleDeleteList}>
+            Delete list
+          </Button>
+        </div>
+
+        <motion.ul
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
+          className={styles["lists-container"]}
+        >
+          <AnimatePresence>
+            {movies.map((movie) => (
+              <motion.li
+                key={movie.id}
+                variants={itemVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+              >
+                <ListItem movie={movie} listName={listId} />
+              </motion.li>
+            ))}
+          </AnimatePresence>
+        </motion.ul>
+      </div>
+    </>
   );
 }
 
