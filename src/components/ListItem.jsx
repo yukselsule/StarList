@@ -35,7 +35,7 @@ function ListItem({ movie, listName }) {
   }
 
   return (
-    <li className={styles["list-item"]}>
+    <div className={styles["list-item"]}>
       <a name="movie item link" className={styles["list-item__poster"]}>
         <img
           onClick={handleImageClick}
@@ -63,7 +63,7 @@ function ListItem({ movie, listName }) {
       <Button key={movie.id} type="trash" onClick={handleDelete}>
         <ion-icon name="trash-outline"></ion-icon>
       </Button>
-    </li>
+    </div>
   );
 }
 
