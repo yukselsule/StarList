@@ -3,10 +3,15 @@
 
   @include respond(56.25em) {
     padding: 2rem 4rem;
+    margin-top: 4rem;
+  }
+  @include respond(48em) {
+    margin-top: 6rem;
   }
 
   @include respond(37.5em) {
     padding: 2rem;
+    margin-top: 8rem;
   }
 
   @include respond(31.25em) {
@@ -144,4 +149,8 @@
   position: absolute;
   top: 10rem;
   left: 5rem;
+  @include respond(48em) {
+    top: 10rem;
+    left: 2rem;
+  }
 }

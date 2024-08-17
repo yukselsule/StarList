@@ -37,7 +37,10 @@
     @include respond(37.5em) {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      list-style: disc;
+
+      li:not(:last-child) {
+        list-style: disc;
+      }
     }
 
     @include respond(31.25em) {

@@ -13,6 +13,7 @@
 
   @include respond(48em) {
     width: 100%;
+    margin-top: 6rem;
   }
 
   &-heading {
@@ -47,4 +48,8 @@
   position: absolute;
   top: 10rem;
   left: 5rem;
+  @include respond(48em) {
+    top: 10rem;
+    left: 2rem;
+  }
 }
