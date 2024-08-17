@@ -42,6 +42,9 @@ function AddToList({ movie, onCloseModal }) {
         text: "It is before release date",
         iconColor: "#991b1b",
         confirmButtonColor: "#010101",
+        customClass: {
+          container: styles["custom-swal-popup"],
+        },
       });
       return;
     }
@@ -57,6 +60,9 @@ function AddToList({ movie, onCloseModal }) {
         text: "List name cannot be empty or just spaces",
         iconColor: "#991b1b",
         confirmButtonColor: "#010101",
+        customClass: {
+          container: styles["custom-swal-popup"],
+        },
       });
       return;
     }
@@ -68,6 +74,9 @@ function AddToList({ movie, onCloseModal }) {
         text: "You already have that list",
         iconColor: "#991b1b",
         confirmButtonColor: "#010101",
+        customClass: {
+          container: styles["custom-swal-popup"],
+        },
       });
       return;
     }
@@ -91,6 +100,9 @@ function AddToList({ movie, onCloseModal }) {
         text: "Please fill required fields",
         iconColor: "#991b1b",
         confirmButtonColor: "#010101",
+        customClass: {
+          container: styles["custom-swal-popup"],
+        },
       });
 
       return;
@@ -112,6 +124,9 @@ function AddToList({ movie, onCloseModal }) {
         text: `You already added "${movie.title}" to "${selectedList}" list`,
         iconColor: "#991b1b",
         confirmButtonColor: "#010101",
+        customClass: {
+          container: styles["custom-swal-popup"],
+        },
       });
       return;
     } else {

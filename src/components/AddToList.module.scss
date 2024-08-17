@@ -141,3 +141,7 @@
     @include centerContent;
   }
 }
+
+.custom-swal-popup {
+  z-index: 9999 !important;
+}
