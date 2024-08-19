@@ -7,11 +7,16 @@
   @include respond(56.25em) {
     grid-template-columns: 2fr 4fr 1fr;
     gap: 4rem;
+    margin-top: 4rem;
   }
 
   @include respond(48em) {
     position: relative;
     grid-template-columns: 1fr 2fr;
+    margin-top: 6rem;
+  }
+  @include respond(37.5em) {
+    margin-top: 8rem;
   }
 
   @include respond(31.25em) {
@@ -150,5 +155,15 @@
         }
       }
     }
+  }
+}
+
+.button-box {
+  position: absolute;
+  top: 10rem;
+  left: 5rem;
+  @include respond(48em) {
+    top: 10rem;
+    left: 2rem;
   }
 }
