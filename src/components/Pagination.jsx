@@ -3,7 +3,7 @@ import { useMovies } from "../contexts/MoviesContext";
 import styles from "./Pagination.module.scss";
 
 function getPaginationPages(currentPage, totalPages) {
-  const delta = 5;
+  const delta = 2;
   const range = [];
   const rangeWithDots = [];
 
